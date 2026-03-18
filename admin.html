@@ -1,98 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin | Styles By Tiwa</title>
 
-<title>Admin | Styles By Tiwa</title>
+  <link rel="stylesheet" href="style.css">
 
-<link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
-
-<!-- Supabase -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-
-<style>
-.admin-container {
-  max-width: 500px;
-  margin: 50px auto;
-  text-align: center;
-}
-
-.admin-container input,
-.admin-container select {
-  width: 100%;
-  padding: 12px;
-  margin: 10px 0;
-  border: 1px solid gold;
-  background: transparent;
-  color: white;
-}
-
-.admin-container button {
-  width: 100%;
-  padding: 12px;
-  background: gold;
-  border: none;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.admin-container button:hover {
-  opacity: 0.8;
-}
-</style>
-
+  <!-- SUPABASE -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 </head>
 
 <body>
 
-<header class="navbar">
-
-<h1 class="logo">Styles By Tiwa</h1>
-
-<div class="menu-toggle" onclick="toggleMenu()">☰</div>
-
-<nav id="nav">
-<a href="index.html">Home</a>
-<a href="shop.html">Shop</a>
-</nav>
-
-</header>
-
 <main>
 
-<div class="admin-container">
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <h1 class="logo">Styles By Tiwa</h1>
 
-<h1>Add / Edit Product</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="shop.html">Shop</a>
+    </nav>
+  </header>
 
-<input type="text" id="title" placeholder="Product Title">
+  <!-- FORM SECTION -->
+  <section class="admin-section">
 
-<input type="number" id="price" placeholder="Price">
+    <h2>Add / Edit Product</h2>
 
-<!-- IMAGE UPLOAD -->
-<input type="file" id="imageFile">
+    <input type="text" id="title" placeholder="Product Title">
 
-<select id="category">
-  <option value="vintage_shirts">Vintage Shirts</option>
-  <option value="two_piece_long">Two Piece Long</option>
-  <option value="two_piece_short">Two Piece Short</option>
-</select>
+    <input type="number" id="price" placeholder="Price">
 
-<button onclick="addProduct()">Save Product</button>
+    <input type="file" id="imageFile">
 
-</div>
-  <h2 style="text-align:center; margin-top:40px;">Manage Products</h2>
+    <select id="category">
+      <option value="vintage_shirts">Vintage Shirts</option>
+      <option value="two_piece_long">Two Piece Long</option>
+      <option value="two_piece_short">Two Piece Short</option>
+    </select>
 
-<div id="admin-products" class="product-grid"></div>
+    <button onclick="addProduct()">Save Product</button>
+
+  </section>
+
+  <!-- 🔥 MANAGE PRODUCTS (THIS WAS YOUR MISSING PART BEFORE) -->
+  <section class="admin-section">
+
+    <h2>Manage Products</h2>
+
+    <div id="admin-products" class="product-grid"></div>
+
+  </section>
+
 </main>
 
+<!-- FOOTER -->
 <footer>
   <p>&copy; 2026 Styles By Tiwa. All rights reserved.</p>
 </footer>
 
+<!-- JS -->
 <script src="admin.js"></script>
 
 </body>
