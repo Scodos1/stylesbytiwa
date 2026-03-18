@@ -1,20 +1,19 @@
+let editingId = null;
+
 const supabaseUrl = "https://zlglsosfzrybgfuvwldk.supabase.co";
 const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpsZ2xzb3NmenJ5YmdmdXZ3bGRrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM3NDY0MDksImV4cCI6MjA4OTMyMjQwOX0.-F8BTkb-x1ZM8PvvYbE8p58o6rStxMigGGTzPma-AmM";
 
 const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 
-let editingId = null;
-
 // 🚀 LOAD PRODUCTS
 async function loadProducts() {
-
   const { data, error } = await supabaseClient
     .from("products")
     .select("*")
     .order("created_at", { ascending: false });
 
   if (error) {
-    console.error(error);
+    console.error("Load error:", error);
     return;
   }
 
@@ -23,13 +22,13 @@ async function loadProducts() {
 
 // 🎨 DISPLAY PRODUCTS
 function displayAdminProducts(products) {
-
   const container = document.getElementById("admin-products");
+
+  if (!container) return;
 
   container.innerHTML = "";
 
   products.forEach(product => {
-
     container.innerHTML += `
       <div class="product-card">
 
@@ -39,8 +38,10 @@ function displayAdminProducts(products) {
 
         <p class="price">₦${product.price}</p>
 
-        <button onclick="editProduct('${product.id}')">Edit</button>
-        <button onclick="deleteProduct('${product.id}')">Delete</button>
+        <div class="admin-actions">
+          <button onclick="editProduct('${product.id}')">Edit</button>
+          <button onclick="deleteProduct('${product.id}')">Delete</button>
+        </div>
 
       </div>
     `;
@@ -56,15 +57,18 @@ async function addProduct() {
   const file = document.getElementById("imageFile").files[0];
 
   if (!title || !price || !category) {
-    alert("Fill all fields");
+    alert("Please fill all fields");
     return;
   }
 
   let imageUrl = "";
 
-  // 📸 UPLOAD IMAGE
+  // 📸 UPLOAD IMAGE (ONLY IF FILE EXISTS)
   if (file) {
-    const fileName = Date.now() + "-" + file.name;
+
+    alert("Uploading image...");
+
+    const fileName = `${Date.now()}-${Math.random()}-${file.name}`;
 
     const { error: uploadError } = await supabaseClient
       .storage
@@ -73,7 +77,7 @@ async function addProduct() {
 
     if (uploadError) {
       console.error(uploadError);
-      alert("Image upload failed");
+      alert("Image upload failed ❌");
       return;
     }
 
@@ -83,18 +87,25 @@ async function addProduct() {
   // ✏️ UPDATE MODE
   if (editingId) {
 
+    const updateData = {
+      title,
+      price,
+      category
+    };
+
+    // only update image if new one was uploaded
+    if (imageUrl) {
+      updateData.image = imageUrl;
+    }
+
     const { error } = await supabaseClient
       .from("products")
-      .update({
-        title,
-        price,
-        category,
-        ...(imageUrl && { image: imageUrl })
-      })
+      .update(updateData)
       .eq("id", editingId);
 
     if (error) {
-      alert("Update failed");
+      console.error(error);
+      alert("Update failed ❌");
       return;
     }
 
@@ -103,6 +114,7 @@ async function addProduct() {
 
   } else {
 
+    // ➕ ADD NEW PRODUCT
     const { error } = await supabaseClient
       .from("products")
       .insert([
@@ -115,7 +127,8 @@ async function addProduct() {
       ]);
 
     if (error) {
-      alert("Error adding product");
+      console.error(error);
+      alert("Error adding product ❌");
       return;
     }
 
@@ -132,6 +145,8 @@ function clearForm() {
   document.getElementById("price").value = "";
   document.getElementById("imageFile").value = "";
   document.getElementById("category").selectedIndex = 0;
+
+  editingId = null;
 }
 
 // 🗑 DELETE PRODUCT
@@ -146,7 +161,8 @@ async function deleteProduct(id) {
     .eq("id", id);
 
   if (error) {
-    alert("Delete failed");
+    console.error(error);
+    alert("Delete failed ❌");
   } else {
     alert("Deleted ✅");
     loadProducts();
@@ -162,13 +178,19 @@ async function editProduct(id) {
     .eq("id", id)
     .single();
 
-  if (error) return;
+  if (error) {
+    console.error(error);
+    return;
+  }
 
   document.getElementById("title").value = data.title;
   document.getElementById("price").value = data.price;
   document.getElementById("category").value = data.category;
 
   editingId = id;
+
+  // 🔥 scroll to form for better UX
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 // 🚀 LOAD ON START
