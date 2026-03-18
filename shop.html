@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Styles By Tiwa | Luxury Fashion</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+<!-- Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+</head>
+
+<body>
+
+<main>
+
+<header class="navbar">
+
+<h1 class="logo">Styles By Tiwa</h1>
+
+<div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+<nav id="nav">
+
+<a href="index.html">Home</a>
+<a href="index.html#about">About</a>
+<a href="index.html#collection">Collection</a>
+<a href="shop.html">Shop</a>
+<a href="index.html#instagram">Instagram</a>
+<a href="index.html#contact">Contact</a>
+</nav>
+
+</header>
+
+<h1>Shop Our Collection</h1>
+
+<div class="filters">
+
+<button onclick="filterProducts('all')">All</button>
+<button onclick="filterProducts('vintage_shirts')">Vintage Shirts</button>
+<button onclick="filterProducts('two_piece_long')">Two Piece Long</button>
+<button onclick="filterProducts('two_piece_short')">Two Piece Short</button>
+
+</div>
+
+<div id="product-grid" class="product-grid"></div>
+
+</main>
+
+<footer>
+  <p>&copy; 2026 Styles By Tiwa. All rights reserved.</p>
+</footer>
+
+<script src="shop.js"></script>
+
+</body>
+</html>

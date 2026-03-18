@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admin | Styles By Tiwa</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+<!-- Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+<style>
+.admin-container {
+  max-width: 500px;
+  margin: 50px auto;
+  text-align: center;
+}
+
+.admin-container input,
+.admin-container select {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid gold;
+  background: transparent;
+  color: white;
+}
+
+.admin-container button {
+  width: 100%;
+  padding: 12px;
+  background: gold;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.admin-container button:hover {
+  opacity: 0.8;
+}
+</style>
+
+</head>
+
+<body>
+
+<header class="navbar">
+
+<h1 class="logo">Styles By Tiwa</h1>
+
+<div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+<nav id="nav">
+<a href="index.html">Home</a>
+<a href="shop.html">Shop</a>
+</nav>
+
+</header>
+
+<main>
+
+<div class="admin-container">
+
+<h1>Add / Edit Product</h1>
+
+<input type="text" id="title" placeholder="Product Title">
+
+<input type="number" id="price" placeholder="Price">
+
+<!-- IMAGE UPLOAD -->
+<input type="file" id="imageFile">
+
+<select id="category">
+  <option value="vintage_shirts">Vintage Shirts</option>
+  <option value="two_piece_long">Two Piece Long</option>
+  <option value="two_piece_short">Two Piece Short</option>
+</select>
+
+<button onclick="addProduct()">Save Product</button>
+
+</div>
+</main>
+
+<footer>
+  <p>&copy; 2026 Styles By Tiwa. All rights reserved.</p>
+</footer>
+
+<script src="admin.js"></script>
+
+</body>
+</html>
