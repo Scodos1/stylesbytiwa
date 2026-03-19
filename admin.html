@@ -44,7 +44,7 @@
   opacity: 0.8;
 }
 
-/* 🔥 PRODUCT GRID */
+/* PRODUCT GRID */
 #admin-products {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -80,11 +80,39 @@
   background: crimson;
   color: white;
 }
+
+/* LOGOUT BUTTON */
+.logout-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: crimson;
+  color: white;
+  padding: 10px 15px;
+}
 </style>
 
 </head>
 
 <body>
+
+<!-- 🔒 AUTH CHECK -->
+<script>
+const supabase = window.supabase.createClient(
+  "https://zlglsosfzrybgfuvwldk.supabase.co",
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpsZ2xzb3NmenJ5YmdmdXZ3bGRrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM3NDY0MDksImV4cCI6MjA4OTMyMjQwOX0.-F8BTkb-x1ZM8PvvYbE8p58o6rStxMigGGTzPma-AmM",
+);
+
+async function checkUser() {
+  const { data } = await supabase.auth.getUser();
+
+  if (!data.user) {
+    window.location.href = "login.html";
+  }
+}
+
+checkUser();
+</script>
 
 <header class="navbar">
 
@@ -98,6 +126,9 @@
 </nav>
 
 </header>
+
+<!-- 🔓 LOGOUT BUTTON -->
+<button class="logout-btn" onclick="logout()">Logout</button>
 
 <main>
 
@@ -119,12 +150,11 @@
   <option value="two_piece_short">Two Piece Short</option>
 </select>
 
-<!-- 🔥 IMPORTANT FIX -->
 <button type="button" onclick="addProduct()">Save Product</button>
 
 </div>
 
-<!-- 🔥 MANAGE PRODUCTS (THIS WAS MISSING) -->
+<!-- MANAGE PRODUCTS -->
 <div class="admin-container">
 
 <h2>Manage Products</h2>
@@ -139,8 +169,14 @@
   <p>&copy; 2026 Styles By Tiwa. All rights reserved.</p>
 </footer>
 
-<!-- JS -->
 <script src="admin.js"></script>
+
+<script>
+async function logout() {
+  await supabase.auth.signOut();
+  window.location.href = "login.html";
+}
+</script>
 
 </body>
 </html>
