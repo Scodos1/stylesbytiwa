@@ -1,65 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin | Styles By Tiwa</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="style.css">
+<title>Admin | Styles By Tiwa</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 
-  <!-- SUPABASE -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+<!-- Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+<style>
+.admin-container {
+  max-width: 500px;
+  margin: 50px auto;
+  text-align: center;
+}
+
+.admin-container input,
+.admin-container select {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid gold;
+  background: transparent;
+  color: white;
+}
+
+.admin-container button {
+  width: 100%;
+  padding: 12px;
+  background: gold;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.admin-container button:hover {
+  opacity: 0.8;
+}
+
+/* 🔥 PRODUCT GRID */
+#admin-products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.product-card {
+  background: #111;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.product-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.product-card button {
+  margin-top: 8px;
+  padding: 8px;
+  width: 100%;
+  border: none;
+  cursor: pointer;
+}
+
+.product-card button:first-of-type {
+  background: gold;
+}
+
+.product-card button:last-of-type {
+  background: crimson;
+  color: white;
+}
+</style>
+
 </head>
 
 <body>
 
+<header class="navbar">
+
+<h1 class="logo">Styles By Tiwa</h1>
+
+<div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+<nav id="nav">
+<a href="index.html">Home</a>
+<a href="shop.html">Shop</a>
+</nav>
+
+</header>
+
 <main>
 
-  <!-- NAVBAR -->
-  <header class="navbar">
-    <h1 class="logo">Styles By Tiwa</h1>
+<!-- FORM -->
+<div class="admin-container">
 
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="shop.html">Shop</a>
-    </nav>
-  </header>
+<h1>Add / Edit Product</h1>
 
-  <!-- FORM SECTION -->
-  <section class="admin-section">
+<input type="text" id="title" placeholder="Product Title">
 
-    <h2>Add / Edit Product</h2>
+<input type="number" id="price" placeholder="Price">
 
-    <input type="text" id="title" placeholder="Product Title">
+<input type="file" id="imageFile">
 
-    <input type="number" id="price" placeholder="Price">
+<select id="category">
+  <option value="">Select Category</option>
+  <option value="vintage_shirts">Vintage Shirts</option>
+  <option value="two_piece_long">Two Piece Long</option>
+  <option value="two_piece_short">Two Piece Short</option>
+</select>
 
-    <input type="file" id="imageFile">
+<!-- 🔥 IMPORTANT FIX -->
+<button type="button" onclick="addProduct()">Save Product</button>
 
-    <select id="category">
-      <option value="vintage_shirts">Vintage Shirts</option>
-      <option value="two_piece_long">Two Piece Long</option>
-      <option value="two_piece_short">Two Piece Short</option>
-    </select>
+</div>
 
-    <button onclick="addProduct()">Save Product</button>
+<!-- 🔥 MANAGE PRODUCTS (THIS WAS MISSING) -->
+<div class="admin-container">
 
-  </section>
+<h2>Manage Products</h2>
 
-  <!-- 🔥 MANAGE PRODUCTS (THIS WAS YOUR MISSING PART BEFORE) -->
-  <section class="admin-section">
+<div id="admin-products"></div>
 
-    <h2>Manage Products</h2>
-
-    <div id="admin-products" class="product-grid"></div>
-
-  </section>
+</div>
 
 </main>
 
-<!-- FOOTER -->
 <footer>
   <p>&copy; 2026 Styles By Tiwa. All rights reserved.</p>
 </footer>
