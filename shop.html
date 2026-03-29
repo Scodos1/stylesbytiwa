@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Styles By Tiwa | Luxury Fashion</title>
+
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+<!-- Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+</head>
+
+<body>
+
+<main>
+
+<header class="navbar">
+
+<h1 class="logo">Styles By Tiwa</h1>
+
+<div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+<nav id="nav">
+
+<a href="index.html">Home</a>
+<a href="index.html#about">About</a>
+<a href="index.html#collection">Collection</a>
+<a href="#shop">Shop</a>
+<a href="index.html#Instagram">Instagram</a>
+<a href="index.html#contacts">Contact</a>
+
+</nav>
+</header>
+
+<h1>Shop Our Collection</h1>
+
+<div class="filters">
+
+<button onclick="filterProducts('all')">All</button>
+<button onclick="filterProducts('vintage_shirts')">Vintage Shirts</button>
+<button onclick="filterProducts('two_piece_long')">Two Piece Long</button>
+<button onclick="filterProducts('two_piece_short')">Two Piece Short</button>
+
+</div>
+
+<div id="product-grid" class="product-grid"></div>
+
+</main>
+
+
+<footer>
+
+  <div class="social-icons">
+
+    <a href="https://wa.me/2349078537344" target="_blank">
+      <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <a href="mailto:alagbesulait@gmail.com">
+      <i class="fas fa-envelope"></i>
+    </a>
+
+    <a href="https://instagram.com/styles_by_tiwa" target="_blank">
+      <i class="fab fa-instagram"></i>
+    </a>
+
+    <a href="https://tiktok.com/@_stylesbytiwa" target="_blank">
+      <i class="fab fa-tiktok"></i>
+    </a>
+
+  </div>
+
+  <p>&copy; 2026 Styles By Tiwa. All rights reserved.</p>
+</footer>
+
+<script src="shop.js"></script>
+
+</div>
+
+</body>
+</html>

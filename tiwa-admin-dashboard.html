@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admin | Styles By Tiwa</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+<!-- Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+<style>
+.admin-container {
+  max-width: 500px;
+  margin: 50px auto;
+  text-align: center;
+}
+
+.admin-container input,
+.admin-container select {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid gold;
+  background: transparent;
+  color: white;
+}
+
+.admin-container button {
+  width: 100%;
+  padding: 12px;
+  background: gold;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.admin-container button:hover {
+  opacity: 0.8;
+}
+
+/* PRODUCT GRID */
+#admin-products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.product-card {
+  background: #111;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.product-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.product-card button {
+  margin-top: 8px;
+  padding: 8px;
+  width: 100%;
+  border: none;
+  cursor: pointer;
+}
+
+.product-card button:first-of-type {
+  background: gold;
+}
+
+.product-card button:last-of-type {
+  background: crimson;
+  color: white;
+}
+
+/* LOGOUT BUTTON */
+.logout-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: crimson;
+  color: white;
+  padding: 10px 15px;
+}
+</style>
+
+</head>
+
+<body>
+
+<header class="navbar">
+  
+
+<h1 class="logo">Styles By Tiwa</h1>
+
+<div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+<nav id="nav">
+<a href="index.html">Home</a>
+<a href="shop.html">Shop</a>
+</nav>
+
+</header>
+
+<!-- 🔓 LOGOUT BUTTON -->
+<button class="logout-btn" onclick="logout()">Logout</button>
+
+<main>
+
+<!-- FORM -->
+<div class="admin-container">
+
+<h1>Add / Edit Product</h1>
+
+<input type="text" id="title" placeholder="Product Title">
+
+<input type="number" id="price" placeholder="Price">
+
+<input type="file" id="imageFiles" multiple>
+
+<div id="image-preview" class="image-preview"></div>
+
+<select id="category">
+  <option value="">Select Category</option>
+  <option value="vintage_shirts">Vintage Shirts</option>
+  <option value="two_piece_long">Two Piece Long</option>
+  <option value="two_piece_short">Two Piece Short</option>
+</select>
+
+<button type="button" onclick="addProduct()">Save Product</button>
+
+</div>
+
+<!-- MANAGE PRODUCTS -->
+<div class="admin-container">
+
+<h2>Manage Products</h2>
+
+<div id="admin-products"></div>
+
+</div>
+
+</main>
+
+<footer>
+  <p>&copy; 2026 Styles By Tiwa. All rights reserved.</p>
+</footer>
+
+<script src="admin.js"></script>
+
+<script>
+async function logout() {
+  await supabase.auth.signOut();
+  window.location.href = "login.html";
+}
+</script>
+
+</body>
+</html>

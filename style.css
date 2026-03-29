@@ -1,0 +1,370 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family: Arial, Helvetica, sans-serif;
+background-image:url(images/Logo.jpeg);
+background-color: black;
+color: white;
+}
+
+.navbar{
+
+position:sticky;
+top:0;
+z-index:1000;
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+background:black;
+padding:15px 20px;
+
+border-bottom:1px solid gold;
+
+}
+
+.logo{
+color:gold;
+font-size:22px;
+font-weight:bold;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 350px;
+  height: 350px;
+  margin-top: 20px;
+  overflow: hidden;
+  margin-left: auto;
+  margin-right: auto;
+  border-color: rgba(29, 27, 27, 0.253);
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 50%;
+  }
+
+.logo-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.menu-toggle{
+
+font-size:28px;
+color:gold;
+cursor:pointer;
+display:none;
+
+}
+
+nav a{
+
+color:white;
+text-decoration:none;
+margin-left:20px;
+
+}
+
+nav a:hover{
+
+color:gold;
+
+}
+
+.hero{
+height:90vh;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+margin-top: -180px;
+}
+
+.hero h1{
+font-size:60px;
+color:gold;
+}
+
+.hero p{
+  font-size: 25px;
+  margin-bottom: 20px;
+}
+
+.about{
+padding:40px 10%;
+margin-top:-160px;
+}
+
+.about h2{
+font-size:40px;
+margin-bottom:20px;
+color:gold;
+}
+
+.about p{
+font-size:18px;
+
+}
+
+.btn{
+padding:12px 30px;
+background:gold;
+color:black;
+text-decoration:none;
+font-weight:bold;
+border-radius:5px;
+}
+
+.section-title{
+text-align:center;
+font-size:40px;
+margin:80px 0 40px;
+color:gold;
+}
+
+.products{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
+padding:0 10%;
+}
+
+.card{
+background:#111;
+border-radius:10px;
+overflow:hidden;
+text-align:center;
+}
+
+.card img{
+width:100%;
+height:300px;
+object-fit:cover;
+}
+
+.card p{
+    font-size: 18px;
+  margin-top: 12px;
+}
+
+.card button{
+background:gold;
+border:none;
+padding:10px 20px;
+margin:20px;
+cursor:pointer;
+font-weight:bold;
+}
+
+.container{
+text-align: center;
+margin-top: 50px;
+}
+
+#contact{
+padding:80px 10%;
+text-align:center;
+margin-top: -80px;
+}
+
+form{
+max-width:500px;
+margin:auto;
+display:flex;
+flex-direction:column;
+}
+
+input,textarea{
+margin:10px 0;
+padding:12px;
+border:none;
+}
+
+button{
+background:gold;
+color:black;
+padding:12px;
+border-radius: 6px;
+cursor:pointer;
+}
+
+
+footer{
+background:black;
+color: white;
+text-align:center;
+padding:20px 20px;
+border-top:1px solid gold;
+bottom: 0;
+width: 100%;
+}
+
+footer p{
+color:white;
+margin:0 10px;text-decoration:none;
+font-size: 15px;
+}
+
+.vintage-products{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
+padding:0 10%;
+margin-top: 50px;
+}
+
+@media (max-width:768px){
+
+.menu-toggle{
+
+display:block;
+
+}
+
+nav{
+
+position:absolute;
+top:60px;
+left:0;
+
+width:100%;
+background:black;
+
+display:none;
+flex-direction:column;
+text-align:center;
+
+border-top:1px solid gold;
+
+}
+
+nav a{
+
+padding:15px;
+border-bottom:1px solid #222;
+
+}
+
+nav.active{
+
+display:flex;
+
+}
+
+}
+nav{
+
+transition:0.3s ease;
+
+}
+
+.product-grid{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
+padding:40px;
+
+}
+
+.product-card{
+
+background:#111;
+border:1px solid gold;
+border-radius:10px;
+padding:20px;
+text-align:center;
+
+transition:0.3s;
+
+}
+
+.product-card:hover{
+
+transform:translateY(-5px);
+box-shadow:0 0 20px gold;
+
+}
+
+.product-card img{
+
+width:100%;
+border-radius:8px;
+
+}
+
+.price{
+
+color:gold;
+font-weight:bold;
+
+}
+
+.order-btn{
+
+display:inline-block;
+margin-top:10px;
+padding:10px 18px;
+
+background:gold;
+color:black;
+
+border-radius:5px;
+text-decoration:none;
+
+font-weight:bold;
+
+}
+
+/* Admin settings */
+.admin-section {
+  max-width: 500px;
+  margin: 40px auto;
+  text-align: center;
+}
+
+.admin-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.admin-actions button {
+  padding: 8px 12px;
+  border: none;
+  background: gold;
+  cursor: pointer;
+}
+
+.social-icons {
+  margin-bottom: 20px;
+}
+
+.social-icons a {
+  color: gold;
+  margin: 0 10px;
+  font-size: 25px;
+  transition: 0.3s;
+  text-decoration: none; /* ✅ FIX */
+  display: inline-block;
+}
+
+.social-icons a:hover {
+  color: white;
+  transform: scale(1.2);
+}
+
+.map-container {
+  margin-top: 40px;
+  margin-bottom: -10px;
+  border-radius: 10px;
+  overflow: hidden;
+}

@@ -1,0 +1,125 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /Contents 6 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+6 0 obj
+<< /Length 2598 >>
+stream
+BT
+/F2 19 Tf
+54 806 Td
+(Styles By Tiwa App Summary) Tj
+0 -18 Td
+/F1 9 Tf
+(Repo-based one-page overview of the storefront and admin flow.) Tj
+0 -18 Td
+/F2 11 Tf
+(WHAT IT IS) Tj
+0 -11 Td
+/F1 9 Tf
+(A static fashion storefront for Styles By Tiwa with a landing page, shop page,) Tj
+0 -11 Td
+/F1 9 Tf
+(and browser-based admin area. Product data, admin auth, and image storage use Supabase.) Tj
+0 -18 Td
+/F2 11 Tf
+(WHO IT IS FOR) Tj
+0 -11 Td
+/F1 9 Tf
+(Primary persona: a small fashion brand owner who wants to showcase collections online,) Tj
+0 -11 Td
+/F1 9 Tf
+(take orders through WhatsApp, and manage products without a custom backend app.) Tj
+0 -18 Td
+/F2 11 Tf
+(WHAT IT DOES) Tj
+0 -11 Td
+/F1 9 Tf
+(- Presents a branded homepage with hero, about, featured collection, and contact sections.) Tj
+0 -11 Td
+/F1 9 Tf
+(- Loads a shop grid from a Supabase products table.) Tj
+0 -11 Td
+/F1 9 Tf
+(- Lets shoppers filter products by category.) Tj
+0 -11 Td
+/F1 9 Tf
+(- Opens product details in a modal with image, title, price, and CTA.) Tj
+0 -11 Td
+/F1 9 Tf
+(- Routes purchase intent to WhatsApp with prefilled order text.) Tj
+0 -11 Td
+/F1 9 Tf
+(- Supports admin login with Supabase Auth and an allowed-email check.) Tj
+0 -11 Td
+/F1 9 Tf
+(- Lets the admin add, edit, delete, and image-upload products.) Tj
+0 -18 Td
+/F2 11 Tf
+(HOW IT WORKS) Tj
+0 -11 Td
+/F1 9 Tf
+(UI: index.html, shop.html, login.html, and tiwa-admin-dashboard.html share style.css.) Tj
+0 -11 Td
+/F1 9 Tf
+(Client logic: script.js toggles nav; shop.js loads and filters products; admin.js handles auth and CRUD.) Tj
+0 -11 Td
+/F1 9 Tf
+(Services: Supabase JS CDN is used for auth, reads/writes to products, and uploads to product-images.) Tj
+0 -11 Td
+/F1 9 Tf
+(Flow: browser page -> JS creates Supabase client -> shop reads products and renders cards/modal ->) Tj
+0 -11 Td
+/F1 9 Tf
+(admin authenticates, uploads images, and updates records -> shopper orders continue in WhatsApp.) Tj
+0 -11 Td
+/F1 9 Tf
+(Server code/API layer: Not found in repo.) Tj
+0 -18 Td
+/F2 11 Tf
+(HOW TO RUN) Tj
+0 -11 Td
+/F1 9 Tf
+(1. Open index.html in a browser for the landing page.) Tj
+0 -11 Td
+/F1 9 Tf
+(2. Open shop.html for the catalog; internet access is needed for Supabase and CDN assets.) Tj
+0 -11 Td
+/F1 9 Tf
+(3. Open login.html for admin sign-in, then continue to tiwa-admin-dashboard.html.) Tj
+0 -11 Td
+/F1 9 Tf
+(4. Supabase schema setup, local dev server, package commands, and deployment steps: Not found in repo.) Tj
+0 -18 Td
+/F1 8 Tf
+(Evidence used: index.html, shop.html, login.html, tiwa-admin-dashboard.html, shop.js, admin.js, script.js, style.css.) Tj
+ET
+endstream
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000251 00000 n 
+0000000321 00000 n 
+0000000396 00000 n 
+0000003028 00000 n 
+trailer
+<< /Size 7 /Root 1 0 R >>
+startxref
+3045
+%%EOF

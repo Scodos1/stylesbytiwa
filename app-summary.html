@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Styles By Tiwa App Summary</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 0.45in;
+    }
+
+    :root {
+      --ink: #171717;
+      --muted: #555;
+      --gold: #9a7b13;
+      --line: #d8d0b0;
+      --panel: #faf8f1;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: white;
+    }
+
+    .page {
+      width: 100%;
+      min-height: 100vh;
+    }
+
+    .header {
+      border-bottom: 2px solid var(--gold);
+      padding-bottom: 10px;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      margin: 0 0 4px;
+      font-size: 23px;
+      letter-spacing: 0.3px;
+    }
+
+    .subtitle {
+      margin: 0;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px 18px;
+    }
+
+    section {
+      break-inside: avoid;
+    }
+
+    h2 {
+      margin: 0 0 6px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--gold);
+    }
+
+    p {
+      margin: 0;
+      font-size: 11px;
+      line-height: 1.38;
+    }
+
+    ul, ol {
+      margin: 0;
+      padding-left: 16px;
+      font-size: 11px;
+      line-height: 1.34;
+    }
+
+    li + li {
+      margin-top: 3px;
+    }
+
+    .full {
+      grid-column: 1 / -1;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 10px 11px;
+    }
+
+    .arch p {
+      margin-bottom: 6px;
+    }
+
+    .arch p:last-child {
+      margin-bottom: 0;
+    }
+
+    .footer {
+      margin-top: 14px;
+      padding-top: 8px;
+      border-top: 1px solid var(--line);
+      font-size: 9.5px;
+      line-height: 1.3;
+      color: var(--muted);
+    }
+
+    .mono {
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="header">
+      <h1>Styles By Tiwa App Summary</h1>
+      <p class="subtitle">One-page repo-based overview of the static storefront and admin tooling.</p>
+    </div>
+
+    <div class="grid">
+      <section class="panel">
+        <h2>What It Is</h2>
+        <p>
+          A static fashion storefront for Styles By Tiwa with a landing page, a shop page, and a browser-based admin area.
+          The customer-facing pages are plain HTML/CSS/JS, while product data, image storage, and admin authentication are handled through Supabase.
+        </p>
+      </section>
+
+      <section class="panel">
+        <h2>Who It&rsquo;s For</h2>
+        <p>
+          Primary persona: a small fashion brand owner in Lagos who wants to showcase collections online, take orders through WhatsApp, and manage products without a custom backend app.
+        </p>
+      </section>
+
+      <section class="panel">
+        <h2>What It Does</h2>
+        <ul>
+          <li>Presents a branded homepage with hero, about, featured collection, and contact sections.</li>
+          <li>Shows a shop grid populated from a Supabase <span class="mono">products</span> table.</li>
+          <li>Lets shoppers filter products by category.</li>
+          <li>Opens product details in a modal with title, image, price, and CTA.</li>
+          <li>Sends purchase intent to WhatsApp with prefilled order text.</li>
+          <li>Supports admin login with Supabase Auth and a single allowed email check.</li>
+          <li>Lets the admin add, edit, delete, and image-upload products via Supabase Storage.</li>
+        </ul>
+      </section>
+
+      <section class="panel arch">
+        <h2>How It Works</h2>
+        <p><strong>UI components:</strong> <span class="mono">index.html</span> (landing), <span class="mono">shop.html</span> (catalog), <span class="mono">login.html</span> (admin auth), <span class="mono">tiwa-admin-dashboard.html</span> (product management), all styled by <span class="mono">style.css</span>.</p>
+        <p><strong>Client logic:</strong> <span class="mono">script.js</span> toggles mobile nav; <span class="mono">shop.js</span> loads and filters products; <span class="mono">admin.js</span> protects the admin page and performs CRUD.</p>
+        <p><strong>Services:</strong> Supabase JS CDN is used for auth, database reads/writes against <span class="mono">products</span>, and uploads to the <span class="mono">product-images</span> storage bucket. Google Maps and social/media links are embedded directly in the pages.</p>
+        <p><strong>Data flow:</strong> Browser page -&gt; JS creates Supabase client -&gt; shop reads products and renders cards/modal -&gt; admin authenticates, uploads images, then inserts/updates/deletes product records -&gt; shopper orders continue in WhatsApp. Server code/API layer: Not found in repo.</p>
+      </section>
+
+      <section class="panel full">
+        <h2>How To Run</h2>
+        <ol>
+          <li>Open <span class="mono">index.html</span> in a browser for the landing page.</li>
+          <li>Open <span class="mono">shop.html</span> for the storefront catalog; internet access is needed for Supabase/CDN assets.</li>
+          <li>Open <span class="mono">login.html</span> to access admin features, then continue to <span class="mono">tiwa-admin-dashboard.html</span> after sign-in.</li>
+          <li>Supabase schema setup, local dev server, package manager commands, and deployment steps: Not found in repo.</li>
+        </ol>
+      </section>
+    </div>
+
+    <div class="footer">
+      Repo evidence used: <span class="mono">index.html</span>, <span class="mono">shop.html</span>, <span class="mono">login.html</span>, <span class="mono">tiwa-admin-dashboard.html</span>, <span class="mono">shop.js</span>, <span class="mono">admin.js</span>, <span class="mono">script.js</span>, <span class="mono">style.css</span>.
+    </div>
+  </div>
+</body>
+</html>
