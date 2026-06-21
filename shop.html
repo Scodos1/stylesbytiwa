@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Shop Styles By Tiwa - Vintage shirts, two-piece sets, and Greg shirts.">
+  <link rel="icon" type="image/jpeg" href="images/Hero_logo.jpeg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <title>Shop | Styles By Tiwa</title>
+
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+</head>
+
+<body>
+
+  <!-- Loader -->
+  <div class="loader" id="loader">
+    <div class="loader-content">
+      <div class="loader-logo">
+        <img src="images/Hero_logo.jpeg" alt="Loading">
+      </div>
+      <div class="loader-bar">
+        <div class="loader-progress"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating WhatsApp -->
+  <a href="https://wa.me/2349078537344" target="_blank" class="whatsapp-float" aria-label="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <div class="bg-texture"></div>
+
+  <header class="navbar" id="navbar">
+
+    <a href="index.html" class="logo-link">
+      <span class="logo-text">Styles By Tiwa</span>
+    </a>
+
+    <div class="menu-toggle" onclick="toggleMenu()" id="menuToggle" aria-label="Toggle Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <nav id="nav">
+
+      <div class="nav-logo">
+        <img src="images/Hero_logo.jpeg" alt="Styles By Tiwa">
+      </div>
+
+      <a href="index.html" onclick="closeMenu()"><span>Home</span></a>
+      <a href="index.html#about" onclick="closeMenu()"><span>About</span></a>
+      <a href="index.html#collection" onclick="closeMenu()"><span>Collection</span></a>
+      <a href="shop.html" onclick="closeMenu()"><span>Shop</span></a>
+      <a href="index.html#contact" onclick="closeMenu()"><span>Contact</span></a>
+
+      <div class="nav-social">
+        <a href="https://instagram.com/styles_by_tiwa" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://tiktok.com/@_stylesbytiwa" target="_blank"><i class="fab fa-tiktok"></i></a>
+      </div>
+
+    </nav>
+
+  </header>
+
+  <main>
+
+    <section class="shop-hero">
+      <div class="shop-hero-bg"></div>
+      <div class="shop-hero-content">
+        <p class="section-eyebrow">Our Products</p>
+        <h1>Shop Collection</h1>
+        <p class="shop-hero-subtitle">Handcrafted fashion pieces for the discerning individual</p>
+      </div>
+    </section>
+
+    <section class="shop-section" id="shop">
+
+      <div class="shop-filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="vintage_shirts">Vintage Shirts</button>
+        <button class="filter-btn" data-filter="two_piece_long">Two Piece Long</button>
+        <button class="filter-btn" data-filter="two_piece_short">Two Piece Short</button>
+        <button class="filter-btn" data-filter="greg_shirt">Greg Shirt</button>
+      </div>
+
+      <div id="product-grid" class="product-grid"></div>
+
+      <div class="shop-empty" id="shop-empty" style="display: none;">
+        <i class="fas fa-search"></i>
+        <p>No products found in this category</p>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Image Lightbox Modal -->
+  <div class="image-modal" id="imageModal">
+    <button class="modal-close" aria-label="Close">
+      <i class="fas fa-times"></i>
+    </button>
+
+    <div class="modal-nav">
+      <button class="modal-prev" aria-label="Previous image">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <button class="modal-next" aria-label="Next image">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+
+    <div class="modal-image-container">
+      <img id="modalImage" src="" alt="Product image">
+    </div>
+
+    <span class="modal-counter" id="modalCounter"></span>
+  </div>
+
+  <footer>
+
+    <div class="footer-main">
+      <div class="footer-brand">
+        <img src="images/Hero_logo.jpeg" alt="Styles By Tiwa">
+        <p>Luxury fashion for everyone. Handcrafted with love in Lagos, Nigeria.</p>
+      </div>
+
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <a href="index.html#about">About</a>
+        <a href="index.html#collection">Collection</a>
+        <a href="shop.html">Shop</a>
+        <a href="index.html#contact">Contact</a>
+      </div>
+
+      <div class="footer-links">
+        <h4>Follow Us</h4>
+        <a href="https://instagram.com/styles_by_tiwa" target="_blank">Instagram</a>
+        <a href="https://tiktok.com/@_stylesbytiwa" target="_blank">TikTok</a>
+        <a href="https://wa.me/2349078537344" target="_blank">WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="social-icons">
+        <a href="https://wa.me/2349078537344" target="_blank" aria-label="WhatsApp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="mailto:alagbesulait@gmail.com" aria-label="Email">
+          <i class="fas fa-envelope"></i>
+        </a>
+        <a href="https://instagram.com/styles_by_tiwa" target="_blank" aria-label="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://tiktok.com/@_stylesbytiwa" target="_blank" aria-label="TikTok">
+          <i class="fab fa-tiktok"></i>
+        </a>
+      </div>
+      <p class="footer-copyright">&copy; 2026 Styles By Tiwa. All rights reserved.</p>
+    </div>
+
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="shop.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/jpeg" href="images/Hero_logo.jpeg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <title>Admin | Styles By Tiwa</title>
+
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+</head>
+
+<body>
+
+  <!-- Loader -->
+  <div class="loader" id="loader">
+    <div class="loader-content">
+      <div class="loader-logo">
+        <img src="images/Hero_logo.jpeg" alt="Loading">
+      </div>
+      <div class="loader-bar">
+        <div class="loader-progress"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-texture"></div>
+
+  <header class="navbar" id="navbar">
+
+    <a href="index.html" class="logo-link">
+      <span class="logo-text">Styles By Tiwa</span>
+    </a>
+
+    <div class="menu-toggle" onclick="toggleMenu()" id="menuToggle" aria-label="Toggle Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <nav id="nav">
+
+      <div class="nav-logo">
+        <img src="images/Hero_logo.jpeg" alt="Styles By Tiwa">
+      </div>
+
+      <a href="index.html" onclick="closeMenu()"><span>Home</span></a>
+      <a href="index.html#about" onclick="closeMenu()"><span>About</span></a>
+      <a href="index.html#collection" onclick="closeMenu()"><span>Collection</span></a>
+      <a href="shop.html" onclick="closeMenu()"><span>Shop</span></a>
+      <a href="index.html#contact" onclick="closeMenu()"><span>Contact</span></a>
+      <a href="#" class="nav-logout" onclick="logout(); return false;">
+        <span>Logout</span> <i class="fas fa-arrow-right-from-bracket"></i>
+      </a>
+
+      <div class="nav-social">
+        <a href="https://instagram.com/styles_by_tiwa" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://tiktok.com/@_stylesbytiwa" target="_blank"><i class="fab fa-tiktok"></i></a>
+      </div>
+
+    </nav>
+
+  </header>
+
+  <main>
+
+    <section class="admin-header">
+      <p class="section-eyebrow">Dashboard</p>
+      <h1>Manage Your Collection</h1>
+      <p>Add, edit, and organize the products and homepage collection customers see</p>
+    </section>
+
+    <section class="admin-section">
+
+      <!-- FORM -->
+      <div class="admin-panel">
+        <h2>Add / Edit Product</h2>
+
+        <div class="admin-form">
+
+          <div class="field">
+            <label for="title">Product Title</label>
+            <input type="text" id="title" placeholder="e.g. Vintage Denim Shirt">
+          </div>
+
+          <div class="field">
+            <label for="price">Price (₦)</label>
+            <input type="number" id="price" placeholder="e.g. 25000">
+          </div>
+
+          <div class="field full">
+            <label for="category">Category</label>
+            <select id="category">
+              <option value="">Select Category</option>
+              <option value="vintage_shirts">Vintage Shirts</option>
+              <option value="two_piece_long">Two Piece Long</option>
+              <option value="two_piece_short">Two Piece Short</option>
+              <option value="greg_shirt">Greg Shirt</option>
+            </select>
+          </div>
+
+          <div class="field full">
+            <label for="imageFiles">Product Images</label>
+            <label class="upload-zone" for="imageFiles">
+              <i class="fas fa-cloud-arrow-up"></i>
+              <span>Click to upload images</span>
+            </label>
+            <input type="file" id="imageFiles" multiple class="sr-only-file">
+            <div id="image-preview" class="image-preview"></div>
+          </div>
+
+          <div class="admin-form-actions">
+            <button type="button" class="btn btn-primary" onclick="addProduct()">
+              <span>Save Product</span>
+              <i class="fas fa-check"></i>
+            </button>
+            <button type="button" class="btn btn-ghost" onclick="clearForm()">
+              <span>Clear Form</span>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- MANAGE PRODUCTS -->
+      <div class="admin-panel">
+        <h2>Manage Products</h2>
+        <div id="admin-products" class="admin-product-grid"></div>
+      </div>
+
+      <!-- FEATURED COLLECTION FORM -->
+      <div class="admin-panel" id="collectionFormPanel">
+        <h2>Add / Edit Featured Collection Card</h2>
+        <p class="admin-panel-hint">These cards appear in the "Featured Collection" section on the homepage.</p>
+
+        <div class="admin-form">
+
+          <div class="field">
+            <label for="collectionTitle">Card Title</label>
+            <input type="text" id="collectionTitle" placeholder="e.g. Vintage Shirts">
+          </div>
+
+          <div class="field">
+            <label for="collectionBadge">Badge (optional)</label>
+            <input type="text" id="collectionBadge" placeholder="e.g. Bestseller, New, Popular">
+          </div>
+
+          <div class="field full">
+            <label for="collectionDescription">Description</label>
+            <input type="text" id="collectionDescription" placeholder="e.g. Timeless style, modern comfort">
+          </div>
+
+          <div class="field">
+            <label for="collectionButtonLabel">Button Label</label>
+            <input type="text" id="collectionButtonLabel" placeholder="View Products">
+          </div>
+
+          <div class="field">
+            <label for="collectionButtonLink">Button Link</label>
+            <input type="text" id="collectionButtonLink" placeholder="shop.html">
+          </div>
+
+          <div class="field full">
+            <label for="collectionOrder">Display Order</label>
+            <input type="number" id="collectionOrder" placeholder="0" value="0">
+          </div>
+
+          <div class="field full">
+            <label for="collectionImageFile">Card Image</label>
+            <label class="upload-zone" for="collectionImageFile">
+              <i class="fas fa-cloud-arrow-up"></i>
+              <span>Click to upload image</span>
+            </label>
+            <input type="file" id="collectionImageFile" class="sr-only-file">
+            <div id="collection-image-preview" class="image-preview"></div>
+          </div>
+
+          <div class="admin-form-actions">
+            <button type="button" class="btn btn-primary" onclick="addCollection()">
+              <span>Save Card</span>
+              <i class="fas fa-check"></i>
+            </button>
+            <button type="button" class="btn btn-ghost" onclick="clearCollectionForm()">
+              <span>Clear Form</span>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- MANAGE FEATURED COLLECTION -->
+      <div class="admin-panel">
+        <h2>Manage Featured Collection</h2>
+        <div id="admin-collections" class="admin-product-grid"></div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-bottom" style="border-top: none; padding-top: 0;">
+      <p class="footer-copyright">&copy; 2026 Styles By Tiwa. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="admin.js"></script>
+
+</body>
+</html>

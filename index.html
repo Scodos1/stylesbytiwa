@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Styles By Tiwa - Luxury Fashion Brand in Lagos, Nigeria. Vintage shirts, two-piece sets, and Greg shirts.">
+  <link rel="icon" type="image/jpeg" href="images/Hero_logo.jpeg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <title>Styles By Tiwa | Luxury Fashion</title>
+
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+</head>
+
+<body>
+
+  <!-- Page Loading Screen -->
+  <div class="loader" id="loader">
+    <div class="loader-content">
+      <div class="loader-logo">
+        <img src="images/Hero_logo.jpeg" alt="Loading">
+      </div>
+      <div class="loader-bar">
+        <div class="loader-progress"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating WhatsApp Button -->
+  <a href="https://wa.me/2349078537344" target="_blank" class="whatsapp-float" aria-label="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- Background Elements -->
+  <div class="bg-texture"></div>
+  <canvas id="particles"></canvas>
+
+  <!-- Navigation -->
+  <header class="navbar" id="navbar">
+
+    <a href="#" class="logo-link">
+      <span class="logo-text">Styles By Tiwa</span>
+    </a>
+
+    <div class="menu-toggle" onclick="toggleMenu()" id="menuToggle" aria-label="Toggle Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <nav id="nav" role="navigation">
+
+      <div class="nav-logo">
+        <img src="images/Hero_logo.jpeg" alt="Styles By Tiwa">
+      </div>
+
+      <a href="#" onclick="closeMenu()">
+        <span>Home</span>
+      </a>
+      <a href="#about" onclick="closeMenu()">
+        <span>About</span>
+      </a>
+      <a href="#collection" onclick="closeMenu()">
+        <span>Collection</span>
+      </a>
+      <a href="shop.html" onclick="closeMenu()">
+        <span>Shop</span>
+      </a>
+      <a href="#contact" onclick="closeMenu()">
+        <span>Contact</span>
+      </a>
+
+      <div class="nav-social">
+        <a href="https://instagram.com/styles_by_tiwa" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://tiktok.com/@_stylesbytiwa" target="_blank"><i class="fab fa-tiktok"></i></a>
+      </div>
+
+    </nav>
+
+  </header>
+
+  <main>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+
+      <div class="hero-bg">
+        <div class="hero-bg-gradient"></div>
+        <div class="hero-bg-lines"></div>
+      </div>
+
+      <div class="logo-container">
+        <img src="images/Hero_logo.jpeg" alt="Styles By Tiwa Logo" class="logo-image">
+      </div>
+
+      <div class="hero-content">
+
+        <div class="hero-badge">
+          <span>Handcrafted in Lagos</span>
+        </div>
+
+        <h1>
+          <span class="hero-title-line">Luxury Fashion</span>
+          <span class="hero-title-line">For Everyone</span>
+        </h1>
+
+        <p class="hero-tagline">
+          <span>Elegance</span>
+          <span class="hero-dot"></span>
+          <span>Culture</span>
+          <span class="hero-dot"></span>
+          <span>Individuality</span>
+        </p>
+
+        <div class="hero-cta">
+          <a href="#collection" class="btn btn-primary">
+            <span>Explore Collection</span>
+            <i class="fas fa-arrow-down"></i>
+          </a>
+          <a href="shop.html" class="btn btn-secondary">
+            <span>Shop Now</span>
+          </a>
+        </div>
+
+      </div>
+
+      <div class="scroll-indicator">
+        <div class="scroll-line"></div>
+        <span>Scroll</span>
+      </div>
+
+      <!-- Decorative Elements -->
+      <div class="hero-decor hero-decor-1"></div>
+      <div class="hero-decor hero-decor-2"></div>
+
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+
+      <div class="section-divider">
+        <span class="section-divider-line"></span>
+        <span class="section-divider-icon"><i class="fas fa-diamond"></i></span>
+        <span class="section-divider-line"></span>
+      </div>
+
+      <div class="about-container animate-on-scroll">
+
+        <p class="section-eyebrow">Our Story</p>
+        <h2>About Styles By Tiwa</h2>
+
+        <div class="about-content">
+          <p>
+            Styles by Tiwa is a fashion brand based in Lagos, Nigeria, dedicated to creating stylish and comfortable clothing inspired by vintage and contemporary fashion. We specialize in unique fashion pieces such as vintage shirts, two-piece vintage sets and Greg shirts designed to help individuals express their style with confidence.
+          </p>
+          <p>
+            We focus on quality fabrics, creativity and attention to detail to ensure every piece stands out. Our brand also provides services ranging from unprocessed fabrics to processed fabrics, giving customers the flexibility to choose fabrics or ready to wear styles that suit their needs.
+          </p>
+        </div>
+
+        <div class="about-stats">
+          <div class="stat">
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Handcrafted</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">500+</span>
+            <span class="stat-label">Happy Clients</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">50+</span>
+            <span class="stat-label">Unique Designs</span>
+          </div>
+        </div>
+
+        <div class="about-mission">
+          <i class="fas fa-quote-left"></i>
+          <p><strong>Our mission:</strong> Deliver trendy, high-quality fashion pieces that combine comfort, culture and individuality.</p>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- Collection Section -->
+    <section id="collection">
+
+      <p class="section-eyebrow animate-on-scroll">Curated Selection</p>
+      <h2 class="section-title animate-on-scroll">Featured Collection</h2>
+
+      <div class="products" id="collection-grid">
+        <!-- Populated dynamically from Supabase by collection.js -->
+      </div>
+
+      <div class="container">
+        <div class="instagram animate-on-scroll">
+          <a href="https://www.instagram.com/styles_by_tiwa" class="btn btn-outline" target="_blank">
+            <i class="fab fa-instagram"></i>
+            <span>View More on Instagram</span>
+          </a>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+      <div class="features-container">
+        <div class="feature animate-on-scroll">
+          <div class="feature-icon">
+            <i class="fas fa-gem"></i>
+          </div>
+          <h3>Premium Quality</h3>
+          <p>Carefully selected fabrics and attention to every detail</p>
+        </div>
+        <div class="feature animate-on-scroll">
+          <div class="feature-icon">
+            <i class="fas fa-truck"></i>
+          </div>
+          <h3>Fast Delivery</h3>
+          <p>Prompt delivery across Nigeria and beyond</p>
+        </div>
+        <div class="feature animate-on-scroll">
+          <div class="feature-icon">
+            <i class="fas fa-hand-holding-heart"></i>
+          </div>
+          <h3>Made with Love</h3>
+          <p>Each piece crafted with passion and care</p>
+        </div>
+        <div class="feature animate-on-scroll">
+          <div class="feature-icon">
+            <i class="fas fa-tshirt"></i>
+          </div>
+          <h3>Unique Designs</h3>
+          <p>Stand out with exclusive fashion pieces</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+
+      <div class="section-divider">
+        <span class="section-divider-line"></span>
+        <span class="section-divider-icon"><i class="fas fa-diamond"></i></span>
+        <span class="section-divider-line"></span>
+      </div>
+
+      <p class="section-eyebrow animate-on-scroll">Get in Touch</p>
+      <h2 class="section-title animate-on-scroll">Contact / Orders</h2>
+
+      <div class="contact-grid">
+
+        <form action="mailto:alagbesuliat@gmail.com" method="POST" enctype="text/plain" class="contact-form animate-on-scroll">
+
+          <div class="form-group">
+            <input type="text" id="name" placeholder=" " required>
+            <label for="name">Your Name</label>
+          </div>
+
+          <div class="form-group">
+            <input type="email" id="email" placeholder=" " required>
+            <label for="email">Your Email</label>
+          </div>
+
+          <div class="form-group">
+            <textarea id="message" placeholder=" " rows="5"></textarea>
+            <label for="message">Your Message</label>
+          </div>
+
+          <button type="submit" class="btn btn-submit">
+            <span>Send Message</span>
+            <i class="fas fa-paper-plane"></i>
+          </button>
+
+        </form>
+
+        <div class="contact-info animate-on-scroll">
+
+          <div class="contact-card">
+            <div class="contact-card-icon">
+              <i class="fab fa-whatsapp"></i>
+            </div>
+            <div class="contact-card-content">
+              <h4>WhatsApp</h4>
+              <a href="https://wa.me/2349078537344" target="_blank">+234 907 853 7344</a>
+            </div>
+          </div>
+
+          <div class="contact-card">
+            <div class="contact-card-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div class="contact-card-content">
+              <h4>Email</h4>
+              <a href="mailto:alagbesulait@gmail.com">alagbesulait@gmail.com</a>
+            </div>
+          </div>
+
+          <div class="contact-card">
+            <div class="contact-card-icon">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div class="contact-card-content">
+              <h4>Location</h4>
+              <p>Lagos, Nigeria</p>
+            </div>
+          </div>
+
+          <div class="contact-card">
+            <div class="contact-card-icon">
+              <i class="fab fa-instagram"></i>
+            </div>
+            <div class="contact-card-content">
+              <h4>Instagram</h4>
+              <a href="https://instagram.com/styles_by_tiwa" target="_blank">@styles_by_tiwa</a>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="map-container animate-on-scroll">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d775.3714619575265!2d3.5426597045089725!3d6.608158669088368!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sng!4v1774124234216!5m2!1sen!2sng"
+          width="100%"
+          height="400"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer>
+
+    <div class="footer-main">
+      <div class="footer-brand">
+        <img src="images/Hero_logo.jpeg" alt="Styles By Tiwa">
+        <p>Luxury fashion for everyone. Handcrafted with love in Lagos, Nigeria.</p>
+      </div>
+
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <a href="#about">About</a>
+        <a href="#collection">Collection</a>
+        <a href="shop.html">Shop</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+      <div class="footer-links">
+        <h4>Follow Us</h4>
+        <a href="https://instagram.com/styles_by_tiwa" target="_blank">Instagram</a>
+        <a href="https://tiktok.com/@_stylesbytiwa" target="_blank">TikTok</a>
+        <a href="https://wa.me/2349078537344" target="_blank">WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="social-icons">
+        <a href="https://wa.me/2349078537344" target="_blank" aria-label="WhatsApp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="mailto:alagbesulait@gmail.com" aria-label="Email">
+          <i class="fas fa-envelope"></i>
+        </a>
+        <a href="https://instagram.com/styles_by_tiwa" target="_blank" aria-label="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://tiktok.com/@_stylesbytiwa" target="_blank" aria-label="TikTok">
+          <i class="fab fa-tiktok"></i>
+        </a>
+      </div>
+      <p class="footer-copyright">&copy; 2026 Styles By Tiwa. All rights reserved.</p>
+    </div>
+
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="collection.js"></script>
+
+</body>
+</html>
