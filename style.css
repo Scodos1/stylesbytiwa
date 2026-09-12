@@ -2,21 +2,28 @@
    Styles By Tiwa - Premium Luxury CSS
    ======================================== */
 
-/* CSS Variables */
+/* CSS Variables - Premium Maison Palette from ST Monogram Logo */
 :root {
   --gold: #C9A961;
-  --gold-light: #E8D5A3;
-  --gold-dark: #8B7355;
-  --black: #0A0A0A;
-  --black-soft: #111111;
-  --black-card: #161616;
-  --black-card-hover: #1C1C1C;
-  --white: #FAFAFA;
-  --gray: #9A9A9A;
-  --gray-dark: #5A5A5A;
-  --cream: #F5F0E8;
+  --gold-light: #F5E7B8;
+  --gold-mid: #D8B86A;
+  --gold-dark: #8C6E3A;
+  --gold-foil: linear-gradient(112deg, #8C6E3A 0%, #D8B86A 22%, #F5E7B8 38%, #C9A961 52%, #F1DF9A 68%, #8C6E3A 100%);
+  --gold-ring: linear-gradient(180deg, #F5E7B8 0%, #C9A961 48%, #8C6E3A 100%);
+  --black: #050507;
+  --black-soft: #0B0B0B;
+  --black-card: #111111;
+  --black-card-hover: #171717;
+  --white: #FDFCF9;
+  --ivory: #F5F0E8;
+  --gray: #A8A29A;
+  --gray-dark: #6A6560;
+  --line: rgba(245, 231, 184, 0.14);
+  --line-strong: rgba(201, 169, 97, 0.28);
+  --grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
   --transition: cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-slow: cubic-bezier(0.4, 0, 0.6, 1);
+  --transition-slow: cubic-bezier(0.32, 0, 0.2, 1);
+  --radius-oval: 999px;
 }
 
 /* Reset & Base */
@@ -37,6 +44,18 @@ body {
   line-height: 1.7;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  background-image: var(--grain);
+  position: relative;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cg fill='none' stroke='%23C9A961' stroke-opacity='0.06'%3E%3Cellipse cx='70' cy='70' rx='38' ry='52'/%3E%3Cellipse cx='70' cy='70' rx='33' ry='46'/%3E%3Ctext x='70' y='78' text-anchor='middle' font-family='serif' font-size='28' fill='%23C9A961' fill-opacity='0.06' stroke='none'%3EST%3C/text%3E%3C/g%3E%3C/svg%3E");
+  background-size: 140px 140px;
 }
 
 /* Selection */
@@ -78,33 +97,38 @@ body {
 }
 
 .loader-logo {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
+  width: 72px;
+  height: 86px;
+  border-radius: 999px;
   overflow: hidden;
   margin: 0 auto 30px;
-  border: 2px solid var(--gold);
-  animation: pulse 2s infinite;
+  border: 1.8px solid transparent;
+  background: var(--gold-ring);
+  padding: 1.6px;
+  animation: pulse 2.2s infinite;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.5);
 }
-
 .loader-logo img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.85);
 }
 
 .loader-bar {
   width: 120px;
   height: 2px;
-  background: var(--black-card);
+  background: rgba(255,255,255,0.06);
   margin: 0 auto;
-  border-radius: 1px;
+  border-radius: 999px;
   overflow: hidden;
+  border: 1px solid rgba(201,169,97,0.16);
 }
 
 .loader-progress {
   height: 100%;
-  background: var(--gold);
+  background: var(--gold-foil);
   animation: loading 1.5s var(--transition) infinite;
 }
 
@@ -209,18 +233,105 @@ body {
 
 .logo-link {
   text-decoration: none;
+  display: flex;
+  align-items: center;
 }
 
 .logo-text {
-  background: linear-gradient(115deg, var(--gold-dark) 0%, var(--gold-light) 35%, var(--gold) 60%, var(--gold-light) 100%);
+  background: var(--gold-foil);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: var(--gold);
-  font-family: 'Playfair Display', serif;
+  font-family: 'Cormorant Garamond', 'Playfair Display', serif;
   font-size: 24px;
   font-weight: 600;
   letter-spacing: 1px;
+}
+
+/* Premium Brand Lockup - ST oval + hairline + foil wordmark (from Hero_logo) */
+.brand-lockup {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.brand-oval {
+  position: relative;
+  width: 46px;
+  height: 58px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #F5E7B8, #C9A961 55%, #8C6E3A);
+  padding: 1.8px;
+  box-shadow: 0 0 0 1px rgba(245,231,184,0.35), 0 4px 16px rgba(0,0,0,0.45);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+.brand-oval::before {
+  content: '';
+  position: absolute;
+  inset: 1.8px;
+  border-radius: 999px;
+  background: #070709;
+  border: 1px solid rgba(255,255,255,0.9);
+  box-shadow: inset 0 0 0 1px rgba(201,169,97,0.35);
+}
+.brand-oval-inner {
+  position: relative;
+  z-index: 1;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 1;
+  background: var(--gold-foil);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 1px 0 rgba(255,255,255,0.35));
+}
+.brand-oval-t {
+  position: absolute;
+  z-index: 2;
+  font-size: 23px;
+  transform: translateY(-0.5px);
+  letter-spacing: 0.5px;
+}
+.brand-divider {
+  width: 1px;
+  height: 42px;
+  background: linear-gradient(180deg, transparent, rgba(245,231,184,0.9), transparent);
+  opacity: 0.95;
+}
+.brand-wordmark {
+  line-height: 0.92;
+  font-family: 'Cormorant Garamond', serif;
+}
+.brand-wd-styles {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  background: var(--gold-foil);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.brand-wd-by {
+  font-size: 14px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--ivory);
+  opacity: 0.95;
+  letter-spacing: 0.5px;
+  -webkit-text-fill-color: var(--ivory);
+}
+.brand-wd-tiwa {
+  font-size: 23px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  background: var(--gold-foil);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 /* Hamburger - hidden on desktop/laptop, visible only on mobile */
@@ -391,105 +502,189 @@ nav a:hover::after { width: 100%; }
   justify-content: center;
   position: relative;
   overflow: hidden;
-  padding: 120px 24px 80px;
+  padding: 130px 24px 90px;
+  background: #050507;
 }
 
 .hero-bg {
   position: absolute;
   inset: 0;
   z-index: 0;
+  background: #050507;
 }
 
 .hero-bg-gradient {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse at 20% 30%, rgba(201, 169, 97, 0.12) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 70%, rgba(201, 169, 97, 0.08) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 50%, rgba(201, 169, 97, 0.05) 0%, transparent 60%);
+    radial-gradient(ellipse at 25% 22%, rgba(201,169,97,0.16) 0%, transparent 52%),
+    radial-gradient(ellipse at 78% 78%, rgba(201,169,97,0.09) 0%, transparent 55%),
+    radial-gradient(ellipse at 50% 50%, rgba(245,231,184,0.04) 0%, transparent 65%);
 }
 
 .hero-bg-lines {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(201, 169, 97, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(201, 169, 97, 0.03) 1px, transparent 1px);
-  background-size: 80px 80px;
-  mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+    linear-gradient(rgba(201,169,97,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201,169,97,0.025) 1px, transparent 1px);
+  background-size: 84px 84px;
+  mask-image: radial-gradient(ellipse at center, black 35%, transparent 72%);
+  opacity: 0.9;
 }
-
-.logo-container {
+.hero-monogram-watermark {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 500px;
-  height: 500px;
-  opacity: 0.04;
+  inset: 0;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cg fill='none' stroke='%23C9A961' stroke-opacity='0.12'%3E%3Cellipse cx='90' cy='90' rx='54' ry='74'/%3E%3Cellipse cx='90' cy='90' rx='47' ry='66' stroke-opacity='0.08'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 180px 180px;
+  background-position: center;
   pointer-events: none;
 }
 
-.logo-container img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+.logo-container { display: none; }
+.hero-content { display: none; }
 
-.hero-content {
+/* Premium Maison Lockup - directly from logo */
+.hero-maison {
   position: relative;
   z-index: 2;
   text-align: center;
-  max-width: 800px;
-  animation: heroFadeIn 1.5s var(--transition) forwards;
+  max-width: 920px;
+  animation: heroFadeIn 1.4s var(--transition-slow) forwards;
 }
-
 @keyframes heroFadeIn {
-  from { opacity: 0; transform: translateY(60px); }
+  from { opacity: 0; transform: translateY(40px); }
   to { opacity: 1; transform: translateY(0); }
+}
+.hero-lockup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  margin-bottom: 28px;
+}
+.hero-oval {
+  position: relative;
+  width: 138px;
+  height: 188px;
+  border-radius: 999px;
+  background: var(--gold-ring);
+  padding: 3px;
+  box-shadow: 0 0 0 1px rgba(245,231,184,0.45), 0 12px 36px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.35);
+  flex-shrink: 0;
+}
+.hero-oval-ring {
+  position: absolute;
+  inset: 3px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.96);
+  box-shadow: inset 0 0 0 1px rgba(201,169,97,0.32);
+}
+.hero-oval-ring-inner {
+  inset: 8px;
+  border-color: rgba(255,255,255,0.42);
+  box-shadow: none;
+}
+.hero-oval-s, .hero-oval-t {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Cormorant Garamond', serif;
+  background: linear-gradient(180deg, #FFF8D6 0%, #F5E7B8 35%, #C9A961 62%, #9C7A2F 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 1px 0 rgba(255,255,255,0.55)) drop-shadow(0 2px 6px rgba(140,110,58,0.35));
+}
+.hero-oval-s { font-size: 78px; font-weight: 600; letter-spacing: -1px; transform: translate(-50%, -50%) translateX(-1px); }
+.hero-oval-t { font-size: 80px; font-weight: 500; letter-spacing: 1px; transform: translate(-50%, -50%) translateX(1px) translateY(-1px); }
+
+.hero-hairline {
+  width: 1px;
+  height: 142px;
+  background: linear-gradient(180deg, transparent, rgba(245,231,184,0.95) 22%, rgba(245,231,184,0.95) 78%, transparent);
+  box-shadow: 0 0 8px rgba(245,231,184,0.25);
+}
+.hero-wordmark {
+  text-align: left;
+  line-height: 0.88;
+  font-family: 'Cormorant Garamond', serif;
+}
+.hw-styles {
+  display: block;
+  font-size: clamp(46px, 6.2vw, 68px);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  background: var(--gold-foil);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 1px 0 rgba(255,255,255,0.22));
+}
+.hw-by {
+  font-size: 0.38em;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--ivory);
+  -webkit-text-fill-color: var(--ivory);
+  letter-spacing: 2px;
+  vertical-align: super;
+  margin-left: 6px;
+  opacity: 0.98;
+}
+.hw-tiwa {
+  display: block;
+  font-size: clamp(48px, 6.5vw, 70px);
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  background: var(--gold-foil);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-top: 2px;
 }
 
 .hero-badge {
-  display: inline-block;
-  margin-bottom: 32px;
-  padding: 10px 24px;
-  border: 1px solid rgba(201, 169, 97, 0.4);
-  font-size: 11px;
-  letter-spacing: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  padding: 9px 22px;
+  border: 1px solid rgba(201,169,97,0.42);
+  border-radius: 999px;
+  font-size: 10px;
+  letter-spacing: 3.6px;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--gold-light);
+  background: rgba(255,255,255,0.02);
+  backdrop-filter: blur(6px);
 }
 
-.hero h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(42px, 8vw, 80px);
-  font-weight: 600;
-  color: var(--gold);
-  line-height: 1.1;
-  margin-bottom: 28px;
-  text-shadow: 0 0 80px rgba(201, 169, 97, 0.3);
+.hero-maison-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(38px, 6vw, 58px);
+  font-weight: 500;
+  color: var(--ivory);
+  line-height: 1.05;
+  margin-bottom: 18px;
+  letter-spacing: 0.4px;
 }
-
-.hero-title-line {
+.hero-maison-title .hero-title-line {
   display: block;
-  overflow: hidden;
 }
-
-.hero-title-line:nth-child(2) {
-  animation-delay: 0.2s;
-}
-
 .hero-tagline {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 16px;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 300;
-  letter-spacing: 6px;
+  letter-spacing: 5.5px;
   text-transform: uppercase;
   color: var(--gray);
-  margin-bottom: 48px;
+  margin-bottom: 36px;
 }
 
 .hero-dot {
@@ -506,75 +701,71 @@ nav a:hover::after { width: 100%; }
   flex-wrap: wrap;
 }
 
-/* Buttons */
+/* Buttons - Premium foil pill & hairline secondary */
 .btn {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 16px 36px;
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 2px;
+  padding: 15px 32px;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 2.2px;
   text-transform: uppercase;
   text-decoration: none;
-  border-radius: 4px;
+  border-radius: 999px;
   cursor: pointer;
-  transition: all 0.4s var(--transition);
+  transition: all 0.42s var(--transition);
   position: relative;
   overflow: hidden;
+  backdrop-filter: blur(4px);
 }
 
 .btn::before {
   content: '';
   position: absolute;
   top: 0;
-  left: -120%;
-  width: 60%;
+  left: -130%;
+  width: 70%;
   height: 100%;
-  background: linear-gradient(115deg, transparent, rgba(255, 255, 255, 0.35), transparent);
-  transform: skewX(-20deg);
-  transition: left 0.7s var(--transition);
+  background: linear-gradient(112deg, transparent, rgba(255,255,255,0.42), transparent);
+  transform: skewX(-18deg);
+  transition: left 0.78s var(--transition-slow);
   pointer-events: none;
 }
-
-.btn:hover::before {
-  left: 130%;
-}
+.btn:hover::before { left: 130%; }
 
 .btn-primary {
-  background: var(--gold);
-  color: var(--black);
-  border: 1px solid var(--gold);
+  background: var(--gold-foil);
+  color: #0A0A0A;
+  border: 1px solid rgba(245,231,184,0.55);
+  box-shadow: 0 8px 28px rgba(201,169,97,0.28), inset 0 1px 0 rgba(255,255,255,0.55);
 }
-
 .btn-primary:hover {
-  background: var(--gold-light);
-  border-color: var(--gold-light);
   transform: translateY(-2px);
-  box-shadow: 0 10px 40px rgba(201, 169, 97, 0.3);
+  box-shadow: 0 14px 36px rgba(201,169,97,0.38), inset 0 1px 0 rgba(255,255,255,0.65);
+  filter: brightness(1.04);
 }
-
 .btn-secondary {
-  background: transparent;
-  color: var(--gold);
-  border: 1px solid var(--gold);
+  background: rgba(255,255,255,0.02);
+  color: var(--gold-light);
+  border: 1px solid rgba(201,169,97,0.42);
 }
-
 .btn-secondary:hover {
-  background: var(--gold);
-  color: var(--black);
+  background: rgba(201,169,97,0.08);
+  color: var(--ivory);
+  border-color: rgba(245,231,184,0.62);
 }
-
 .btn-outline {
   background: transparent;
-  color: var(--gold);
-  border: 1px solid rgba(201, 169, 97, 0.5);
-  padding: 18px 48px;
+  color: var(--gold-light);
+  border: 1px solid rgba(201,169,97,0.38);
+  padding: 14px 28px;
+  border-radius: 999px;
 }
-
 .btn-outline:hover {
-  border-color: var(--gold);
-  background: rgba(201, 169, 97, 0.1);
+  border-color: rgba(245,231,184,0.72);
+  background: rgba(201,169,97,0.08);
+  color: var(--ivory);
 }
 
 .btn i {
@@ -663,7 +854,8 @@ nav a:hover::after { width: 100%; }
 
 .section-divider-icon {
   color: var(--gold);
-  font-size: 10px;
+  font-size: 9px;
+  filter: drop-shadow(0 0 6px rgba(201,169,97,0.35));
 }
 
 /* ========================================
@@ -691,12 +883,15 @@ nav a:hover::after { width: 100%; }
 }
 
 .about h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(32px, 5vw, 48px);
-  font-weight: 500;
-  color: var(--gold);
+  font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+  font-size: clamp(34px, 5vw, 50px);
+  font-weight: 600;
+  background: var(--gold-foil);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
   margin-bottom: 48px;
-  letter-spacing: 1px;
+  letter-spacing: 0.6px;
 }
 
 .about-content {
@@ -783,12 +978,15 @@ nav a:hover::after { width: 100%; }
 
 .section-title {
   text-align: center;
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(32px, 5vw, 48px);
-  font-weight: 500;
-  color: var(--gold);
+  font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+  font-size: clamp(34px, 5vw, 50px);
+  font-weight: 600;
+  background: var(--gold-foil);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
   margin-bottom: 60px;
-  letter-spacing: 1px;
+  letter-spacing: 0.6px;
 }
 
 .products {
@@ -799,23 +997,32 @@ nav a:hover::after { width: 100%; }
   margin-bottom: 80px;
 }
 
-/* Card */
+/* Card - Double hairline luxury */
 .card {
-  background: var(--black-card);
-  border-radius: 16px;
+  background: linear-gradient(180deg, #141414 0%, #0F0F0F 100%);
+  border-radius: 18px;
   overflow: hidden;
-  border: 1px solid rgba(201, 169, 97, 0.08);
-  transition: all 0.5s var(--transition);
+  border: 1px solid rgba(201,169,97,0.10);
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.02) inset, 0 18px 40px rgba(0,0,0,0.45);
+  transition: all 0.55s var(--transition);
   position: relative;
 }
-
-.card:hover {
-  transform: translateY(-12px);
-  border-color: rgba(201, 169, 97, 0.2);
-  box-shadow:
-    0 30px 60px rgba(0, 0, 0, 0.4),
-    0 0 60px rgba(201, 169, 97, 0.06);
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border-radius: 14px;
+  border: 1px solid rgba(245,231,184,0.07);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
 }
+.card:hover {
+  transform: translateY(-10px);
+  border-color: rgba(245,231,184,0.22);
+  box-shadow: 0 28px 60px rgba(0,0,0,0.52), 0 0 0 1px rgba(201,169,97,0.14), 0 0 36px rgba(201,169,97,0.08);
+}
+.card:hover::before { opacity: 1; }
 
 .card-image-wrapper {
   position: relative;
@@ -2126,6 +2333,23 @@ footer {
   .hero {
     padding: 100px 24px 60px;
   }
+
+  .hero-lockup {
+    flex-direction: column;
+    gap: 18px;
+  }
+  .hero-hairline {
+    width: 142px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(245,231,184,0.95) 22%, rgba(245,231,184,0.95) 78%, transparent);
+  }
+  .hero-wordmark { text-align: center; }
+  .hero-oval { width: 118px; height: 164px; }
+  .hero-oval-s { font-size: 66px; }
+  .hero-oval-t { font-size: 68px; }
+  .brand-lockup { gap: 10px; }
+  .brand-oval { width: 40px; height: 52px; }
+  .brand-wordmark { line-height: 0.9; }
 
   .hero-tagline {
     flex-direction: column;
