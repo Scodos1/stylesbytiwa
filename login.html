@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/jpeg" href="images/Hero_logo.jpeg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <title>Admin Login | Styles By Tiwa</title>
+
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+  <script src="supabase-config.js"></script>
+</head>
+
+<body>
+
+  <!-- Loader -->
+  <div class="loader" id="loader">
+    <div class="loader-content">
+      <div class="loader-logo">
+        <img src="images/Hero_logo.jpeg" alt="Loading">
+      </div>
+      <div class="loader-bar">
+        <div class="loader-progress"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-texture"></div>
+
+  <header class="navbar" id="navbar">
+
+    <a href="index.html" class="logo-link">
+      <span class="logo-text">Styles By Tiwa</span>
+    </a>
+
+    <div class="menu-toggle" onclick="toggleMenu()" id="menuToggle" aria-label="Toggle Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <nav id="nav">
+
+      <div class="nav-logo">
+        <img src="images/Hero_logo.jpeg" alt="Styles By Tiwa">
+      </div>
+
+      <a href="index.html" onclick="closeMenu()"><span>Home</span></a>
+      <a href="index.html#about" onclick="closeMenu()"><span>About</span></a>
+      <a href="index.html#collection" onclick="closeMenu()"><span>Collection</span></a>
+      <a href="shop.html" onclick="closeMenu()"><span>Shop</span></a>
+      <a href="index.html#contact" onclick="closeMenu()"><span>Contact</span></a>
+
+      <div class="nav-social">
+        <a href="https://instagram.com/styles_by_tiwa" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://tiktok.com/@_stylesbytiwa" target="_blank"><i class="fab fa-tiktok"></i></a>
+      </div>
+
+    </nav>
+
+  </header>
+
+  <main>
+
+    <section class="login-header">
+      <p class="section-eyebrow">Restricted Access</p>
+      <h1>Admin Login</h1>
+      <p>Sign in to manage the Styles By Tiwa collection</p>
+    </section>
+
+    <section class="login-section">
+      <div class="login-panel">
+
+        <div class="login-icon">
+          <i class="fas fa-lock"></i>
+        </div>
+
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="you@example.com">
+        </div>
+
+        <div class="field">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="••••••••">
+        </div>
+
+        <button type="button" class="btn btn-primary" onclick="login()">
+          <span>Login</span>
+          <i class="fas fa-arrow-right"></i>
+        </button>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-bottom" style="border-top: none; padding-top: 0;">
+      <p class="footer-copyright">&copy; 2026 Styles By Tiwa. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>document.addEventListener('DOMContentLoaded',()=>{const e=document.querySelector('.footer-copyright'); if(e) e.textContent=`\u00A9 ${new Date().getFullYear()} Styles By Tiwa. All rights reserved.`});</script>
+  <script>
+    const supabaseClient = (typeof getSupabaseClient === 'function' ? getSupabaseClient() : supabase.createClient(SUPABASE_URL, SUPABASE_KEY));
+
+    async function login() {
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+
+      if (!email || !password) {
+        alert("Enter email and password");
+        return;
+      }
+
+      // basic email format check
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        alert("Please enter a valid email");
+        return;
+      }
+
+      const { error } = await supabaseClient.auth.signInWithPassword({
+        email,
+        password
+      });
+
+      if (error) {
+        console.error(error);
+        alert("Login failed ❌ " + (error.message || ""));
+      } else {
+        window.location.href = "tiwa-admin-dashboard.html";
+      }
+    }
+    // allow Enter key to submit
+    document.addEventListener('DOMContentLoaded', () => {
+      const pw = document.getElementById('password');
+      if (pw) pw.addEventListener('keydown', e => { if (e.key === 'Enter') login(); });
+    });
+  </script>
+
+</body>
+</html>
