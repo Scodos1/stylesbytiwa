@@ -1,153 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noindex, nofollow">
-  <link rel="icon" type="image/jpeg" href="images/Hero_logo.jpeg">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-  <title>Admin Login | Styles By Tiwa</title>
-
-  <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
-  <script src="supabase-config.js"></script>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="robots" content="noindex, nofollow"/>
+<meta name="description" content="Admin Login - Styles By Tiwa"/>
+<title>Admin Login | Styles By Tiwa</title>
+<link rel="icon" type="image/jpeg" href="images/Hero_logo.jpeg">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,600&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="supabase-config.js"></script>
+<style>
+:root{--paper:#FDF9F3;--paper-2:#F3ECE1;--ink:#11100F;--ink-2:#5C5752;--line:rgba(17,16,15,0.12);--line-strong:rgba(17,16,15,0.22);--noir:#0B0B0C;--gold:#C9A961;--gold-light:#F5E7B8;--gold-line:rgba(201,169,97,0.28);--ease:cubic-bezier(.76,0,.24,1)}
+*{margin:0;padding:0;box-sizing:border-box}html{background:var(--paper)}body{font-family:"Inter",system-ui,sans-serif;background:var(--paper);color:var(--ink);-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column}
+button{cursor:pointer;font:inherit}
+.header{height:80px;display:flex;align-items:center;justify-content:space-between;padding:0 32px;border-bottom:1px solid var(--gold-line);background:rgba(11,11,12,0.96);color:var(--paper)}
+.logo{display:flex;align-items:center;gap:14px;text-decoration:none;color:inherit}.logo-mark{height:54px;border-radius:12px;border:1px solid rgba(201,169,97,.35);overflow:hidden;background:#0A0A0A}.logo-mark img{height:100%;width:auto;max-width:230px;object-fit:contain;display:block}
+main{flex:1;display:grid;place-items:center;padding:48px 20px}
+.login-card{width:100%;max-width:400px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:36px 32px;box-shadow:0 20px 50px rgba(0,0,0,.07)}
+.login-card h1{font-family:"Bodoni Moda";font-size:32px;letter-spacing:-.03em;line-height:1}
+.login-card h1 em{font-family:"Instrument Serif";font-style:italic;font-weight:400}
+.login-card p.sub{font-size:13px;color:var(--ink-2);margin:10px 0 24px}
+.field{margin-bottom:16px}.field label{display:block;font-size:10px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;opacity:.6;margin-bottom:8px}
+.field input{width:100%;padding:13px 14px;border:1px solid var(--line);border-radius:12px;font-size:14px;font-family:inherit;background:var(--paper)}
+.field input:focus{outline:none;border-color:var(--ink)}
+.btn{width:100%;height:48px;border-radius:999px;background:var(--noir);color:var(--gold-light);border:1px solid rgba(201,169,97,.4);font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn:hover{background:#000}
+.err{font-size:12px;color:#b3261e;margin-top:12px;min-height:16px}
+footer{padding:20px;text-align:center;font-size:11px;opacity:.6}
+</style>
 </head>
-
 <body>
-
-  <!-- Loader -->
-  <div class="loader" id="loader">
-    <div class="loader-content">
-      <div class="loader-logo">
-        <img src="images/Hero_logo.jpeg" alt="Loading">
-      </div>
-      <div class="loader-bar">
-        <div class="loader-progress"></div>
-      </div>
-    </div>
+<header class="header">
+  <a href="index.html" class="logo"><span class="logo-mark"><img src="images/Hero_logo.jpeg" alt="Styles By Tiwa"/></span></a>
+  <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.6">Restricted Access</span>
+</header>
+<main>
+  <div class="login-card">
+    <h1>Admin <em>Login</em></h1>
+    <p class="sub">Sign in to manage the Styles By Tiwa collection</p>
+    <div class="field"><label for="email">Email</label><input type="email" id="email" placeholder="you@example.com" autocomplete="email"/></div>
+    <div class="field"><label for="password">Password</label><input type="password" id="password" placeholder="••••••••" autocomplete="current-password"/></div>
+    <button class="btn" onclick="login()">Login →</button>
+    <div class="err" id="err"></div>
   </div>
-
-  <div class="bg-texture"></div>
-
-  <header class="navbar" id="navbar">
-
-    <a href="index.html" class="logo-link" aria-label="Styles By Tiwa">
-      <div class="brand-lockup">
-        <div class="brand-oval" aria-hidden="true"><span class="brand-oval-inner">S</span><span class="brand-oval-inner brand-oval-t">T</span></div>
-        <span class="brand-divider"></span>
-        <span class="brand-wordmark"><span class="brand-wd-styles">Styles</span><span class="brand-wd-by"> by</span><br><span class="brand-wd-tiwa">Tiwa.</span></span>
-      </div>
-    </a>
-
-    <div class="menu-toggle" onclick="toggleMenu()" id="menuToggle" aria-label="Toggle Menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-
-    <nav id="nav">
-
-      <div class="nav-logo">
-        <img src="images/Hero_logo.jpeg" alt="Styles By Tiwa">
-      </div>
-
-      <a href="index.html" onclick="closeMenu()"><span>Home</span></a>
-      <a href="index.html#about" onclick="closeMenu()"><span>About</span></a>
-      <a href="index.html#collection" onclick="closeMenu()"><span>Collection</span></a>
-      <a href="shop.html" onclick="closeMenu()"><span>Shop</span></a>
-      <a href="index.html#contact" onclick="closeMenu()"><span>Contact</span></a>
-
-      <div class="nav-social">
-        <a href="https://instagram.com/styles_by_tiwa" target="_blank"><i class="fab fa-instagram"></i></a>
-        <a href="https://tiktok.com/@_stylesbytiwa" target="_blank"><i class="fab fa-tiktok"></i></a>
-      </div>
-
-    </nav>
-
-  </header>
-
-  <main>
-
-    <section class="login-header">
-      <p class="section-eyebrow">Restricted Access</p>
-      <h1>Admin Login</h1>
-      <p>Sign in to manage the Styles By Tiwa collection</p>
-    </section>
-
-    <section class="login-section">
-      <div class="login-panel">
-
-        <div class="login-icon">
-          <i class="fas fa-lock"></i>
-        </div>
-
-        <div class="field">
-          <label for="email">Email</label>
-          <input type="email" id="email" placeholder="you@example.com">
-        </div>
-
-        <div class="field">
-          <label for="password">Password</label>
-          <input type="password" id="password" placeholder="••••••••">
-        </div>
-
-        <button type="button" class="btn btn-primary" onclick="login()">
-          <span>Login</span>
-          <i class="fas fa-arrow-right"></i>
-        </button>
-
-      </div>
-    </section>
-
-  </main>
-
-  <footer>
-    <div class="footer-bottom" style="border-top: none; padding-top: 0;">
-      <p class="footer-copyright">&copy; 2026 Styles By Tiwa. All rights reserved.</p>
-    </div>
-  </footer>
-
-  <script src="script.js"></script>
-  <script>document.addEventListener('DOMContentLoaded',()=>{const e=document.querySelector('.footer-copyright'); if(e) e.textContent=`\u00A9 ${new Date().getFullYear()} Styles By Tiwa. All rights reserved.`});</script>
-  <script>
-    const supabaseClient = (typeof getSupabaseClient === 'function' ? getSupabaseClient() : supabase.createClient(SUPABASE_URL, SUPABASE_KEY));
-
-    async function login() {
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value;
-
-      if (!email || !password) {
-        alert("Enter email and password");
-        return;
-      }
-
-      // basic email format check
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        alert("Please enter a valid email");
-        return;
-      }
-
-      const { error } = await supabaseClient.auth.signInWithPassword({
-        email,
-        password
-      });
-
-      if (error) {
-        console.error(error);
-        alert("Login failed ❌ " + (error.message || ""));
-      } else {
-        window.location.href = "tiwa-admin-dashboard.html";
-      }
-    }
-    // allow Enter key to submit
-    document.addEventListener('DOMContentLoaded', () => {
-      const pw = document.getElementById('password');
-      if (pw) pw.addEventListener('keydown', e => { if (e.key === 'Enter') login(); });
-    });
-  </script>
-
+</main>
+<footer>© <span id="y"></span> Styles By Tiwa. All rights reserved.</footer>
+<script>
+lucide.createIcons?.();
+document.getElementById('y').textContent=new Date().getFullYear();
+const supabaseClient=(typeof getSupabaseClient==='function'?getSupabaseClient():supabase.createClient(SUPABASE_URL,SUPABASE_KEY));
+async function login(){
+  const email=document.getElementById('email').value.trim();
+  const password=document.getElementById('password').value;
+  const err=document.getElementById('err'); err.textContent='';
+  if(!email||!password){err.textContent='Enter email and password';return}
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){err.textContent='Please enter a valid email';return}
+  const btn=document.querySelector('.btn'); btn.textContent='Signing in…'; btn.disabled=true;
+  const {error}=await supabaseClient.auth.signInWithPassword({email,password});
+  btn.textContent='Login →'; btn.disabled=false;
+  if(error){err.textContent='Login failed: '+(error.message||'check credentials');}
+  else window.location.href='tiwa-admin-dashboard.html';
+}
+document.getElementById('password').addEventListener('keydown',e=>{if(e.key==='Enter')login()});
+</script>
 </body>
 </html>

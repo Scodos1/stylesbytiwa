@@ -1,222 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noindex, nofollow">
-  <link rel="icon" type="image/jpeg" href="images/Hero_logo.jpeg">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-  <title>Admin | Styles By Tiwa</title>
-
-  <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
-  <script src="supabase-config.js"></script>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="robots" content="noindex, nofollow"/>
+<title>Admin | Styles By Tiwa</title>
+<link rel="icon" type="image/jpeg" href="images/Hero_logo.jpeg">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,600&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="supabase-config.js"></script>
+<style>
+:root{--paper:#FDF9F3;--paper-2:#F3ECE1;--ink:#11100F;--ink-2:#5C5752;--line:rgba(17,16,15,0.12);--noir:#0B0B0C;--gold:#C9A961;--gold-light:#F5E7B8;--gold-line:rgba(201,169,97,0.28);--ease:cubic-bezier(.76,0,.24,1)}
+*{margin:0;padding:0;box-sizing:border-box}html{background:var(--paper)}body{font-family:"Inter",system-ui,sans-serif;background:var(--paper);color:var(--ink);-webkit-font-smoothing:antialiased}
+button{cursor:pointer;font:inherit}
+.header{height:80px;display:flex;align-items:center;justify-content:space-between;padding:0 32px;border-bottom:1px solid var(--gold-line);background:rgba(11,11,12,0.96);color:var(--paper);position:sticky;top:0;z-index:20}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}.logo-mark{height:54px;border-radius:12px;border:1px solid rgba(201,169,97,.35);overflow:hidden;background:#0A0A0A}.logo-mark img{height:100%;width:auto;max-width:230px;object-fit:contain;display:block}
+.nav{display:flex;gap:24px;align-items:center}.nav a{font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--paper);opacity:.75;text-decoration:none}.nav a:hover{opacity:1}
+.wrap{max-width:1080px;margin:0 auto;padding:32px 24px 80px}
+.hero{padding:24px 0 20px}.hero h1{font-family:"Bodoni Moda";font-size:40px;letter-spacing:-.03em}.hero h1 em{font-family:"Instrument Serif";font-style:italic;font-weight:400}.hero p{font-size:13px;color:var(--ink-2);margin-top:6px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;margin-top:20px}
+.panel h2{font-family:"Bodoni Moda";font-size:22px;margin-bottom:4px}.panel .hint{font-size:12px;color:var(--ink-2);margin-bottom:18px}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:680px}
+.form .full{grid-column:1/-1}
+.field label{display:block;font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;opacity:.6;margin-bottom:7px}
+.field input,.field select{width:100%;padding:12px 13px;border:1px solid var(--line);border-radius:10px;font-size:13px;font-family:inherit;background:var(--paper)}
+.upload{border:1.5px dashed rgba(17,16,15,.25);border-radius:12px;padding:18px;text-align:center;font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;display:block}
+.preview{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.preview img{width:64px;height:64px;object-fit:cover;border-radius:8px;border:1px solid var(--line)}
+.actions{grid-column:1/-1;display:flex;gap:10px;margin-top:6px}
+.btn{height:44px;padding:0 22px;border-radius:999px;background:var(--noir);color:var(--gold-light);border:1px solid rgba(201,169,97,.4);font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;margin-top:14px}
+.pcard{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--paper)}
+.pcard img{width:100%;aspect-ratio:3/4;object-fit:cover}
+.pcard .b{padding:12px}.pcard h3{font-size:13px}.pcard .pr{font-family:"Bodoni Moda";font-size:15px;margin:4px 0 10px}
+.pcard .row{display:flex;gap:6px}.pcard .row button{flex:1;height:34px;border-radius:999px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;border:1px solid var(--ink)}
+.empty{text-align:center;padding:36px;color:var(--ink-2);font-size:13px}
+footer{padding:20px;text-align:center;font-size:11px;opacity:.6}
+@media(max-width:640px){.form{grid-template-columns:1fr}.nav a:not(.keep){display:none}}
+</style>
 </head>
-
 <body>
+<header class="header">
+  <a href="index.html" class="logo"><span class="logo-mark"><img src="images/Hero_logo.jpeg" alt="Styles By Tiwa"/></span></a>
+  <nav class="nav"><a href="index.html">View Site</a><a href="shop.html">Shop</a><a href="#" class="keep" onclick="logout();return false" style="color:#e08a8a">Logout</a></nav>
+</header>
+<div class="wrap">
+  <div class="hero"><h1>Manage <em>Collection</em></h1><p>Add, edit, and organize products customers see. Paper admin — same maison system.</p></div>
 
-  <!-- Loader -->
-  <div class="loader" id="loader">
-    <div class="loader-content">
-      <div class="loader-logo">
-        <img src="images/Hero_logo.jpeg" alt="Loading">
-      </div>
-      <div class="loader-bar">
-        <div class="loader-progress"></div>
-      </div>
+  <div class="panel">
+    <h2>Add / Edit Product</h2><div class="hint">Title, price in ₦, category, and at least one image (JPG/PNG/WebP, ≤5MB).</div>
+    <div class="form">
+      <div class="field"><label>Product Title</label><input id="title" placeholder="e.g. Vintage Denim Shirt"/></div>
+      <div class="field"><label>Price (₦)</label><input id="price" type="number" min="1" placeholder="e.g. 25000"/></div>
+      <div class="field full"><label>Category</label><select id="category"><option value="">Select Category</option><option value="vintage_shirts">Vintage Shirts</option><option value="two_piece_long">Two Piece Long</option><option value="two_piece_short">Two Piece Short</option><option value="greg_shirt">Greg Shirt</option></select></div>
+      <div class="field full"><label>Product Images</label><label class="upload" for="imageFiles">Click to upload images</label><input type="file" id="imageFiles" multiple accept="image/jpeg,image/png,image/webp,image/gif" style="display:none"/><div id="image-preview" class="preview"></div></div>
+      <div class="actions"><button class="btn" onclick="addProduct()">Save Product</button><button class="btn ghost" onclick="clearForm()">Clear</button></div>
     </div>
   </div>
 
-  <div class="bg-texture"></div>
+  <div class="panel"><h2>Manage Products</h2><div class="hint" id="prodCount"></div><div id="admin-products" class="grid"></div></div>
 
-  <header class="navbar" id="navbar">
-
-    <a href="index.html" class="logo-link" aria-label="Styles By Tiwa">
-      <div class="brand-lockup">
-        <div class="brand-oval" aria-hidden="true"><span class="brand-oval-inner">S</span><span class="brand-oval-inner brand-oval-t">T</span></div>
-        <span class="brand-divider"></span>
-        <span class="brand-wordmark"><span class="brand-wd-styles">Styles</span><span class="brand-wd-by"> by</span><br><span class="brand-wd-tiwa">Tiwa.</span></span>
-      </div>
-    </a>
-
-    <div class="menu-toggle" onclick="toggleMenu()" id="menuToggle" aria-label="Toggle Menu">
-      <span></span>
-      <span></span>
-      <span></span>
+  <div class="panel" id="collectionFormPanel">
+    <h2>Featured Collection Card</h2><div class="hint">Homepage cards (legacy — homepage now uses Shop Collection grid).</div>
+    <div class="form">
+      <div class="field"><label>Card Title</label><input id="collectionTitle" placeholder="e.g. Vintage Shirts"/></div>
+      <div class="field"><label>Badge (optional)</label><input id="collectionBadge" placeholder="New"/></div>
+      <div class="field full"><label>Description</label><input id="collectionDescription" placeholder="Timeless style"/></div>
+      <div class="field"><label>Button Label</label><input id="collectionButtonLabel" placeholder="View Products"/></div>
+      <div class="field"><label>Button Link</label><input id="collectionButtonLink" placeholder="shop.html"/></div>
+      <div class="field full"><label>Display Order</label><input id="collectionOrder" type="number" value="0"/></div>
+      <div class="field full"><label>Card Image</label><label class="upload" for="collectionImageFile">Click to upload image</label><input type="file" id="collectionImageFile" accept="image/jpeg,image/png,image/webp" style="display:none"/><div id="collection-image-preview" class="preview"></div></div>
+      <div class="actions"><button class="btn" onclick="addCollection()">Save Card</button><button class="btn ghost" onclick="clearCollectionForm()">Clear</button></div>
     </div>
+  </div>
 
-    <nav id="nav">
-
-      <div class="nav-logo">
-        <img src="images/Hero_logo.jpeg" alt="Styles By Tiwa">
-      </div>
-
-      <a href="index.html" onclick="closeMenu()"><span>Home</span></a>
-      <a href="index.html#about" onclick="closeMenu()"><span>About</span></a>
-      <a href="index.html#collection" onclick="closeMenu()"><span>Collection</span></a>
-      <a href="shop.html" onclick="closeMenu()"><span>Shop</span></a>
-      <a href="index.html#contact" onclick="closeMenu()"><span>Contact</span></a>
-      <a href="#" class="nav-logout" onclick="logout(); return false;">
-        <span>Logout</span> <i class="fas fa-arrow-right-from-bracket"></i>
-      </a>
-
-      <div class="nav-social">
-        <a href="https://instagram.com/styles_by_tiwa" target="_blank"><i class="fab fa-instagram"></i></a>
-        <a href="https://tiktok.com/@_stylesbytiwa" target="_blank"><i class="fab fa-tiktok"></i></a>
-      </div>
-
-    </nav>
-
-  </header>
-
-  <main>
-
-    <section class="admin-header">
-      <p class="section-eyebrow">Dashboard</p>
-      <h1>Manage Your Collection</h1>
-      <p>Add, edit, and organize the products and homepage collection customers see</p>
-    </section>
-
-    <section class="admin-section">
-
-      <!-- FORM -->
-      <div class="admin-panel">
-        <h2>Add / Edit Product</h2>
-
-        <div class="admin-form">
-
-          <div class="field">
-            <label for="title">Product Title</label>
-            <input type="text" id="title" placeholder="e.g. Vintage Denim Shirt">
-          </div>
-
-          <div class="field">
-            <label for="price">Price (₦)</label>
-            <input type="number" id="price" placeholder="e.g. 25000">
-          </div>
-
-          <div class="field full">
-            <label for="category">Category</label>
-            <select id="category">
-              <option value="">Select Category</option>
-              <option value="vintage_shirts">Vintage Shirts</option>
-              <option value="two_piece_long">Two Piece Long</option>
-              <option value="two_piece_short">Two Piece Short</option>
-              <option value="greg_shirt">Greg Shirt</option>
-            </select>
-          </div>
-
-          <div class="field full">
-            <label for="imageFiles">Product Images</label>
-            <label class="upload-zone" for="imageFiles">
-              <i class="fas fa-cloud-arrow-up"></i>
-              <span>Click to upload images</span>
-            </label>
-            <input type="file" id="imageFiles" multiple class="sr-only-file">
-            <div id="image-preview" class="image-preview"></div>
-          </div>
-
-          <div class="admin-form-actions">
-            <button type="button" class="btn btn-primary" onclick="addProduct()">
-              <span>Save Product</span>
-              <i class="fas fa-check"></i>
-            </button>
-            <button type="button" class="btn btn-ghost" onclick="clearForm()">
-              <span>Clear Form</span>
-            </button>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- MANAGE PRODUCTS -->
-      <div class="admin-panel">
-        <h2>Manage Products</h2>
-        <div id="admin-products" class="admin-product-grid"></div>
-      </div>
-
-      <!-- FEATURED COLLECTION FORM -->
-      <div class="admin-panel" id="collectionFormPanel">
-        <h2>Add / Edit Featured Collection Card</h2>
-        <p class="admin-panel-hint">These cards appear in the "Featured Collection" section on the homepage.</p>
-
-        <div class="admin-form">
-
-          <div class="field">
-            <label for="collectionTitle">Card Title</label>
-            <input type="text" id="collectionTitle" placeholder="e.g. Vintage Shirts">
-          </div>
-
-          <div class="field">
-            <label for="collectionBadge">Badge (optional)</label>
-            <input type="text" id="collectionBadge" placeholder="e.g. Bestseller, New, Popular">
-          </div>
-
-          <div class="field full">
-            <label for="collectionDescription">Description</label>
-            <input type="text" id="collectionDescription" placeholder="e.g. Timeless style, modern comfort">
-          </div>
-
-          <div class="field">
-            <label for="collectionButtonLabel">Button Label</label>
-            <input type="text" id="collectionButtonLabel" placeholder="View Products">
-          </div>
-
-          <div class="field">
-            <label for="collectionButtonLink">Button Link</label>
-            <input type="text" id="collectionButtonLink" placeholder="shop.html">
-          </div>
-
-          <div class="field full">
-            <label for="collectionOrder">Display Order</label>
-            <input type="number" id="collectionOrder" placeholder="0" value="0">
-          </div>
-
-          <div class="field full">
-            <label for="collectionImageFile">Card Image</label>
-            <label class="upload-zone" for="collectionImageFile">
-              <i class="fas fa-cloud-arrow-up"></i>
-              <span>Click to upload image</span>
-            </label>
-            <input type="file" id="collectionImageFile" class="sr-only-file">
-            <div id="collection-image-preview" class="image-preview"></div>
-          </div>
-
-          <div class="admin-form-actions">
-            <button type="button" class="btn btn-primary" onclick="addCollection()">
-              <span>Save Card</span>
-              <i class="fas fa-check"></i>
-            </button>
-            <button type="button" class="btn btn-ghost" onclick="clearCollectionForm()">
-              <span>Clear Form</span>
-            </button>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- MANAGE FEATURED COLLECTION -->
-      <div class="admin-panel">
-        <h2>Manage Featured Collection</h2>
-        <div id="admin-collections" class="admin-product-grid"></div>
-      </div>
-
-    </section>
-
-  </main>
-
-  <footer>
-    <div class="footer-bottom" style="border-top: none; padding-top: 0;">
-      <p class="footer-copyright">&copy; 2026 Styles By Tiwa. All rights reserved.</p>
-    </div>
-  </footer>
-
-  <script src="script.js"></script>
-  <script src="admin.js"></script>
-  <script>document.addEventListener('DOMContentLoaded',()=>{const e=document.querySelector('.footer-copyright'); if(e) e.textContent=`\u00A9 ${new Date().getFullYear()} Styles By Tiwa. All rights reserved.`});</script>
-
+  <div class="panel"><h2>Manage Featured Collection</h2><div id="admin-collections" class="grid"></div></div>
+</div>
+<footer>© <span id="y"></span> Styles By Tiwa</footer>
+<script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+<script src="admin.js"></script>
 </body>
 </html>

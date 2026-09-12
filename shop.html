@@ -1,180 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Shop Styles By Tiwa - Vintage shirts, two-piece sets, and Greg shirts.">
-  <link rel="icon" type="image/jpeg" href="images/Hero_logo.jpeg">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-  <title>Shop | Styles By Tiwa</title>
-
-  <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
-  <script src="supabase-config.js"></script>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Shop Styles By Tiwa - Vintage shirts, two-piece sets, and Greg shirts."/>
+<title>Shop | Styles By Tiwa</title>
+<link rel="icon" type="image/jpeg" href="images/Hero_logo.jpeg">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,600&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="supabase-config.js"></script>
+<style>
+:root{--paper:#FDF9F3;--paper-2:#F3ECE1;--ink:#11100F;--ink-2:#5C5752;--line:rgba(17,16,15,0.12);--line-strong:rgba(17,16,15,0.22);--ease:cubic-bezier(.76,0,.24,1);--noir:#0B0B0C;--gold:#C9A961;--gold-light:#F5E7B8;--gold-line:rgba(201,169,97,0.28)}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth;background:var(--paper)}body{font-family:"Inter",system-ui,sans-serif;background:var(--paper);color:var(--ink);-webkit-font-smoothing:antialiased}
+button,a{cursor:pointer;color:inherit;text-decoration:none;background:none;border:none;font:inherit}img{display:block;width:100%;height:100%;object-fit:cover}
+.header{position:fixed;top:0;left:0;right:0;z-index:50;height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;border-bottom:1px solid var(--gold-line);background:rgba(11,11,12,0.97);backdrop-filter:blur(16px);color:var(--paper)}
+.header .nav a{color:var(--paper);opacity:.78}.header .pill-btn{border-color:rgba(245,231,184,.35);color:var(--paper)}
+.logo{display:flex;align-items:center;gap:12px}.logo-mark{width:auto;height:44px;border-radius:10px;border:1px solid rgba(201,169,97,.3);display:block;background:#0A0A0A;overflow:hidden;padding:0;flex-shrink:0}.logo-mark img{width:auto;height:100%;max-width:190px;object-fit:contain;object-position:center;display:block}.header .logo-type{display:none}.logo-mark img{width:100%;height:100%;object-fit:cover;object-position:center 42%;transform:none;display:block}
+.logo-type b{font-family:"Bodoni Moda";font-size:18px;letter-spacing:-.03em}.logo-type i{font-family:"Instrument Serif";font-style:italic;font-weight:400}.logo-type small{font-size:9px;letter-spacing:.22em;text-transform:uppercase;opacity:.6;font-weight:600}
+.nav{display:flex;gap:36px;align-items:center}.nav a{font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;opacity:.72}.nav a:hover{opacity:1}
+.pill-btn{height:38px;padding:0 18px;border-radius:999px;border:1px solid var(--line-strong);font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:8px}
+.pill-btn.dark{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.icon-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;background:#fff}
+.mob-nav{display:none}
+.filters{display:flex;gap:8px;flex-wrap:wrap;padding:12px 24px;border-bottom:1px solid var(--line);position:sticky;top:68px;background:rgba(253,249,243,.94);backdrop-filter:blur(12px);z-index:10}
+.filter{height:36px;padding:0 16px;border-radius:999px;border:1px solid var(--line);font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+.filter.active{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);border-bottom:1px solid var(--line);min-height:300px}
+.card{grid-column:span 3;border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px;background:var(--paper)}
+.card:nth-child(4n){border-right:none}
+.card-img{aspect-ratio:4/5;overflow:hidden;border-radius:16px;background:var(--paper-2);position:relative;cursor:pointer}
+.card-img img{transition:transform .8s var(--ease)}.card:hover .card-img img{transform:scale(1.06)}
+.card-top{position:absolute;top:12px;left:12px;right:12px;display:flex;justify-content:space-between}
+.tag{font-size:9px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;background:var(--paper);padding:6px 10px;border-radius:999px;border:1px solid var(--line)}
+.card-body{padding:14px 4px 6px;display:flex;justify-content:space-between;gap:12px}
+.card-title{font-size:14px;font-weight:600}.card-cat{font-size:10px;letter-spacing:.14em;text-transform:uppercase;opacity:.55;margin-top:4px}
+.card-price{font-family:"Bodoni Moda";font-size:16px}
+.add{margin-top:10px;width:100%;height:42px;border-radius:999px;border:1px solid var(--ink);display:flex;align-items:center;justify-content:center;gap:8px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+.add:hover{background:var(--ink);color:var(--paper)}
+.shop-empty{grid-column:1/-1;padding:80px;text-align:center;opacity:.6}
+.hero-shop{padding:100px 24px 28px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap}
+.hero-shop h1{font-family:"Bodoni Moda";font-size:52px;letter-spacing:-.04em;line-height:.9}
+.hero-shop p{font-size:13px;color:var(--ink-2);max-width:360px}
+.cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.28);opacity:0;pointer-events:none;transition:.4s;z-index:60}
+.cart-overlay.open{opacity:1;pointer-events:auto}
+.cart-drawer{position:fixed;top:0;right:0;bottom:0;width:min(420px,92vw);background:var(--paper);border-left:1px solid var(--line);transform:translateX(100%);transition:transform .6s var(--ease);z-index:61;display:flex;flex-direction:column}
+.cart-drawer.open{transform:translateX(0)}
+.cart-head{height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;border-bottom:1px solid var(--line)}
+.cart-body{flex:1;overflow:auto;padding:16px}.cart-item{display:flex;gap:14px;padding:14px;border:1px solid var(--line);border-radius:14px;margin-bottom:12px;background:#fff}
+.cart-foot{padding:18px 22px;border-top:1px solid var(--line);display:grid;gap:12px}
+.image-modal{position:fixed;inset:0;z-index:70;display:grid;place-items:center;background:rgba(17,16,15,.92);opacity:0;visibility:hidden;transition:.3s}
+.image-modal.active{opacity:1;visibility:visible}
+.modal-close{position:absolute;top:18px;right:18px;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);color:#fff;display:grid;place-items:center}
+.modal-nav{position:absolute;inset:0;display:flex;justify-content:space-between;align-items:center;padding:0 18px;pointer-events:none}
+.modal-prev,.modal-next{pointer-events:all;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);color:#fff;display:grid;place-items:center}
+@media(max-width:900px){.nav{display:none}.mob-nav{display:grid}.grid{grid-template-columns:repeat(2,1fr)}.card{grid-column:span 1}.card:nth-child(4n){border-right:1px solid var(--line)}.card:nth-child(2n){border-right:none}}
+@media(max-width:560px){.grid{grid-template-columns:1fr}.card{border-right:none !important}}
+</style>
 </head>
-
 <body>
-
-  <!-- Loader -->
-  <div class="loader" id="loader">
-    <div class="loader-content">
-      <div class="loader-logo">
-        <img src="images/Hero_logo.jpeg" alt="Loading">
-      </div>
-      <div class="loader-bar">
-        <div class="loader-progress"></div>
-      </div>
-    </div>
+<header class="header">
+  <a href="index.html" class="logo"><div class="logo-mark"><img src="images/Hero_logo.jpeg" alt="Styles By Tiwa"/></div><div class="logo-type"><b>Styles <i>by Tiwa.</i></b><small>Handcrafted in Lagos</small></div></a>
+  <nav class="nav"><a href="index.html">Home</a><a href="index.html#about">About</a><a href="index.html#collection">Collection</a><a href="shop.html" style="text-decoration:underline;text-underline-offset:8px;opacity:1">Shop</a><a href="index.html#contact">Contact</a></nav>
+  <div style="display:flex;gap:12px;align-items:center">
+    <button class="pill-btn" id="openCart" style="position:relative"><i data-lucide="shopping-bag" style="width:14px;height:14px"></i> Bag <span id="bagNum">0</span></button>
+    <a href="index.html" class="icon-btn mob-nav" style="display:grid"><i data-lucide="home" style="width:16px;height:16px"></i></a>
   </div>
+</header>
 
-  <!-- Floating WhatsApp -->
-  <a href="https://wa.me/2349078537344" target="_blank" class="whatsapp-float" aria-label="Chat on WhatsApp">
-    <i class="fab fa-whatsapp"></i>
-  </a>
+<div class="hero-shop"><h1>Shop <em style="font-family:'Instrument Serif';font-style:italic;font-weight:400">Collection</em></h1><p>Handcrafted fashion pieces — filtered by category, added to bag instantly. All products live from Supabase.</p></div>
+<div class="filters" id="filters"></div>
+<div class="grid" id="grid"><div class="shop-empty">Loading products…</div></div>
 
-  <div class="bg-texture"></div>
+<div class="cart-overlay" id="cartOverlay"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-head"><b style="font-size:12px;letter-spacing:.14em;text-transform:uppercase">Bag — <span id="cartCount">0</span></b><button class="icon-btn" id="closeCart"><i data-lucide="x" style="width:16px;height:16px"></i></button></div>
+  <div class="cart-body" id="cartBody"><div style="padding:40px 0;text-align:center;opacity:.5">Empty</div></div>
+  <div class="cart-foot"><div style="display:flex;justify-content:space-between"><span style="opacity:.6">Subtotal</span><b id="cartTotal">₦0</b></div><button onclick="checkout()" style="height:46px;background:var(--ink);color:var(--paper);border-radius:999px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;width:100%">Checkout on WhatsApp</button></div>
+</div>
 
-  <header class="navbar" id="navbar">
+<div class="image-modal" id="imageModal"><button class="modal-close"><i data-lucide="x" style="width:16px;height:16px"></i></button><div class="modal-nav"><button class="modal-prev"><i data-lucide="chevron-left"></i></button><button class="modal-next"><i data-lucide="chevron-right"></i></button></div><div style="max-width:88vw;max-height:78vh"><img id="modalImage" src="" style="max-width:88vw;max-height:78vh;object-fit:contain;border-radius:12px"/></div><span id="modalCounter" style="position:absolute;bottom:18px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.7);font-size:11px"></span></div>
 
-    <a href="index.html" class="logo-link" aria-label="Styles By Tiwa">
-      <div class="brand-lockup">
-        <div class="brand-oval" aria-hidden="true"><span class="brand-oval-inner">S</span><span class="brand-oval-inner brand-oval-t">T</span></div>
-        <span class="brand-divider"></span>
-        <span class="brand-wordmark"><span class="brand-wd-styles">Styles</span><span class="brand-wd-by"> by</span><br><span class="brand-wd-tiwa">Tiwa.</span></span>
-      </div>
-    </a>
-
-    <div class="menu-toggle" onclick="toggleMenu()" id="menuToggle" aria-label="Toggle Menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-
-    <nav id="nav">
-
-      <div class="nav-logo">
-        <img src="images/Hero_logo.jpeg" alt="Styles By Tiwa">
-      </div>
-
-      <a href="index.html" onclick="closeMenu()"><span>Home</span></a>
-      <a href="index.html#about" onclick="closeMenu()"><span>About</span></a>
-      <a href="index.html#collection" onclick="closeMenu()"><span>Collection</span></a>
-      <a href="shop.html" onclick="closeMenu()"><span>Shop</span></a>
-      <a href="index.html#contact" onclick="closeMenu()"><span>Contact</span></a>
-
-      <div class="nav-social">
-        <a href="https://instagram.com/styles_by_tiwa" target="_blank"><i class="fab fa-instagram"></i></a>
-        <a href="https://tiktok.com/@_stylesbytiwa" target="_blank"><i class="fab fa-tiktok"></i></a>
-      </div>
-
-    </nav>
-
-  </header>
-
-  <main>
-
-    <section class="shop-hero">
-      <div class="shop-hero-bg"></div>
-      <div class="shop-hero-content">
-        <p class="section-eyebrow">Our Products</p>
-        <h1>Shop Collection</h1>
-        <p class="shop-hero-subtitle">Handcrafted fashion pieces for the discerning individual</p>
-      </div>
-    </section>
-
-    <section class="shop-section" id="shop">
-
-      <div class="shop-filters">
-        <button class="filter-btn active" data-filter="all">All</button>
-        <button class="filter-btn" data-filter="vintage_shirts">Vintage Shirts</button>
-        <button class="filter-btn" data-filter="two_piece_long">Two Piece Long</button>
-        <button class="filter-btn" data-filter="two_piece_short">Two Piece Short</button>
-        <button class="filter-btn" data-filter="greg_shirt">Greg Shirt</button>
-      </div>
-
-      <div id="product-grid" class="product-grid"></div>
-
-      <div class="shop-empty" id="shop-empty" style="display: none;">
-        <i class="fas fa-search"></i>
-        <p>No products found in this category</p>
-      </div>
-
-    </section>
-
-  </main>
-
-  <!-- Image Lightbox Modal -->
-  <div class="image-modal" id="imageModal">
-    <button class="modal-close" aria-label="Close">
-      <i class="fas fa-times"></i>
-    </button>
-
-    <div class="modal-nav">
-      <button class="modal-prev" aria-label="Previous image">
-        <i class="fas fa-chevron-left"></i>
-      </button>
-      <button class="modal-next" aria-label="Next image">
-        <i class="fas fa-chevron-right"></i>
-      </button>
-    </div>
-
-    <div class="modal-image-container">
-      <img id="modalImage" src="" alt="Product image">
-    </div>
-
-    <span class="modal-counter" id="modalCounter"></span>
-  </div>
-
-  <footer>
-
-    <div class="footer-main">
-      <div class="footer-brand">
-        <img src="images/Hero_logo.jpeg" alt="Styles By Tiwa">
-        <p>Luxury fashion for everyone. Handcrafted with love in Lagos, Nigeria.</p>
-      </div>
-
-      <div class="footer-links">
-        <h4>Quick Links</h4>
-        <a href="index.html#about">About</a>
-        <a href="index.html#collection">Collection</a>
-        <a href="shop.html">Shop</a>
-        <a href="index.html#contact">Contact</a>
-      </div>
-
-      <div class="footer-links">
-        <h4>Follow Us</h4>
-        <a href="https://instagram.com/styles_by_tiwa" target="_blank">Instagram</a>
-        <a href="https://tiktok.com/@_stylesbytiwa" target="_blank">TikTok</a>
-        <a href="https://wa.me/2349078537344" target="_blank">WhatsApp</a>
-      </div>
-    </div>
-
-    <div class="footer-bottom">
-      <div class="social-icons">
-        <a href="https://wa.me/2349078537344" target="_blank" aria-label="WhatsApp">
-          <i class="fab fa-whatsapp"></i>
-        </a>
-        <a href="mailto:alagbesulait@gmail.com" aria-label="Email">
-          <i class="fas fa-envelope"></i>
-        </a>
-        <a href="https://instagram.com/styles_by_tiwa" target="_blank" aria-label="Instagram">
-          <i class="fab fa-instagram"></i>
-        </a>
-        <a href="https://tiktok.com/@_stylesbytiwa" target="_blank" aria-label="TikTok">
-          <i class="fab fa-tiktok"></i>
-        </a>
-      </div>
-      <p class="footer-copyright">&copy; 2026 Styles By Tiwa. All rights reserved.</p>
-    </div>
-
-  </footer>
-
-  <script src="script.js"></script>
-  <script src="shop.js"></script>
-  <script>document.addEventListener('DOMContentLoaded',()=>{const e=document.querySelector('.footer-copyright'); if(e) e.textContent=`\u00A9 ${new Date().getFullYear()} Styles By Tiwa. All rights reserved.`});</script>
-
+<script>
+lucide.createIcons();
+const supa = (typeof getSupabaseClient==='function'? getSupabaseClient():null);
+const MAP={vintage_shirts:"VINTAGE SHIRTS",two_piece_long:"TWO PIECE LONG",two_piece_short:"TWO PIECE SHORT",greg_shirt:"GREG SHIRT"};
+const cats=["ALL","VINTAGE SHIRTS","TWO PIECE LONG","TWO PIECE SHORT","GREG SHIRT"];
+let active="ALL";
+document.getElementById('filters').innerHTML=cats.map(c=>`<button class="filter ${c===active?'active':''}" data-cat="${c}">${c}</button>`).join('');
+const DEMO_SHOP=[
+  {id:'demo1',title:"Ankara Baggy Pants — Earth Tone",cat:"TWO PIECE SHORT",price:19500,img:"images/Ankara%20baggy%20pants.jpeg",imgs:["images/Ankara%20baggy%20pants.jpeg"]},
+  {id:'demo2',title:"Two Piece Set — Sand Dune",cat:"TWO PIECE LONG",price:24500,img:"images/Two%20piece%20set.jpeg",imgs:["images/Two%20piece%20set.jpeg"]},
+  {id:'demo3',title:"Vintage Shirt — Cocoa Stripe",cat:"VINTAGE SHIRTS",price:18000,img:"images/Vintage%20shirt.jpeg",imgs:["images/Vintage%20shirt.jpeg"]},
+  {id:'demo4',title:"Vintage Shirt — Classic",cat:"VINTAGE SHIRTS",price:17500,img:"images/Vintage_shirt.jpeg",imgs:["images/Vintage_shirt.jpeg"]},
+  {id:'demo5',title:"Vintage Shirt — Indigo",cat:"VINTAGE SHIRTS",price:18200,img:"images/product1.jpeg",imgs:["images/product1.jpeg"]},
+  {id:'demo6',title:"Two Piece Short — Terracotta",cat:"TWO PIECE SHORT",price:22000,img:"images/product2.jpeg",imgs:["images/product2.jpeg"]},
+  {id:'demo7',title:"Greg Shirt — Off White",cat:"GREG SHIRT",price:16000,img:"images/product3.jpeg",imgs:["images/product3.jpeg"]},
+  {id:'demo8',title:"Two Piece Long — Midnight",cat:"TWO PIECE LONG",price:26500,img:"images/product4.jpeg",imgs:["images/product4.jpeg"]},
+  {id:'demo9',title:"Greg Shirt — Clay",cat:"GREG SHIRT",price:16500,img:"images/product5.jpeg",imgs:["images/product5.jpeg"]},
+];
+let products=[];
+function mapRow(p){const cat=MAP[p.category]|| (p.category||'').toUpperCase(); const imgs=(p.images&&p.images.length?p.images:[p.image]).filter(Boolean); return {id:p.id,title:p.title,cat,price:Number(p.price)||0,img:imgs[0]||'',imgs}}
+async function load(){
+  if(!supa){products=[...DEMO_SHOP];render();return}
+  try{
+    const {data,error}=await supa.from('products').select('*').order('created_at',{ascending:false}).limit(100);
+    if(error) throw error;
+    if(data && data.length){ products=data.map(mapRow); } else { products=[...DEMO_SHOP]; }
+  }catch(e){ console.error(e); products=[...DEMO_SHOP]; }
+  render();
+}
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+function render(){
+  const list=active==="ALL"?products:products.filter(p=>p.cat===active);
+  const g=document.getElementById('grid');
+  if(!list.length){g.innerHTML='<div class=\"shop-empty\">No products in '+esc(active)+'</div>';return}
+  g.innerHTML=list.map(p=>`
+    <div class="card">
+      <div class="card-img" data-id="${esc(p.id)}"><img src="${esc(p.img)}" alt="${esc(p.title)}" loading="lazy"/><div class="card-top"><span class="tag">${esc(p.cat)}</span><span class="tag">New</span></div></div>
+      <div class="card-body"><div><div style="font-size:14px;font-weight:600">${esc(p.title)}</div><div style="font-size:10px;opacity:.55;letter-spacing:.14em;text-transform:uppercase;margin-top:4px">Handcrafted • Lagos</div></div><div style="font-family:'Bodoni Moda';font-size:16px">₦${Number(p.price).toLocaleString('en-NG')}</div></div>
+      <button class="add" onclick="addToCart('${esc(p.id)}')">Add to Bag</button>
+      <a href="https://wa.me/2349078537344?text=${encodeURIComponent('Hello, I want to order '+p.title)}" target="_blank" style="display:block;text-align:center;margin-top:8px;font-size:11px;opacity:.6">Order on WhatsApp →</a>
+    </div>`).join('');
+  lucide.createIcons();
+  g.querySelectorAll('.card-img').forEach(el=>el.addEventListener('click',()=>{const id=el.getAttribute('data-id');const pr=products.find(x=>String(x.id)===String(id)); if(pr) openLightbox(pr.imgs)}));
+}
+document.getElementById('filters').addEventListener('click',e=>{
+  if(e.target.classList.contains('filter')){active=e.target.dataset.cat;document.querySelectorAll('.filter').forEach(b=>b.classList.toggle('active',b.dataset.cat===active));render()}
+});
+// lightbox
+let mImgs=[],mI=0;
+function openLightbox(imgs){mImgs=(imgs||[]).filter(Boolean); if(!mImgs.length) return; mI=0;upd();document.getElementById('imageModal').classList.add('active')}
+function upd(){document.getElementById('modalImage').src=mImgs[mI];document.getElementById('modalCounter').textContent=mImgs.length>1? (mI+1)+' / '+mImgs.length : ''}
+document.querySelector('.modal-close').onclick=()=>document.getElementById('imageModal').classList.remove('active');
+document.querySelector('.modal-prev').onclick=()=>{mI=(mI-1+mImgs.length)%mImgs.length;upd()}
+document.querySelector('.modal-next').onclick=()=>{mI=(mI+1)%mImgs.length;upd()}
+document.getElementById('imageModal').addEventListener('click',e=>{if(e.target.id==='imageModal') e.currentTarget.classList.remove('active')})
+// cart
+let cart=[];
+function addToCart(id){const p=products.find(x=>String(x.id)===String(id)); if(!p)return; const e=cart.find(c=>String(c.id)===String(id)); if(e) e.qty++; else cart.push({...p,qty:1});updCart();openDrawer()}
+function updCart(){document.getElementById('bagNum').textContent=cart.reduce((s,i)=>s+i.qty,0);document.getElementById('cartCount').textContent=cart.reduce((s,i)=>s+i.qty,0);const b=document.getElementById('cartBody'); if(!cart.length){b.innerHTML='<div style="padding:40px 0;text-align:center;opacity:.5">Empty</div>';document.getElementById('cartTotal').textContent='₦0';return} b.innerHTML=cart.map(i=>`<div class="cart-item" style="display:flex;gap:14px;padding:14px;border:1px solid var(--line);border-radius:14px;margin-bottom:12px;background:#fff"><img src="${esc(i.img)}" style="width:72px;height:88px;border-radius:10px;object-fit:cover"/><div style="flex:1"><div style="font-weight:600">${esc(i.title)}</div><div style="font-size:10px;opacity:.6">${esc(i.cat)}</div><div style="display:flex;justify-content:space-between;margin-top:10px"><b>₦${(Number(i.price)*i.qty).toLocaleString()}</b><span>${i.qty} ×</span></div></div></div>`).join('');document.getElementById('cartTotal').textContent='₦'+cart.reduce((s,i)=>s+Number(i.price)*i.qty,0).toLocaleString()}
+function openDrawer(){document.getElementById('cartDrawer').classList.add('open');document.getElementById('cartOverlay').classList.add('open')}
+document.getElementById('openCart').onclick=openDrawer;
+document.getElementById('closeCart').onclick=()=>{document.getElementById('cartDrawer').classList.remove('open');document.getElementById('cartOverlay').classList.remove('open')};
+document.getElementById('cartOverlay').onclick=()=>{document.getElementById('cartDrawer').classList.remove('open');document.getElementById('cartOverlay').classList.remove('open')};
+function checkout(){if(!cart.length) return alert('Empty'); const txt=cart.map(i=>`${i.qty}x ${i.title} — ₦${i.price}`).join('%0A'); const tot=cart.reduce((s,i)=>s+Number(i.price)*i.qty,0); window.open('https://wa.me/2349078537344?text=Hello%20Tiwa!%20I%20want%20to%20order:%0A'+txt+'%0A%0ATotal:%20₦'+tot,'_blank')}
+load();
+</script>
 </body>
 </html>
