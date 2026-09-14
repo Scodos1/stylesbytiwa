@@ -159,6 +159,27 @@ img{display:block; width:100%; height:100%; object-fit:cover}
 .value-icon{width:40px; height:40px; border-radius:50%; border:1px solid var(--line); display:grid; place-items:center; margin-bottom:22px}
 .value h4{font-size:12px; letter-spacing:.16em; text-transform:uppercase; font-weight:700; margin-bottom:10px}
 .value p{font-size:13px; line-height:1.6; color:var(--ink-2)}
+/* video reel */
+.video-reel{border-bottom:1px solid var(--line); background:var(--paper)}
+.video-reel .section-head{border-bottom:none}
+.video-grid{display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid var(--line)}
+.video-card{border-right:1px solid var(--line); position:relative; cursor:pointer; overflow:hidden; aspect-ratio:9/16; background:var(--noir)}
+.video-card:last-child{border-right:none}
+.video-card video{width:100%; height:100%; object-fit:cover; display:block}
+.video-card .play-overlay{position:absolute; inset:0; display:grid; place-items:center; background:rgba(0,0,0,.35); opacity:0; transition:.3s}
+.video-card:hover .play-overlay{opacity:1}
+.play-btn{width:56px; height:56px; border-radius:50%; border:2px solid rgba(255,255,255,.8); display:grid; place-items:center; background:rgba(255,255,255,.1); backdrop-filter:blur(4px)}
+.play-btn::after{content:""; width:0; height:0; border-style:solid; border-width:9px 0 9px 16px; border-color:transparent transparent transparent #fff; margin-left:3px}
+.video-card .video-info{position:absolute; bottom:0; left:0; right:0; padding:20px; background:linear-gradient(0deg, rgba(0,0,0,.7), transparent); color:#fff}
+.video-info h4{font-size:14px; font-weight:600; margin-bottom:4px}
+.video-info span{font-size:10px; letter-spacing:.14em; text-transform:uppercase; opacity:.7}
+.video-card .video-tag{position:absolute; top:14px; left:14px; font-size:9px; letter-spacing:.14em; text-transform:uppercase; font-weight:700; background:var(--paper); color:var(--ink); padding:6px 10px; border-radius:999px; border:1px solid var(--line)}
+@media(max-width:900px){
+  .video-grid{grid-template-columns:1fr}
+  .video-card{border-right:none; border-bottom:1px solid var(--line); aspect-ratio:16/9}
+  .video-card:last-child{border-bottom:none}
+  .video-card .play-overlay{opacity:1; background:rgba(0,0,0,.25)}
+}
 /* editorial */
 .editorial{display:grid; grid-template-columns:1fr 1fr; min-height:72vh; border-bottom:1px solid var(--line); background:var(--ink); color:var(--paper)}
 .editorial-media{position:relative; overflow:hidden}
@@ -409,6 +430,39 @@ img{display:block; width:100%; height:100%; object-fit:cover}
   </div>
   <div class="filters" id="filters"></div>
   <div class="grid" id="grid"><div class="shop-empty" style="grid-column:1/-1; padding:60px; text-align:center; opacity:.6">Loading collection…</div></div>
+</section>
+
+<section class="video-reel" id="reel">
+  <div class="section-head">
+    <h3>Latest <em style="font-family:'Instrument Serif'; font-style:italic; font-weight:400">Arrivals</em></h3>
+    <p>Watch our newest pieces in motion. Tap to play.</p>
+  </div>
+  <div class="video-grid">
+    <div class="video-card" onclick="this.querySelector('video').play(); this.querySelector('.play-overlay').style.opacity='0'">
+      <video muted loop playsinline preload="metadata" poster="images/Two piece set.jpeg">
+        <source src="" type="video/mp4"/>
+      </video>
+      <div class="play-overlay"><div class="play-btn"></div></div>
+      <div class="video-tag">New</div>
+      <div class="video-info"><h4>Two-Piece Vintage Set</h4><span>Spring '26 Collection</span></div>
+    </div>
+    <div class="video-card" onclick="this.querySelector('video').play(); this.querySelector('.play-overlay').style.opacity='0'">
+      <video muted loop playsinline preload="metadata" poster="images/Vintage shirt.jpeg">
+        <source src="" type="video/mp4"/>
+      </video>
+      <div class="play-overlay"><div class="play-btn"></div></div>
+      <div class="video-tag">New</div>
+      <div class="video-info"><h4>Vintage Shirt Look</h4><span>Lagos Atelier</span></div>
+    </div>
+    <div class="video-card" onclick="this.querySelector('video').play(); this.querySelector('.play-overlay').style.opacity='0'">
+      <video muted loop playsinline preload="metadata" poster="images/Vintage_shirt.jpeg">
+        <source src="" type="video/mp4"/>
+      </video>
+      <div class="play-overlay"><div class="play-btn"></div></div>
+      <div class="video-tag">New</div>
+      <div class="video-info"><h4>Greg Shirt Drop</h4><span>Handcrafted in Lagos</span></div>
+    </div>
+  </div>
 </section>
 
 <section class="values">
