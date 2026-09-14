@@ -31,7 +31,7 @@
   --noir:#0B0B0C;
   --gold:#C9A961;
   --gold-light:#F5E7B8;
-  --gold-dark:#8C6E3A;
+  --gold-dark:#6B5229;
   --gold-line:rgba(201,169,97,0.28);
   --ease: cubic-bezier(.76,0,.24,1);
 }
@@ -350,6 +350,21 @@ img{display:block; width:100%; height:100%; object-fit:cover}
 .toast.show{opacity:1; transform:translateX(-50%) translateY(0)}
 .wa{position:fixed; right:18px; bottom:18px; width:52px; height:52px; border-radius:50%; background:#25D366; color:white; display:grid; place-items:center; box-shadow:0 10px 30px rgba(0,0,0,.18); z-index:40; transition:.3s}
 .wa:hover{transform:translateY(-2px) scale(1.03)}
+/* cookie consent */
+.cookie-banner{position:fixed;bottom:0;left:0;right:0;z-index:200;background:var(--noir);color:var(--paper);padding:20px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid var(--gold-line);transform:translateY(100%);transition:transform .5s var(--ease)}
+.cookie-banner.show{transform:translateY(0)}
+.cookie-banner p{font-size:12px;line-height:1.6;opacity:.85;flex:1;min-width:240px}
+.cookie-banner p a{color:var(--gold-light);text-decoration:underline}
+.cookie-banner .cookie-actions{display:flex;gap:8px;flex-shrink:0}
+.cookie-banner .cookie-btn{height:36px;padding:0 18px;border-radius:999px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;cursor:pointer;transition:.2s}
+.cookie-accept{background:var(--paper);color:var(--noir);border:1px solid var(--paper)}
+.cookie-decline{background:transparent;color:var(--paper);border:1px solid rgba(255,255,255,.3)}
+.cookie-settings{background:transparent;color:var(--paper);border:1px solid rgba(255,255,255,.3)}
+@media(max-width:560px){
+  .cookie-banner{flex-direction:column;align-items:stretch;padding:16px}
+  .cookie-banner .cookie-actions{justify-content:stretch}
+  .cookie-banner .cookie-btn{flex:1;text-align:center}
+}
 /* lightbox */
 .image-modal{position:fixed;inset:0;z-index:70;display:grid;place-items:center;background:rgba(17,16,15,.92);opacity:0;visibility:hidden;transition:.3s;backdrop-filter:blur(8px)}
 .image-modal.active{opacity:1;visibility:visible}
@@ -378,15 +393,15 @@ img{display:block; width:100%; height:100%; object-fit:cover}
     <a href="#contact">Contact</a>
   </nav>
   <div class="actions">
-    <button class="pill-btn" id="openCart" style="position:relative"><i data-lucide="shopping-bag" style="width:14px;height:14px"></i> <span class="bag-label">Bag</span> <span id="bagNum" style="margin-left:2px">0</span></button>
-    <button class="icon-btn mob-nav" id="openMenu"><i data-lucide="menu" style="width:18px;height:18px"></i></button>
+    <button class="pill-btn" id="openCart" style="position:relative" aria-label="Open shopping bag"><i data-lucide="shopping-bag" style="width:14px;height:14px"></i> <span class="bag-label">Bag</span> <span id="bagNum" style="margin-left:2px">0</span></button>
+    <button class="icon-btn mob-nav" id="openMenu" aria-label="Open navigation menu"><i data-lucide="menu" style="width:18px;height:18px"></i></button>
   </div>
 </header>
 
 <div class="menu" id="menu">
   <div class="menu-head">
     <div class="logo"><div class="logo-mark"><img src="images/Hero_logo.jpeg" alt="Styles By Tiwa"/></div><div class="logo-type"><b>Styles <i>by Tiwa.</i></b><small>Handcrafted in Lagos</small></div></div>
-    <button class="icon-btn" id="closeMenu"><i data-lucide="x" style="width:18px;height:18px"></i></button>
+    <button class="icon-btn" id="closeMenu" aria-label="Close menu"><i data-lucide="x" style="width:18px;height:18px"></i></button>
   </div>
   <div class="menu-links">
     <a href="#home" class="mlink"><span>Home</span><span>01</span></a>
@@ -409,10 +424,10 @@ img{display:block; width:100%; height:100%; object-fit:cover}
         <div style="font-size:10px; letter-spacing:.16em; text-transform:uppercase; font-weight:600; opacity:.5">S/S 26 Lookbook</div>
       </div>
       <h1 class="hero-h1"><span class="line1">Luxury Fashion</span><span><em class="line2">For Everyone</em></span></h1>
-      <p class="hero-desc">A new wardrobe language built in Lagos — vintage shirts, two-piece sets and Greg shirts cut for culture, comfort and individuality. Made with love, worn with confidence.</p>
+      <p class="hero-desc">A new wardrobe language built in Lagos — vintage shirts, two-piece sets and Greg shirts cut for culture, comfort and individuality. Handcrafted with care, worn with confidence.</p>
       <div class="hero-ctas">
         <a href="#collection" class="btn-primary">Explore Collection <i data-lucide="arrow-down-right" style="width:14px;height:14px"></i></a>
-        <a href="shop.html" class="btn-ghost">Shop Now — ₦</a>
+        <a href="shop.html" class="btn-ghost">Shop Now</a>
       </div>
     </div>
     <div class="hero-meta"><span>Elegance • Culture • Individuality</span><span>Scroll — 001</span></div>
@@ -438,8 +453,8 @@ img{display:block; width:100%; height:100%; object-fit:cover}
     </div>
     <div class="stats">
       <div class="stat"><strong>100%</strong><span>Handcrafted</span></div>
-      <div class="stat"><strong>500+</strong><span>Happy Clients</span></div>
-      <div class="stat"><strong>50+</strong><span>Unique Designs</span></div>
+      <div class="stat"><strong>100%</strong><span>Lagos Made</span></div>
+      <div class="stat"><strong>4+</strong><span>Product Lines</span></div>
     </div>
     <div class="reveal" style="margin-top:28px; display:flex; gap:12px; align-items:center; flex-wrap:wrap">
       <a href="https://www.instagram.com/styles_by_tiwa" target="_blank" class="pill-btn dark"><i data-lucide="instagram" style="width:14px;height:14px"></i> View more on Instagram</a>
@@ -510,15 +525,19 @@ img{display:block; width:100%; height:100%; object-fit:cover}
       <div class="contact-item"><i><span data-lucide="map-pin" style="width:16px;height:16px"></span></i><div><b>Location</b><span>Lagos, Nigeria</span></div></div>
       <div class="contact-item"><i><span data-lucide="instagram" style="width:16px;height:16px"></span></i><div><b>Instagram</b><span><a href="https://instagram.com/styles_by_tiwa" target="_blank">@styles_by_tiwa</a></span></div></div>
     </div>
-    <div style="margin-top:18px; border-radius:14px; overflow:hidden; border:1px solid var(--line)"><iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d775.3714619575265!2d3.5426597045089725!3d6.608158669088368!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sng!4v1774124234216!5m2!1sen!2sng" width="100%" height="180" style="border:0" loading="lazy"></iframe></div>
+    <div style="margin-top:18px; border-radius:14px; overflow:hidden; border:1px solid var(--line)"><iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d775.3714619575265!2d3.5426597045089725!3d6.608158669088368!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sng!4v1774124234216!5m2!1sen!2sng" width="100%" height="180" style="border:0" loading="lazy" title="Styles By Tiwa location on Google Maps"></iframe></div>
   </div>
   <div class="contact-right">
     <div style="margin-bottom:24px"><b style="font-size:10px; letter-spacing:.18em; text-transform:uppercase">Get in touch</b><p style="margin-top:8px; font-size:13px; color:var(--ink-2); max-width:360px">Tell us what you want — fabric sourcing, custom two-piece, or ready-to-wear. We reply within 2 hours.</p></div>
     <form class="form" id="contactForm">
-      <div class="input"><input type="text" placeholder=" " required id="cname"/><label>Your Name</label></div>
-      <div class="input"><input type="email" placeholder=" " required id="cemail"/><label>Your Email</label></div>
-      <div class="input"><textarea placeholder=" " required id="cmsg"></textarea><label>Your Message — e.g. “Two Piece Short in Sand, Size M”</label></div>
-      <div class="form-foot"><button type="submit" class="btn-primary">Send Message <i data-lucide="send" style="width:12px;height:12px"></i></button><span class="hint">Average reply: 27 min</span></div>
+      <div class="input"><input type="text" placeholder=" " required id="cname" autocomplete="name"/><label>Your Name</label></div>
+      <div class="input"><input type="email" placeholder=" " required id="cemail" autocomplete="email"/><label>Your Email</label></div>
+      <div class="input"><textarea placeholder=" " required id="cmsg"></textarea><label>Your Message — e.g. "Two Piece Short in Sand, Size M"</label></div>
+      <label style="display:flex;align-items:flex-start;gap:10px;font-size:12px;color:var(--ink-2);line-height:1.5;cursor:pointer">
+        <input type="checkbox" required id="cconsent" style="width:16px;height:16px;margin-top:2px;flex-shrink:0;accent-color:var(--ink)"/>
+        <span>I agree to the <a href="privacy-policy.html" style="text-decoration:underline">Privacy Policy</a> and consent to being contacted regarding my enquiry. <span style="opacity:.5">Required</span></span>
+      </label>
+      <div class="form-foot"><button type="submit" class="btn-primary">Send Message <i data-lucide="send" style="width:12px;height:12px"></i></button><span class="hint">We reply within 2 hours</span></div>
     </form>
   </div>
 </section>
@@ -526,30 +545,46 @@ img{display:block; width:100%; height:100%; object-fit:cover}
 <footer class="footer">
   <div class="footer-brand">
     <div class="logo"><div class="logo-mark"><img src="images/Hero_logo.jpeg" alt="Styles By Tiwa"/></div><div class="logo-type"><b>Styles <i>by Tiwa.</i></b><small>Handcrafted in Lagos</small></div></div>
-    <p>Luxury fashion for everyone. Handcrafted with love in Lagos, Nigeria. New identity — same soul, elevated craft.</p>
+    <p>Fashion brand based in Lagos, Nigeria. Handcrafted vintage shirts, two-piece sets and Greg shirts.</p>
+    <p style="margin-top:8px;font-size:11px;opacity:.5;line-height:1.6">Business: Styles By Tiwa &bull; Lagos, Nigeria<br/>Contact: <a href="mailto:alagbesulait@gmail.com" style="color:var(--gold-light)">alagbesulait@gmail.com</a> &bull; <a href="https://wa.me/2349078537344" style="color:var(--gold-light)">+234 907 853 7344</a></p>
   </div>
   <div><h5>Quick Links</h5><div class="footer-links"><a href="#about">About</a><a href="#collection">Collection</a><a href="shop.html">Shop</a><a href="#contact">Contact</a></div></div>
   <div><h5>Follow Us</h5><div class="footer-links"><a href="https://instagram.com/styles_by_tiwa" target="_blank">Instagram</a><a href="https://tiktok.com/@_stylesbytiwa" target="_blank">TikTok</a><a href="https://wa.me/2349078537344" target="_blank">WhatsApp</a></div></div>
-  <div class="copy"><span>© <span id="y"></span> Styles By Tiwa. All rights reserved.</span><span style="display:flex; gap:12px"><i data-lucide="heart" style="width:12px;height:12px"></i> Lagos — Worldwide</span></div>
+  <div class="copy"><span>&copy; <span id="y"></span> Styles By Tiwa. All rights reserved.</span><span style="display:flex; gap:12px; align-items:center"><i data-lucide="heart" style="width:12px;height:12px"></i> Lagos — Worldwide</span></div>
+  <div style="grid-column:1/-1; border-top:1px solid rgba(255,255,255,.1); padding-top:14px; margin-top:4px; display:flex; gap:16px; flex-wrap:wrap; font-size:10px; letter-spacing:.08em; text-transform:uppercase; opacity:.45">
+    <a href="privacy-policy.html">Privacy Policy</a>
+    <a href="terms.html">Terms &amp; Conditions</a>
+    <a href="cookie-policy.html">Cookie Policy</a>
+    <a href="refund-policy.html">Refund Policy</a>
+  </div>
 </footer>
 </main>
 
 <div class="cart-overlay" id="cartOverlay"></div>
 <div class="cart-drawer" id="cartDrawer">
-  <div class="cart-head"><b style="font-size:12px; letter-spacing:.14em; text-transform:uppercase">Your Bag — <span id="cartCount">0</span></b><button class="icon-btn" id="closeCart"><i data-lucide="x" style="width:16px;height:16px"></i></button></div>
+  <div class="cart-head"><b style="font-size:12px; letter-spacing:.14em; text-transform:uppercase">Your Bag — <span id="cartCount">0</span></b><button class="icon-btn" id="closeCart" aria-label="Close shopping bag"><i data-lucide="x" style="width:16px;height:16px"></i></button></div>
   <div class="cart-body" id="cartBody"><div style="padding:40px 0; text-align:center; opacity:.5; font-size:13px">Your bag is empty. Add some pieces from the collection.</div></div>
   <div class="cart-foot"><div style="display:flex; justify-content:space-between; font-size:13px"><span style="opacity:.6">Subtotal</span><b id="cartTotal">₦0</b></div><button class="btn-primary" style="width:100%; justify-content:center; height:46px" onclick="checkout()">Checkout on WhatsApp</button><span style="font-size:10px; opacity:.5; text-align:center">Secure checkout via WhatsApp • Lagos delivery</span></div>
 </div>
 
 <!-- Image Lightbox (for Supabase product images) -->
 <div class="image-modal" id="imageModal">
-  <button class="modal-close" aria-label="Close"><i data-lucide="x" style="width:16px;height:16px"></i></button>
-  <div class="modal-nav"><button class="modal-prev" aria-label="Prev"><i data-lucide="chevron-left" style="width:16px;height:16px"></i></button><button class="modal-next" aria-label="Next"><i data-lucide="chevron-right" style="width:16px;height:16px"></i></button></div>
-  <div class="modal-image-container"><img id="modalImage" src="" alt=""/></div>
+  <button class="modal-close" aria-label="Close image viewer"><i data-lucide="x" style="width:16px;height:16px"></i></button>
+  <div class="modal-nav"><button class="modal-prev" aria-label="Previous image"><i data-lucide="chevron-left" style="width:16px;height:16px"></i></button><button class="modal-next" aria-label="Next image"><i data-lucide="chevron-right" style="width:16px;height:16px"></i></button></div>
+  <div class="modal-image-container"><img id="modalImage" src="" alt="Product image"/></div>
   <span class="modal-counter" id="modalCounter"></span>
 </div>
 
-<a class="wa" href="https://wa.me/2349078537344" target="_blank" aria-label="WhatsApp"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M19.05 4.94A9.82 9.82 0 0 0 12.03 2C6.57 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.28-1.38a9.78 9.78 0 0 0 4.68 1.19h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01l-.93.95zm-7.02 15.2h-.01a8.13 8.13 0 0 1-4.15-1.14l-.3-.18-3.13.82.83-3.05-.2-.31a8.2 8.2 0 0 1-1.26-4.37c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.26 8.23zm4.52-6.16c-.25-.12-1.47-.73-1.7-.81-.23-.09-.39-.12-.56.12-.17.25-.65.81-.8.97-.15.17-.3.19-.55.06-.25-.12-1.05-.39-2-1.24-.74-.66-1.24-1.47-1.38-1.72-.14-.25-.02-.38.1-.51.11-.11.25-.29.37-.43.12-.14.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.23.25-.87.85-.87 2.08 0 1.22.89 2.4 1.01 2.57.12.17 1.75 2.67 4.24 3.75.59.26 1.05.41 1.41.53.59.19 1.13.16 1.55.1.47-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.14-1.18-.06-.11-.23-.17-.48-.29z"/></svg></a>
+<a class="wa" href="https://wa.me/2349078537344" target="_blank" aria-label="Chat with us on WhatsApp"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M19.05 4.94A9.82 9.82 0 0 0 12.03 2C6.57 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.28-1.38a9.78 9.78 0 0 0 4.68 1.19h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01l-.93.95zm-7.02 15.2h-.01a8.13 8.13 0 0 1-4.15-1.14l-.3-.18-3.13.82.83-3.05-.2-.31a8.2 8.2 0 0 1-1.26-4.37c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.26 8.23zm4.52-6.16c-.25-.12-1.47-.73-1.7-.81-.23-.09-.39-.12-.56.12-.17.25-.65.81-.8.97-.15.17-.3.19-.55.06-.25-.12-1.05-.39-2-1.24-.74-.66-1.24-1.47-1.38-1.72-.14-.25-.02-.38.1-.51.11-.11.25-.29.37-.43.12-.14.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.23.25-.87.85-.87 2.08 0 1.22.89 2.4 1.01 2.57.12.17 1.75 2.67 4.24 3.75.59.26 1.05.41 1.41.53.59.19 1.13.16 1.55.1.47-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.14-1.18-.06-.11-.23-.17-.48-.29z"/></svg></a>
+
+<div class="cookie-banner" id="cookieBanner">
+  <p>We use minimal local storage to remember your cart. No tracking cookies are used. Read our <a href="cookie-policy.html">Cookie Policy</a> and <a href="privacy-policy.html">Privacy Policy</a>.</p>
+  <div class="cookie-actions">
+    <button class="cookie-btn cookie-accept" id="cookieAccept">Accept</button>
+    <button class="cookie-btn cookie-decline" id="cookieDecline">Decline</button>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
@@ -593,7 +628,7 @@ function mapSupabaseRow(p){
   const rawCat = p.category || 'vintage_shirts';
   const cat = CATEGORY_MAP[rawCat] || rawCat.toUpperCase();
   const imgs = (p.images && p.images.length ? p.images : [p.image]).filter(Boolean);
-  const img = imgs[0] || "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?q=80&w=800";
+  const img = imgs[0] || "images/Hero_logo.jpeg";
   return {id:p.id, title:p.title, cat, price:Number(p.price)||0, img, imgs, _rawCategory:rawCat, _raw:p};
 }
 async function loadProducts(){
@@ -641,7 +676,7 @@ function renderGrid(){
     <div class="card reveal">
       <div class="card-img" data-id="${escapeHtml(p.id)}"><img src="${escapeHtml(p.img)}" alt="${escapeHtml(p.title)}" loading="lazy"/><div class="card-top"><span class="tag">${escapeHtml(p.cat)}</span><span class="tag">New</span></div></div>
       <div class="card-body"><div><div class="card-title">${escapeHtml(p.title)}</div><div class="card-cat">Handcrafted • Lagos</div></div><div class="card-price">₦${Number(p.price).toLocaleString('en-NG')}</div></div>
-      <button class="add" onclick="addToCart('${escapeHtml(p.id)}')"><i data-lucide="plus" style="width:14px;height:14px"></i> Add to Bag</button>
+      <button class="add" onclick="addToCart('${escapeHtml(p.id)}')" aria-label="Add ${escapeHtml(p.title)} to bag"><i data-lucide="plus" style="width:14px;height:14px"></i> Add to Bag</button>
       <a href="https://wa.me/2349078537344?text=${encodeURIComponent('Hello, I want to order ' + p.title)}" target="_blank" style="display:block; margin-top:8px; text-align:center; font-size:11px; opacity:.6">Order on WhatsApp →</a>
     </div>
   `).join('');
@@ -747,12 +782,24 @@ document.querySelectorAll('.mlink').forEach(a=>a.onclick=()=>menu.classList.remo
 function showToast(msg){
   const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2600);
 }
+// cookie consent
+(function(){
+  const banner = document.getElementById('cookieBanner');
+  if(!banner) return;
+  const consent = localStorage.getItem('sbt_cookie_consent');
+  if(!consent) banner.classList.add('show');
+  document.getElementById('cookieAccept')?.addEventListener('click', ()=>{ localStorage.setItem('sbt_cookie_consent','accepted'); banner.classList.remove('show'); });
+  document.getElementById('cookieDecline')?.addEventListener('click', ()=>{ localStorage.setItem('sbt_cookie_consent','declined'); banner.classList.remove('show'); });
+})();
+
 document.getElementById('contactForm').addEventListener('submit', e=>{
   e.preventDefault();
   const name=document.getElementById('cname').value.trim();
   const email=document.getElementById('cemail').value.trim();
   const msg=document.getElementById('cmsg').value.trim();
+  const consent=document.getElementById('cconsent')?.checked;
   if(!name||!email||!msg) return showToast('Please fill all fields');
+  if(!consent) return showToast('Please agree to the Privacy Policy');
   const subject=encodeURIComponent('Website inquiry from '+name);
   const body=encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${msg}`);
   window.location.href=`mailto:alagbesulait@gmail.com?subject=${subject}&body=${body}`;
@@ -815,8 +862,8 @@ function loadInstagramGrid(){
     {img:'images/Vintage_shirt.jpeg', link:'https://www.instagram.com/styles_by_tiwa/'},
   ];
   grid.innerHTML = posts.map(p => `
-    <a href="${p.link}" target="_blank" class="ig-slot">
-      <img src="${p.img}" alt="Instagram" loading="lazy"/>
+    <a href="${p.link}" target="_blank" class="ig-slot" rel="noopener noreferrer">
+      <img src="${p.img}" alt="Styles By Tiwa - Instagram post" loading="lazy"/>
       <div class="ig-play"><i data-lucide="instagram" style="width:20px;height:20px;color:#fff"></i></div>
     </a>
   `).join('');

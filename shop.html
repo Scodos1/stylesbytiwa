@@ -63,8 +63,8 @@ button,a{cursor:pointer;color:inherit;text-decoration:none;background:none;borde
   <a href="index.html" class="logo"><div class="logo-mark"><img src="images/Hero_logo.jpeg" alt="Styles By Tiwa"/></div><div class="logo-type"><b>Styles <i>by Tiwa.</i></b><small>Handcrafted in Lagos</small></div></a>
   <nav class="nav"><a href="index.html">Home</a><a href="index.html#about">About</a><a href="index.html#collection">Collection</a><a href="shop.html" style="text-decoration:underline;text-underline-offset:8px;opacity:1">Shop</a><a href="index.html#contact">Contact</a></nav>
   <div style="display:flex;gap:12px;align-items:center">
-    <button class="pill-btn" id="openCart" style="position:relative"><i data-lucide="shopping-bag" style="width:14px;height:14px"></i> Bag <span id="bagNum">0</span></button>
-    <a href="index.html" class="icon-btn mob-nav" style="display:grid"><i data-lucide="home" style="width:16px;height:16px"></i></a>
+    <button class="pill-btn" id="openCart" style="position:relative" aria-label="Open shopping bag"><i data-lucide="shopping-bag" style="width:14px;height:14px"></i> Bag <span id="bagNum">0</span></button>
+    <a href="index.html" class="icon-btn mob-nav" style="display:grid" aria-label="Back to home"><i data-lucide="home" style="width:16px;height:16px"></i></a>
   </div>
 </header>
 
@@ -74,12 +74,11 @@ button,a{cursor:pointer;color:inherit;text-decoration:none;background:none;borde
 
 <div class="cart-overlay" id="cartOverlay"></div>
 <div class="cart-drawer" id="cartDrawer">
-  <div class="cart-head"><b style="font-size:12px;letter-spacing:.14em;text-transform:uppercase">Bag — <span id="cartCount">0</span></b><button class="icon-btn" id="closeCart"><i data-lucide="x" style="width:16px;height:16px"></i></button></div>
-  <div class="cart-body" id="cartBody"><div style="padding:40px 0;text-align:center;opacity:.5">Empty</div></div>
-  <div class="cart-foot"><div style="display:flex;justify-content:space-between"><span style="opacity:.6">Subtotal</span><b id="cartTotal">₦0</b></div><button onclick="checkout()" style="height:46px;background:var(--ink);color:var(--paper);border-radius:999px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;width:100%">Checkout on WhatsApp</button></div>
+  <div class="cart-head"><b style="font-size:12px;letter-spacing:.14em;text-transform:uppercase">Bag — <span id="cartCount">0</span></b><button class="icon-btn" id="closeCart" aria-label="Close shopping bag"><i data-lucide="x" style="width:16px;height:16px"></i></button></div>  <div class="cart-body" id="cartBody"><div style="padding:40px 0;text-align:center;opacity:.5">Empty</div></div>
+  <div class="cart-foot"><div style="display:flex;justify-content:space-between"><span style="opacity:.6">Subtotal</span><b id="cartTotal">₦0</b></div><button onclick="checkout()" aria-label="Checkout on WhatsApp" style="height:46px;background:var(--ink);color:var(--paper);border-radius:999px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;width:100%">Checkout on WhatsApp</button></div>
 </div>
 
-<div class="image-modal" id="imageModal"><button class="modal-close"><i data-lucide="x" style="width:16px;height:16px"></i></button><div class="modal-nav"><button class="modal-prev"><i data-lucide="chevron-left"></i></button><button class="modal-next"><i data-lucide="chevron-right"></i></button></div><div style="max-width:88vw;max-height:78vh"><img id="modalImage" src="" style="max-width:88vw;max-height:78vh;object-fit:contain;border-radius:12px"/></div><span id="modalCounter" style="position:absolute;bottom:18px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.7);font-size:11px"></span></div>
+<div class="image-modal" id="imageModal"><button class="modal-close" aria-label="Close image viewer"><i data-lucide="x" style="width:16px;height:16px"></i></button><div class="modal-nav"><button class="modal-prev" aria-label="Previous image"><i data-lucide="chevron-left"></i></button><button class="modal-next" aria-label="Next image"><i data-lucide="chevron-right"></i></button></div><div style="max-width:88vw;max-height:78vh"><img id="modalImage" src="" alt="" style="max-width:88vw;max-height:78vh;object-fit:contain;border-radius:12px"/></div><span id="modalCounter" style="position:absolute;bottom:18px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.7);font-size:11px"></span></div>
 
 <script>
 lucide.createIcons();
@@ -119,7 +118,7 @@ function render(){
     <div class="card">
       <div class="card-img" data-id="${esc(p.id)}"><img src="${esc(p.img)}" alt="${esc(p.title)}" loading="lazy"/><div class="card-top"><span class="tag">${esc(p.cat)}</span><span class="tag">New</span></div></div>
       <div class="card-body"><div><div style="font-size:14px;font-weight:600">${esc(p.title)}</div><div style="font-size:10px;opacity:.55;letter-spacing:.14em;text-transform:uppercase;margin-top:4px">Handcrafted • Lagos</div></div><div style="font-family:'Bodoni Moda';font-size:16px">₦${Number(p.price).toLocaleString('en-NG')}</div></div>
-      <button class="add" onclick="addToCart('${esc(p.id)}')">Add to Bag</button>
+      <button class="add" onclick="addToCart('${esc(p.id)}')" aria-label="Add ${esc(p.title)} to bag">Add to Bag</button>
       <a href="https://wa.me/2349078537344?text=${encodeURIComponent('Hello, I want to order '+p.title)}" target="_blank" style="display:block;text-align:center;margin-top:8px;font-size:11px;opacity:.6">Order on WhatsApp →</a>
     </div>`).join('');
   lucide.createIcons();
@@ -144,8 +143,39 @@ function openDrawer(){document.getElementById('cartDrawer').classList.add('open'
 document.getElementById('openCart').onclick=openDrawer;
 document.getElementById('closeCart').onclick=()=>{document.getElementById('cartDrawer').classList.remove('open');document.getElementById('cartOverlay').classList.remove('open')};
 document.getElementById('cartOverlay').onclick=()=>{document.getElementById('cartDrawer').classList.remove('open');document.getElementById('cartOverlay').classList.remove('open')};
-function checkout(){if(!cart.length) return alert('Empty'); const txt=cart.map(i=>`${i.qty}x ${i.title} — ₦${i.price}`).join('%0A'); const tot=cart.reduce((s,i)=>s+Number(i.price)*i.qty,0); window.open('https://wa.me/2349078537344?text=Hello%20Tiwa!%20I%20want%20to%20order:%0A'+txt+'%0A%0ATotal:%20₦'+tot,'_blank')}
+function checkout(){if(!cart.length) return alert('Your bag is empty. Add items before checking out.'); const txt=cart.map(i=>`${i.qty}x ${i.title} — ₦${i.price}`).join('%0A'); const tot=cart.reduce((s,i)=>s+Number(i.price)*i.qty,0); window.open('https://wa.me/2349078537344?text=Hello%20Tiwa!%20I%20want%20to%20order:%0A'+txt+'%0A%0ATotal:%20₦'+tot,'_blank')}
+
+// cookie consent
+(function(){
+  const banner=document.getElementById('cookieBanner');
+  if(!banner)return;
+  const c=localStorage.getItem('sbt_cookie_consent');
+  if(!c) banner.classList.add('show');
+  document.getElementById('cookieAccept')?.addEventListener('click',()=>{localStorage.setItem('sbt_cookie_consent','accepted');banner.classList.remove('show')});
+  document.getElementById('cookieDecline')?.addEventListener('click',()=>{localStorage.setItem('sbt_cookie_consent','declined');banner.classList.remove('show')});
+})();
 load();
 </script>
+
+<footer style="padding:24px;background:var(--noir);color:var(--paper);border-top:1px solid var(--gold-line);margin-top:40px">
+  <div style="max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+    <div style="display:flex;gap:16px;flex-wrap:wrap">
+      <a href="privacy-policy.html" style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.5">Privacy Policy</a>
+      <a href="terms.html" style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.5">Terms &amp; Conditions</a>
+      <a href="cookie-policy.html" style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.5">Cookie Policy</a>
+      <a href="refund-policy.html" style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.5">Refund Policy</a>
+    </div>
+    <div style="font-size:11px;opacity:.4">&copy; 2026 Styles By Tiwa. All rights reserved.</div>
+  </div>
+</footer>
+
+<div class="cookie-banner" id="cookieBanner" style="position:fixed;bottom:0;left:0;right:0;z-index:200;background:var(--noir);color:var(--paper);padding:20px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid var(--gold-line);transform:translateY(100%);transition:transform .5s cubic-bezier(.76,0,.24,1)">
+  <p style="font-size:12px;line-height:1.6;opacity:.85;flex:1;min-width:240px">We use minimal local storage to remember your cart. No tracking cookies. Read our <a href="cookie-policy.html" style="color:var(--gold-light);text-decoration:underline">Cookie Policy</a> and <a href="privacy-policy.html" style="color:var(--gold-light);text-decoration:underline">Privacy Policy</a>.</p>
+  <div style="display:flex;gap:8px;flex-shrink:0">
+    <button class="cookie-btn" id="cookieAccept" style="height:36px;padding:0 18px;border-radius:999px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;cursor:pointer;background:var(--paper);color:var(--noir);border:1px solid var(--paper)">Accept</button>
+    <button class="cookie-btn" id="cookieDecline" style="height:36px;padding:0 18px;border-radius:999px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;cursor:pointer;background:transparent;color:var(--paper);border:1px solid rgba(255,255,255,.3)">Decline</button>
+  </div>
+</div>
+
 </body>
 </html>

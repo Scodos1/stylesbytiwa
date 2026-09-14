@@ -46,7 +46,11 @@ footer{padding:20px;text-align:center;font-size:11px;opacity:.6}
     <div class="err" id="err"></div>
   </div>
 </main>
-<footer>© <span id="y"></span> Styles By Tiwa. All rights reserved.</footer>
+<footer style="padding:16px;text-align:center;font-size:10px;opacity:.5;display:flex;justify-content:center;gap:16px;flex-wrap:wrap">
+  <span>&copy; <span id="y"></span> Styles By Tiwa</span>
+  <a href="privacy-policy.html" style="color:inherit">Privacy Policy</a>
+  <a href="terms.html" style="color:inherit">Terms</a>
+</footer>
 <script>
 lucide.createIcons?.();
 document.getElementById('y').textContent=new Date().getFullYear();
