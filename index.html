@@ -182,6 +182,7 @@ img{display:block; width:100%; height:100%; object-fit:cover}
 @media(max-width:900px){
   .video-grid{grid-template-columns:1fr}
   .video-card{border-right:none; border-bottom:1px solid var(--line); aspect-ratio:16/9}
+  .video-card video{object-fit:contain}
   .video-card:last-child{border-bottom:none}
   .video-card .play-overlay{opacity:1; background:rgba(0,0,0,.25)}
 }
