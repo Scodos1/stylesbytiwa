@@ -551,8 +551,9 @@ img{display:block; width:100%; height:100%; object-fit:cover}
 <script>
 lucide.createIcons();
 document.getElementById('y').textContent = new Date().getFullYear();
-// loader
+// loader — hide after 1.5s max regardless
 window.addEventListener('load',()=> setTimeout(()=>{const l=document.getElementById('loader'); if(l) l.classList.add('hidden')}, 700));
+setTimeout(()=>{const l=document.getElementById('loader'); if(l && !l.classList.contains('hidden')) l.classList.add('hidden')}, 1500);
 const marqueeText = ["ELEGANCE","CULTURE","INDIVIDUALITY","HANDCRAFTED IN LAGOS","MAISON 2026","VINTAGE SHIRTS","TWO-PIECE SETS","GREG SHIRT"];
 const marquee = document.getElementById('marquee');
 marquee.innerHTML = [...marqueeText,...marqueeText].map(t=>`<span>${t} <span class="sep"></span> <i>${t==='ELEGANCE'?'craft':t==='CULTURE'?'style':'stylesbytiwa'}</i></span>`).join('') + [...marqueeText,...marqueeText].map(t=>`<span>${t} <span class="sep"></span> <i>${t==='ELEGANCE'?'craft':t==='CULTURE'?'style':'stylesbytiwa'}</i></span>`).join('');
