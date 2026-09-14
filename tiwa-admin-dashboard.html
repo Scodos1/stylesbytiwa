@@ -14,76 +14,114 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
 <script src="supabase-config.js"></script>
 <style>
-:root{--paper:#FDF9F3;--paper-2:#F3ECE1;--ink:#11100F;--ink-2:#5C5752;--line:rgba(17,16,15,0.12);--noir:#0B0B0C;--gold:#C9A961;--gold-light:#F5E7B8;--gold-line:rgba(201,169,97,0.28);--ease:cubic-bezier(.76,0,.24,1)}
-*{margin:0;padding:0;box-sizing:border-box}html{background:var(--paper)}body{font-family:"Inter",system-ui,sans-serif;background:var(--paper);color:var(--ink);-webkit-font-smoothing:antialiased}
+:root{--paper:#FDF9F3;--paper-2:#F3ECE1;--ink:#11100F;--ink-2:#5C5752;--line:rgba(17,16,15,0.10);--line-med:rgba(17,16,15,0.18);--noir:#0B0B0C;--gold:#C9A961;--gold-light:#F5E7B8;--gold-line:rgba(201,169,97,0.28);--ease:cubic-bezier(.76,0,.24,1);--shadow:0 2px 12px rgba(0,0,0,.06)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{background:var(--paper);scroll-behavior:smooth}
+body{font-family:"Inter",system-ui,sans-serif;background:var(--paper);color:var(--ink);-webkit-font-smoothing:antialiased;line-height:1.5}
 button{cursor:pointer;font:inherit}
-.header{height:80px;display:flex;align-items:center;justify-content:space-between;padding:0 32px;border-bottom:1px solid var(--gold-line);background:rgba(11,11,12,0.96);color:var(--paper);position:sticky;top:0;z-index:20}
-.logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}.logo-mark{height:54px;border-radius:12px;border:1px solid rgba(201,169,97,.35);overflow:hidden;background:#0A0A0A}.logo-mark img{height:100%;width:auto;max-width:230px;object-fit:contain;display:block}
-.nav{display:flex;gap:24px;align-items:center}.nav a{font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--paper);opacity:.75;text-decoration:none}.nav a:hover{opacity:1}
-.wrap{max-width:1080px;margin:0 auto;padding:32px 24px 80px}
-.hero{padding:24px 0 20px}.hero h1{font-family:"Bodoni Moda";font-size:40px;letter-spacing:-.03em}.hero h1 em{font-family:"Instrument Serif";font-style:italic;font-weight:400}.hero p{font-size:13px;color:var(--ink-2);margin-top:6px}
-.panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;margin-top:20px}
-.panel h2{font-family:"Bodoni Moda";font-size:22px;margin-bottom:4px}.panel .hint{font-size:12px;color:var(--ink-2);margin-bottom:18px}
-.form{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:680px}
+input:focus,select:focus{outline:none;border-color:var(--gold)!important;box-shadow:0 0 0 3px rgba(201,169,97,.15)}
+
+.header{height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;border-bottom:1px solid var(--gold-line);background:var(--noir);color:var(--paper);position:sticky;top:0;z-index:20;backdrop-filter:blur(12px)}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
+.logo-mark{height:40px;border-radius:10px;border:1px solid rgba(201,169,97,.3);overflow:hidden;background:#0A0A0A;flex-shrink:0}
+.logo-mark img{height:100%;width:auto;max-width:160px;object-fit:contain;display:block}
+.nav{display:flex;gap:20px;align-items:center}
+.nav a{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--paper);opacity:.65;text-decoration:none;transition:.25s}
+.nav a:hover{opacity:1}
+.nav a.logout-link{color:#e08a8a;opacity:.8}
+.nav a.logout-link:hover{opacity:1}
+
+.wrap{max-width:960px;margin:0 auto;padding:28px 20px 80px}
+.hero{padding:20px 0 16px}
+.hero h1{font-family:"Bodoni Moda";font-size:36px;letter-spacing:-.03em;line-height:1}
+.hero h1 em{font-family:"Instrument Serif";font-style:italic;font-weight:400}
+.hero p{font-size:13px;color:var(--ink-2);margin-top:8px;max-width:460px}
+
+.panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px;margin-top:18px;transition:.3s var(--ease)}
+.panel:hover{box-shadow:var(--shadow)}
+.panel h2{font-family:"Bodoni Moda";font-size:20px;margin-bottom:2px;letter-spacing:-.02em}
+.panel .hint{font-size:11.5px;color:var(--ink-2);margin-bottom:16px;line-height:1.5}
+
+.form{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .form .full{grid-column:1/-1}
-.field label{display:block;font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;opacity:.6;margin-bottom:7px}
-.field input,.field select{width:100%;padding:12px 13px;border:1px solid var(--line);border-radius:10px;font-size:13px;font-family:inherit;background:var(--paper)}
-.upload{border:1.5px dashed rgba(17,16,15,.25);border-radius:12px;padding:18px;text-align:center;font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;display:block}
-.preview{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.preview img{width:64px;height:64px;object-fit:cover;border-radius:8px;border:1px solid var(--line)}
-.actions{grid-column:1/-1;display:flex;gap:10px;margin-top:6px}
-.btn{height:44px;padding:0 22px;border-radius:999px;background:var(--noir);color:var(--gold-light);border:1px solid rgba(201,169,97,.4);font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700}
-.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;margin-top:14px}
-.admin-product-card{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--paper)}
-.admin-product-img{width:100%;height:200px;object-fit:cover;display:block}
-.admin-card-body{padding:12px}
-.admin-product-card h3{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.admin-product-card .price{font-size:12px;color:var(--ink-2);margin:4px 0 10px}
+.field label{display:block;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;opacity:.5;margin-bottom:6px}
+.field input,.field select{width:100%;padding:11px 13px;border:1px solid var(--line-med);border-radius:10px;font-size:13px;font-family:inherit;background:var(--paper);transition:.25s}
+.field input::placeholder{color:var(--ink-2);opacity:.5}
+
+.upload{border:1.5px dashed var(--line-med);border-radius:12px;padding:20px;text-align:center;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;display:block;transition:.25s;color:var(--ink-2);background:var(--paper)}
+.upload:hover{border-color:var(--gold);color:var(--ink);background:rgba(201,169,97,.04)}
+.preview{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.preview img{width:56px;height:56px;object-fit:cover;border-radius:8px;border:1px solid var(--line)}
+
+.actions{grid-column:1/-1;display:flex;gap:10px;margin-top:4px}
+.btn{height:42px;padding:0 24px;border-radius:999px;background:var(--noir);color:var(--gold-light);border:1px solid rgba(201,169,97,.35);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;transition:.3s var(--ease)}
+.btn:hover{background:#1a1a1a;transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,0,0,.15)}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.btn.ghost{background:transparent;color:var(--ink-2);border-color:var(--line-med)}
+.btn.ghost:hover{border-color:var(--ink);color:var(--ink);background:transparent}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px;margin-top:14px}
+.admin-product-card{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--paper);transition:.3s var(--ease)}
+.admin-product-card:hover{box-shadow:var(--shadow);transform:translateY(-2px)}
+.admin-product-img{width:100%;height:220px;object-fit:cover;display:block}
+.admin-card-body{padding:14px}
+.admin-product-card h3{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:-.01em}
+.admin-product-card .price{font-size:11.5px;color:var(--ink-2);margin:4px 0 12px;font-family:"Bodoni Moda";font-size:14px}
 .admin-card-actions{display:flex;gap:6px}
-.admin-card-actions button{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;padding:8px;font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;border-radius:999px;cursor:pointer;border:1px solid var(--ink)}
-.btn-edit{background:transparent;color:var(--ink)}
-.btn-delete{background:transparent;color:#c0392b;border-color:#c0392b}
-.pcard{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--paper)}
-.pcard img{width:100%;aspect-ratio:3/4;object-fit:cover}
-.pcard .b{padding:12px}.pcard h3{font-size:13px}.pcard .pr{font-family:"Bodoni Moda";font-size:15px;margin:4px 0 10px}
-.pcard .row{display:flex;gap:6px}.pcard .row button{flex:1;height:34px;border-radius:999px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;border:1px solid var(--ink)}
-.empty{text-align:center;padding:36px;color:var(--ink-2);font-size:13px}
-footer{padding:20px;text-align:center;font-size:11px;opacity:.6}
-@media(max-width:640px){
+.admin-card-actions button{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;padding:8px;font-size:9.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-radius:999px;cursor:pointer;border:1px solid var(--line-med);transition:.25s;background:transparent}
+.btn-edit{color:var(--ink)}
+.btn-edit:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn-delete{color:#c0392b;border-color:rgba(192,57,43,.3)}
+.btn-delete:hover{background:#c0392b;border-color:#c0392b;color:#fff}
+
+.empty{text-align:center;padding:36px;color:var(--ink-2);font-size:12px}
+footer{padding:20px;text-align:center;font-size:10.5px;opacity:.5;letter-spacing:.08em}
+
+@media(max-width:768px){
   .header{height:56px;padding:0 16px}
-  .logo-mark{height:32px;border-radius:8px}
-  .logo-mark img{max-width:120px}
-  .nav{gap:12px}
-  .nav a{font-size:10px;letter-spacing:.1em}
-  .wrap{padding:16px 14px 60px}
-  .hero{padding:16px 0 12px}
+  .logo-mark{height:34px;border-radius:8px}
+  .logo-mark img{max-width:130px}
+  .nav{gap:14px}
+  .nav a{font-size:10px}
+  .wrap{padding:18px 14px 60px}
+  .hero{padding:14px 0 10px}
   .hero h1{font-size:28px}
   .hero p{font-size:12px}
-  .panel{padding:16px;border-radius:14px;margin-top:14px}
+  .panel{padding:18px;border-radius:14px;margin-top:14px}
   .panel h2{font-size:18px}
+  .panel .hint{font-size:11px}
   .form{grid-template-columns:1fr;gap:12px}
   .form .full{grid-column:1}
-  .actions{grid-column:1;flex-wrap:wrap}
-  .btn{height:40px;padding:0 16px;font-size:10px}
+  .actions{grid-column:1}
+  .btn{height:40px;padding:0 18px;font-size:10px}
   .grid{grid-template-columns:repeat(2,1fr);gap:10px}
-  .admin-product-img{height:140px}
-  .pcard img{aspect-ratio:3/4;height:auto}
-  .pcard .b,.admin-card-body{padding:8px}
-  .pcard h3,.admin-product-card h3{font-size:11px}
-  .pcard .pr,.admin-product-card .price{font-size:13px}
-  .pcard .row button,.admin-card-actions button{height:30px;font-size:9px}
+  .admin-product-img{height:160px}
+  .admin-card-body{padding:10px}
+  .admin-product-card h3{font-size:11.5px}
+  .admin-product-card .price{font-size:13px}
+  .admin-card-actions button{height:30px;font-size:9px;padding:0 8px}
   .preview img{width:48px;height:48px}
   .upload{padding:14px;font-size:10px}
 }
-@media(max-width:380px){
-  .grid{grid-template-columns:1fr}
+@media(max-width:420px){
+  .grid{grid-template-columns:1fr 1fr;gap:8px}
+  .admin-product-img{height:130px}
+  .admin-card-body{padding:8px}
+  .admin-product-card h3{font-size:10.5px}
+  .admin-product-card .price{font-size:12px}
+  .admin-card-actions{flex-direction:column;gap:4px}
+  .admin-card-actions button{height:28px;font-size:8.5px}
 }
 </style>
 </head>
 <body>
 <header class="header">
-  <a href="index.html" class="logo"><span class="logo-mark"><img src="images/Hero_logo.jpeg" alt="Styles By Tiwa"/></span></a>
-  <nav class="nav"><a href="index.html">View Site</a><a href="shop.html">Shop</a><a href="#" class="keep" onclick="logout();return false" style="color:#e08a8a">Logout</a></nav>
+  <a href="index.html" class="logo"><div class="logo-mark"><img src="images/Hero_logo.jpeg" alt="Styles By Tiwa"/></div></a>
+  <nav class="nav">
+    <a href="index.html">View Site</a>
+    <a href="shop.html">Shop</a>
+    <a href="#" class="logout-link" onclick="logout();return false">Logout</a>
+  </nav>
 </header>
 <div class="wrap">
   <div class="hero"><h1>Manage <em>Collection</em></h1><p>Add, edit, and organize products customers see. Paper admin — same maison system.</p></div>
