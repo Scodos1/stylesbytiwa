@@ -37,7 +37,34 @@ button{cursor:pointer;font:inherit}
 .pcard .row{display:flex;gap:6px}.pcard .row button{flex:1;height:34px;border-radius:999px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;border:1px solid var(--ink)}
 .empty{text-align:center;padding:36px;color:var(--ink-2);font-size:13px}
 footer{padding:20px;text-align:center;font-size:11px;opacity:.6}
-@media(max-width:640px){.form{grid-template-columns:1fr}.nav a:not(.keep){display:none}}
+@media(max-width:640px){
+  .header{height:56px;padding:0 16px}
+  .logo-mark{height:32px;border-radius:8px}
+  .logo-mark img{max-width:120px}
+  .nav{gap:12px}
+  .nav a{font-size:10px;letter-spacing:.1em}
+  .wrap{padding:16px 14px 60px}
+  .hero{padding:16px 0 12px}
+  .hero h1{font-size:28px}
+  .hero p{font-size:12px}
+  .panel{padding:16px;border-radius:14px;margin-top:14px}
+  .panel h2{font-size:18px}
+  .form{grid-template-columns:1fr;gap:12px}
+  .form .full{grid-column:1}
+  .actions{grid-column:1;flex-wrap:wrap}
+  .btn{height:40px;padding:0 16px;font-size:10px}
+  .grid{grid-template-columns:repeat(2,1fr);gap:10px}
+  .pcard img,.admin-product-img{aspect-ratio:3/4}
+  .pcard .b,.admin-card-body{padding:8px}
+  .pcard h3,.admin-product-card h3{font-size:11px}
+  .pcard .pr,.admin-product-card .price{font-size:13px}
+  .pcard .row button,.admin-card-actions button{height:30px;font-size:9px}
+  .preview img{width:48px;height:48px}
+  .upload{padding:14px;font-size:10px}
+}
+@media(max-width:380px){
+  .grid{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
