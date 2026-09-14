@@ -182,34 +182,39 @@ img{display:block; width:100%; height:100%; object-fit:cover}
 }
 /* editorial + instagram */
 .editorial{display:grid; grid-template-columns:1fr 1fr; min-height:72vh; border-bottom:1px solid var(--line); background:var(--ink); color:var(--paper)}
-.editorial-media{position:relative; overflow:hidden}
-.editorial-media img{opacity:.9}
-.editorial-media video{width:100%;height:100%;object-fit:cover;display:block}
-.editorial-content{padding:48px 36px; display:flex; flex-direction:column; justify-content:center}
+.editorial-media{position:relative; overflow:hidden;min-height:400px}
+.editorial-media img,.editorial-media video{width:100%;height:100%;object-fit:cover;display:block}
+.editorial-content{padding:48px 36px; display:flex; flex-direction:column; justify-content:center; gap:20px}
 .editorial-content h3{font-family:"Bodoni Moda"; font-size:clamp(32px,4vw,56px); line-height:.95; letter-spacing:-.04em; font-weight:400}
 .editorial-content h3 em{font-family:"Instrument Serif"; font-style:italic}
 .editorial-content p{margin-top:18px; max-width:420px; font-size:14px; line-height:1.7; opacity:.7}
-.ig-header{display:flex;align-items:center;gap:14px;margin-bottom:28px}
+.ig-header{display:flex;align-items:center;gap:14px;margin-bottom:0}
 .ig-icon{width:44px;height:44px;border-radius:50%;background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);display:grid;place-items:center;color:#fff;flex-shrink:0}
 .ig-header h4{font-size:16px;font-weight:600;letter-spacing:-.01em}
 .ig-handle{font-size:11px;opacity:.5;letter-spacing:.04em;display:block;margin-top:2px}
-.ig-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;max-width:380px}
+.ig-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;flex:1}
 .ig-slot{aspect-ratio:1;border-radius:8px;overflow:hidden;background:rgba(255,255,255,.06);position:relative;cursor:pointer;transition:.3s}
 .ig-slot:hover{opacity:.8}
 .ig-slot img{width:100%;height:100%;object-fit:cover;display:block}
 .ig-placeholder{grid-column:1/-1;text-align:center;padding:40px 20px;opacity:.4;font-size:12px}
 .ig-slot .ig-play{position:absolute;inset:0;display:grid;place-items:center;background:rgba(0,0,0,.3);opacity:0;transition:.25s}
 .ig-slot:hover .ig-play{opacity:1}
+.ig-buttons{display:flex;gap:12px;flex-wrap:wrap}
 @media(max-width:900px){
   .editorial{grid-template-columns:1fr;min-height:auto}
   .editorial-media{height:50vh;min-height:300px}
-  .editorial-content{padding:36px 20px}
-  .ig-grid{max-width:100%}
+  .editorial-content{padding:36px 20px;gap:16px}
+  .ig-grid{gap:4px}
 }
 @media(max-width:560px){
   .editorial-media{height:42vh;min-height:240px}
-  .editorial-content{padding:28px 16px}
+  .editorial-content{padding:24px 16px;gap:14px}
   .ig-header h4{font-size:14px}
+  .ig-icon{width:36px;height:36px}
+  .ig-grid{gap:4px}
+  .ig-slot{border-radius:6px}
+  .ig-buttons{flex-direction:column}
+  .ig-buttons a{text-align:center}
 }
 /* contact */
 .contact{display:grid; grid-template-columns:.9fr 1.1fr; border-bottom:1px solid var(--line)}
@@ -470,8 +475,8 @@ img{display:block; width:100%; height:100%; object-fit:cover}
 
 <section class="editorial" id="editorial">
   <div class="editorial-media">
-    <div id="featuredVideo" style="width:100%;height:100%;background:var(--noir);display:grid;place-items:center">
-      <div style="text-align:center;opacity:.4;padding:20px"><div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase">Loading video…</div></div>
+    <div id="featuredVideo" style="width:100%;height:100%;background:var(--noir)">
+      <img src="images/Vintage%20shirt.jpeg" alt="Editorial" style="width:100%;height:100%;object-fit:cover;opacity:.9"/>
     </div>
   </div>
   <div class="editorial-content">
@@ -485,7 +490,7 @@ img{display:block; width:100%; height:100%; object-fit:cover}
     <div class="ig-grid" id="igGrid">
       <div class="ig-placeholder">Loading Instagram…</div>
     </div>
-    <div style="margin-top:28px; display:flex; gap:12px; flex-wrap:wrap">
+    <div class="ig-buttons">
       <a href="https://instagram.com/styles_by_tiwa" target="_blank" class="btn-primary" style="background:var(--paper);color:var(--ink)"><i data-lucide="instagram" style="width:14px;height:14px"></i> Follow on Instagram</a>
       <a href="shop.html" class="btn-primary" style="background:transparent;color:var(--paper);border:1px solid rgba(255,255,255,.25)">View Lookbook — Shop</a>
     </div>
@@ -777,25 +782,25 @@ loadInstagramGrid();
 // 🎬 LOAD FEATURED VIDEO (editorial section)
 async function loadFeaturedVideo(){
   const container = document.getElementById('featuredVideo');
-  if(!container || !supa) return;
+  if(!container) return;
+  // always show fallback first
+  const fallback = `<img src="images/Vintage%20shirt.jpeg" alt="Editorial" style="width:100%;height:100%;object-fit:cover;opacity:.9"/>`;
+  if(!supa){ container.innerHTML = fallback; return; }
   try{
     const {data, error} = await supa.from('videos').select('*').order('sort_order',{ascending:true}).order('created_at',{ascending:false}).limit(1);
-    if(error) throw error;
-    if(!data || data.length===0 || !data[0].video_url){
-      container.innerHTML = `<img src="images/Vintage%20shirt.jpeg" alt="Editorial" style="width:100%;height:100%;object-fit:cover;opacity:.9"/>`;
-      return;
-    }
+    if(error){ console.error('Featured video query error:', error); container.innerHTML = fallback; return; }
+    if(!data || data.length===0 || !data[0].video_url){ container.innerHTML = fallback; return; }
     const v = data[0];
     container.innerHTML = `
       <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover" poster="${escapeHtml(v.poster_url || '')}">
         <source src="${escapeHtml(v.video_url)}" type="video/mp4"/>
       </video>
-      <div style="position:absolute;left:20px;bottom:20px;font-size:10px;letter-spacing:.18em;text-transform:uppercase;opacity:.7;color:#fff">${escapeHtml(v.title || 'Latest Drop')}</div>
+      <div style="position:absolute;left:20px;bottom:20px;font-size:10px;letter-spacing:.18em;text-transform:uppercase;opacity:.7;color:#fff;z-index:2">${escapeHtml(v.title || 'Latest Drop')}</div>
     `;
     container.style.position = 'relative';
   }catch(e){
     console.error('Featured video load failed', e);
-    container.innerHTML = `<img src="images/Vintage%20shirt.jpeg" alt="Editorial" style="width:100%;height:100%;object-fit:cover;opacity:.9"/>`;
+    container.innerHTML = fallback;
   }
 }
 
