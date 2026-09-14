@@ -181,8 +181,7 @@ img{display:block; width:100%; height:100%; object-fit:cover}
 .video-card .video-tag{position:absolute; top:14px; left:14px; font-size:9px; letter-spacing:.14em; text-transform:uppercase; font-weight:700; background:var(--paper); color:var(--ink); padding:6px 10px; border-radius:999px; border:1px solid var(--line)}
 @media(max-width:900px){
   .video-grid{grid-template-columns:1fr}
-  .video-card{border-right:none; border-bottom:1px solid var(--line); aspect-ratio:16/9}
-  .video-card video{object-fit:contain}
+  .video-card{border-right:none; border-bottom:1px solid var(--line); aspect-ratio:9/16}
   .video-card:last-child{border-bottom:none}
   .video-card .play-overlay{opacity:1; background:rgba(0,0,0,.25)}
 }
@@ -442,6 +441,14 @@ img{display:block; width:100%; height:100%; object-fit:cover}
   </div>
 </section>
 
+<section class="video-reel" id="reel">
+  <div class="section-head">
+    <h3>Latest <em style="font-family:'Instrument Serif'; font-style:italic; font-weight:400">Arrivals</em></h3>
+    <p>Watch our newest pieces in motion. Tap to play.</p>
+  </div>
+  <div class="video-grid" id="videoGrid"><div class="shop-empty" style="grid-column:1/-1; padding:60px; text-align:center; opacity:.6">Loading videos…</div></div>
+</section>
+
 <section id="collection">
   <div class="section-head">
     <h3>Shop <em style="font-family:'Instrument Serif'; font-style:italic; font-weight:400">Collection</em></h3>
@@ -458,14 +465,6 @@ img{display:block; width:100%; height:100%; object-fit:cover}
   </div>
   <div class="filters" id="filters"></div>
   <div class="grid" id="grid"><div class="shop-empty" style="grid-column:1/-1; padding:60px; text-align:center; opacity:.6">Loading collection…</div></div>
-</section>
-
-<section class="video-reel" id="reel">
-  <div class="section-head">
-    <h3>Latest <em style="font-family:'Instrument Serif'; font-style:italic; font-weight:400">Arrivals</em></h3>
-    <p>Watch our newest pieces in motion. Tap to play.</p>
-  </div>
-  <div class="video-grid" id="videoGrid"><div class="shop-empty" style="grid-column:1/-1; padding:60px; text-align:center; opacity:.6">Loading videos…</div></div>
 </section>
 
 <section class="editorial" id="editorial">
