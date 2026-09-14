@@ -180,14 +180,37 @@ img{display:block; width:100%; height:100%; object-fit:cover}
   .video-card:last-child{border-bottom:none}
   .video-card .play-overlay{opacity:1; background:rgba(0,0,0,.25)}
 }
-/* editorial */
+/* editorial + instagram */
 .editorial{display:grid; grid-template-columns:1fr 1fr; min-height:72vh; border-bottom:1px solid var(--line); background:var(--ink); color:var(--paper)}
 .editorial-media{position:relative; overflow:hidden}
 .editorial-media img{opacity:.9}
+.editorial-media video{width:100%;height:100%;object-fit:cover;display:block}
 .editorial-content{padding:48px 36px; display:flex; flex-direction:column; justify-content:center}
 .editorial-content h3{font-family:"Bodoni Moda"; font-size:clamp(32px,4vw,56px); line-height:.95; letter-spacing:-.04em; font-weight:400}
 .editorial-content h3 em{font-family:"Instrument Serif"; font-style:italic}
 .editorial-content p{margin-top:18px; max-width:420px; font-size:14px; line-height:1.7; opacity:.7}
+.ig-header{display:flex;align-items:center;gap:14px;margin-bottom:28px}
+.ig-icon{width:44px;height:44px;border-radius:50%;background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);display:grid;place-items:center;color:#fff;flex-shrink:0}
+.ig-header h4{font-size:16px;font-weight:600;letter-spacing:-.01em}
+.ig-handle{font-size:11px;opacity:.5;letter-spacing:.04em;display:block;margin-top:2px}
+.ig-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;max-width:380px}
+.ig-slot{aspect-ratio:1;border-radius:8px;overflow:hidden;background:rgba(255,255,255,.06);position:relative;cursor:pointer;transition:.3s}
+.ig-slot:hover{opacity:.8}
+.ig-slot img{width:100%;height:100%;object-fit:cover;display:block}
+.ig-placeholder{grid-column:1/-1;text-align:center;padding:40px 20px;opacity:.4;font-size:12px}
+.ig-slot .ig-play{position:absolute;inset:0;display:grid;place-items:center;background:rgba(0,0,0,.3);opacity:0;transition:.25s}
+.ig-slot:hover .ig-play{opacity:1}
+@media(max-width:900px){
+  .editorial{grid-template-columns:1fr;min-height:auto}
+  .editorial-media{height:50vh;min-height:300px}
+  .editorial-content{padding:36px 20px}
+  .ig-grid{max-width:100%}
+}
+@media(max-width:560px){
+  .editorial-media{height:42vh;min-height:240px}
+  .editorial-content{padding:28px 16px}
+  .ig-header h4{font-size:14px}
+}
 /* contact */
 .contact{display:grid; grid-template-columns:.9fr 1.1fr; border-bottom:1px solid var(--line)}
 .contact-left{padding:48px 28px; border-right:1px solid var(--line)}
@@ -268,8 +291,6 @@ img{display:block; width:100%; height:100%; object-fit:cover}
   .card:nth-child(2n){border-right:none}
   .values{grid-template-columns:1fr 1fr}
   .value{border-bottom:1px solid var(--line); padding:24px 16px}
-  .editorial{grid-template-columns:1fr}
-  .editorial-content{padding:32px 20px}
   .contact{grid-template-columns:1fr}
   .contact-left{border-right:none; border-bottom:1px solid var(--line); padding:28px 16px}
   .contact-right{padding:28px 16px}
@@ -447,9 +468,28 @@ img{display:block; width:100%; height:100%; object-fit:cover}
   <div class="value reveal"><div class="value-icon"><i data-lucide="shirt" style="width:16px;height:16px"></i></div><h4>Unique Designs</h4><p>Stand out with exclusive fashion pieces — no mass production.</p></div>
 </section>
 
-<section class="editorial">
-  <div class="editorial-media"><img src="images/Vintage%20shirt.jpeg" alt="Editorial - Vintage Shirt"/><div style="position:absolute; inset:0; background:linear-gradient(0deg, rgba(0,0,0,.45), transparent)"></div><div style="position:absolute; left:20px; bottom:20px; font-size:10px; letter-spacing:.18em; text-transform:uppercase; opacity:.7; color:#fff">Editorial — Lagos Atelier / 2026</div></div>
-  <div class="editorial-content"><h3>Clothes that carry <br><em>culture forward.</em></h3><p>We cut for real bodies and real life. Relaxed tailoring, breathable cottons, and vintage references reworked for today. Every stitch is intentional.</p><div style="margin-top:28px"><a href="shop.html" class="btn-primary" style="background:var(--paper); color:var(--ink)">View Lookbook — Shop</a></div></div>
+<section class="editorial" id="editorial">
+  <div class="editorial-media">
+    <div id="featuredVideo" style="width:100%;height:100%;background:var(--noir);display:grid;place-items:center">
+      <div style="text-align:center;opacity:.4;padding:20px"><div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase">Loading video…</div></div>
+    </div>
+  </div>
+  <div class="editorial-content">
+    <div class="ig-header">
+      <div class="ig-icon"><i data-lucide="instagram" style="width:20px;height:20px"></i></div>
+      <div>
+        <h4>@styles_by_tiwa</h4>
+        <span class="ig-handle">Follow for new drops & behind the scenes</span>
+      </div>
+    </div>
+    <div class="ig-grid" id="igGrid">
+      <div class="ig-placeholder">Loading Instagram…</div>
+    </div>
+    <div style="margin-top:28px; display:flex; gap:12px; flex-wrap:wrap">
+      <a href="https://instagram.com/styles_by_tiwa" target="_blank" class="btn-primary" style="background:var(--paper);color:var(--ink)"><i data-lucide="instagram" style="width:14px;height:14px"></i> Follow on Instagram</a>
+      <a href="shop.html" class="btn-primary" style="background:transparent;color:var(--paper);border:1px solid rgba(255,255,255,.25)">View Lookbook — Shop</a>
+    </div>
+  </div>
 </section>
 
 <section class="contact" id="contact">
@@ -731,6 +771,54 @@ window.addEventListener('scroll', ()=>{
 updateCart();
 loadProducts();
 loadVideos();
+loadFeaturedVideo();
+loadInstagramGrid();
+
+// 🎬 LOAD FEATURED VIDEO (editorial section)
+async function loadFeaturedVideo(){
+  const container = document.getElementById('featuredVideo');
+  if(!container || !supa) return;
+  try{
+    const {data, error} = await supa.from('videos').select('*').order('sort_order',{ascending:true}).order('created_at',{ascending:false}).limit(1);
+    if(error) throw error;
+    if(!data || data.length===0 || !data[0].video_url){
+      container.innerHTML = `<img src="images/Vintage%20shirt.jpeg" alt="Editorial" style="width:100%;height:100%;object-fit:cover;opacity:.9"/>`;
+      return;
+    }
+    const v = data[0];
+    container.innerHTML = `
+      <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover" poster="${escapeHtml(v.poster_url || '')}">
+        <source src="${escapeHtml(v.video_url)}" type="video/mp4"/>
+      </video>
+      <div style="position:absolute;left:20px;bottom:20px;font-size:10px;letter-spacing:.18em;text-transform:uppercase;opacity:.7;color:#fff">${escapeHtml(v.title || 'Latest Drop')}</div>
+    `;
+    container.style.position = 'relative';
+  }catch(e){
+    console.error('Featured video load failed', e);
+    container.innerHTML = `<img src="images/Vintage%20shirt.jpeg" alt="Editorial" style="width:100%;height:100%;object-fit:cover;opacity:.9"/>`;
+  }
+}
+
+// 📸 INSTAGRAM GRID (static thumbnails linking to profile)
+function loadInstagramGrid(){
+  const grid = document.getElementById('igGrid');
+  if(!grid) return;
+  const posts = [
+    {img:'images/product1.jpeg', link:'https://www.instagram.com/styles_by_tiwa/'},
+    {img:'images/Two piece set.jpeg', link:'https://www.instagram.com/styles_by_tiwa/'},
+    {img:'images/product2.jpeg', link:'https://www.instagram.com/styles_by_tiwa/'},
+    {img:'images/Vintage shirt.jpeg', link:'https://www.instagram.com/styles_by_tiwa/'},
+    {img:'images/product3.jpeg', link:'https://www.instagram.com/styles_by_tiwa/'},
+    {img:'images/Vintage_shirt.jpeg', link:'https://www.instagram.com/styles_by_tiwa/'},
+  ];
+  grid.innerHTML = posts.map(p => `
+    <a href="${p.link}" target="_blank" class="ig-slot">
+      <img src="${p.img}" alt="Instagram" loading="lazy"/>
+      <div class="ig-play"><i data-lucide="instagram" style="width:20px;height:20px;color:#fff"></i></div>
+    </a>
+  `).join('');
+  if(typeof lucide !== 'undefined') lucide.createIcons();
+}
 
 // 🎬 LOAD VIDEOS FROM SUPABASE
 async function loadVideos(){
