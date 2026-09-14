@@ -620,7 +620,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 // VIDEOS (homepage Latest Arrivals reel)
 // ========================================
 let editingVideoId = null;
-const MAX_VIDEO_SIZE = 25 * 1024 * 1024;
+const MAX_VIDEO_SIZE = 50 * 1024 * 1024;
 const ALLOWED_VIDEO_TYPES = ["video/mp4","video/webm","video/quicktime"];
 
 function validateVideoFile(file) {
@@ -712,6 +712,12 @@ async function addVideo() {
     return;
   }
 
+  // Show loading state
+  const saveBtn = document.querySelector('#videoFormPanel .btn:not(.ghost)');
+  const origText = saveBtn.textContent;
+  saveBtn.textContent = 'Uploading...';
+  saveBtn.disabled = true;
+
   let videoUrl = null;
   let posterUrl = null;
 
@@ -720,23 +726,33 @@ async function addVideo() {
     const ext = (videoFile.name.split('.').pop()||"mp4").toLowerCase().replace(/[^a-z0-9]/g,"") || "mp4";
     const fileName = `video-${Date.now()}-${Math.random().toString(36).substring(2, 8)}.${ext}`;
 
-    const { error: uploadError } = await supabaseClient
-      .storage
-      .from("product-images")
-      .upload(fileName, videoFile);
+    try {
+      const { error: uploadError } = await supabaseClient
+        .storage
+        .from("product-images")
+        .upload(fileName, videoFile, { cacheControl: '3600', upsert: false });
 
-    if (uploadError) {
-      console.error(uploadError);
-      alert("Video upload failed ❌");
+      if (uploadError) {
+        console.error("Video upload error:", uploadError);
+        alert("Video upload failed: " + (uploadError.message || "Unknown error. Check bucket size limit in Supabase dashboard (Storage → product-images → Settings → 50MB)."));
+        saveBtn.textContent = origText;
+        saveBtn.disabled = false;
+        return;
+      }
+
+      const { data } = supabaseClient
+        .storage
+        .from("product-images")
+        .getPublicUrl(fileName);
+
+      videoUrl = data.publicUrl;
+    } catch(e) {
+      console.error("Upload exception:", e);
+      alert("Upload failed: " + e.message);
+      saveBtn.textContent = origText;
+      saveBtn.disabled = false;
       return;
     }
-
-    const { data } = supabaseClient
-      .storage
-      .from("product-images")
-      .getPublicUrl(fileName);
-
-    videoUrl = data.publicUrl;
   }
 
   // 🖼 POSTER UPLOAD
@@ -772,6 +788,8 @@ async function addVideo() {
     if (error) {
       console.error(error);
       alert("Update failed ❌");
+      saveBtn.textContent = origText;
+      saveBtn.disabled = false;
       return;
     }
 
@@ -793,12 +811,16 @@ async function addVideo() {
     if (error) {
       console.error(error);
       alert("Error adding video ❌");
+      saveBtn.textContent = origText;
+      saveBtn.disabled = false;
       return;
     }
 
     alert("Video added ✅");
   }
 
+  saveBtn.textContent = origText;
+  saveBtn.disabled = false;
   clearVideoForm();
   loadVideos();
 }

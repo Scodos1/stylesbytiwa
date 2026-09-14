@@ -67,10 +67,10 @@ create policy "admin write videos" on public.videos
   for all using (auth.jwt() ->> 'email' = 'alagbefareed@gmail.com')
   with check (auth.jwt() ->> 'email' = 'alagbefareed@gmail.com');
 
--- 5) Storage bucket: product-images (public read, admin write)
-insert into storage.buckets (id, name, public)
-values ('product-images','product-images', true)
-on conflict (id) do nothing;
+-- 5) Storage bucket: product-images (public read, admin write, 50MB limit for videos)
+insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+values ('product-images','product-images', true, 52428800, null)
+on conflict (id) do update set file_size_limit = 52428800;
 
 drop policy if exists "public read product-images" on storage.objects;
 create policy "public read product-images" on storage.objects
