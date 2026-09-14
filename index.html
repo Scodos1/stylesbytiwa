@@ -322,7 +322,9 @@ img{display:block; width:100%; height:100%; object-fit:cover}
   .stats{grid-template-columns:1fr; text-align:left}
   .stat{border-right:none; border-bottom:1px solid var(--line); padding:16px 0}
   .stat:last-child{border-bottom:none}
-  .footer{grid-template-columns:1fr}
+  .footer{grid-template-columns:1fr 1fr; gap:16px 24px}
+  .footer-brand{grid-column:1/-1}
+  .copy{grid-column:1/-1}
   .menu-links a{font-size:clamp(32px,10vw,48px)}
   .hero-meta{flex-direction:column; gap:6px; align-items:flex-start}
 }
