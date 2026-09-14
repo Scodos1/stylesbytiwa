@@ -628,7 +628,7 @@ function validateVideoFile(file) {
     var ext = (file.name.split('.').pop()||"").toLowerCase();
     if (!["mp4","webm","mov"].includes(ext)) return "Invalid video type: " + file.name;
   }
-  if (file.size > MAX_VIDEO_SIZE) return file.name + " exceeds 25MB limit";
+  if (file.size > MAX_VIDEO_SIZE) return file.name + " exceeds 50MB limit";
   return null;
 }
 
