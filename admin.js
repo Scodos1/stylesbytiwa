@@ -141,111 +141,6 @@ async function addProduct() {
           return data.publicUrl;
 });
 
-// ========================================
-// EDITORIAL VIDEO (homepage left of Instagram)
-// ========================================
-
-// 🚀 LOAD EDITORIAL VIDEO
-async function loadEditorialVideo() {
-  const info = document.getElementById("editorial-video-info");
-  if (!info) return;
-  try {
-    const { data, error } = await supabaseClient
-      .from("site_config")
-      .select("value")
-      .eq("key", "editorial_video_url")
-      .single();
-    if (error || !data) { info.textContent = "No editorial video uploaded yet."; return; }
-    info.textContent = "Current video loaded. Upload new to replace.";
-  } catch(e) {
-    info.textContent = "No editorial video uploaded yet.";
-  }
-}
-
-// ➕ SAVE EDITORIAL VIDEO
-async function saveEditorialVideo() {
-  const file = document.getElementById("editorialVideoFile").files[0];
-  if (!file) { alert("Please select a video file"); return; }
-
-  const err = validateVideoFile(file);
-  if (err) { alert(err); return; }
-
-  const saveBtn = document.querySelector('#editorialVideoPanel .btn:not(.ghost)');
-  const origText = saveBtn.textContent;
-  saveBtn.textContent = "Uploading...";
-  saveBtn.disabled = true;
-
-  const ext = (file.name.split('.').pop()||"mp4").toLowerCase().replace(/[^a-z0-9]/g,"") || "mp4";
-  const fileName = `editorial-${Date.now()}-${Math.random().toString(36).substring(2, 8)}.${ext}`;
-
-  try {
-    const { error: uploadError } = await supabaseClient
-      .storage
-      .from("product-images")
-      .upload(fileName, file, { cacheControl: '3600', upsert: false });
-
-    if (uploadError) {
-      alert("Upload failed: " + (uploadError.message || "Unknown error"));
-      saveBtn.textContent = origText;
-      saveBtn.disabled = false;
-      return;
-    }
-
-    const { data } = supabaseClient
-      .storage
-      .from("product-images")
-      .getPublicUrl(fileName);
-
-    const videoUrl = data.publicUrl;
-
-    // Upsert into site_config
-    const { error: dbError } = await supabaseClient
-      .from("site_config")
-      .upsert({ key: "editorial_video_url", value: videoUrl, updated_at: new Date().toISOString() }, { onConflict: "key" });
-
-    if (dbError) {
-      alert("Saved to storage but failed to update database: " + dbError.message);
-      saveBtn.textContent = origText;
-      saveBtn.disabled = false;
-      return;
-    }
-
-    alert("Editorial video saved ✅");
-    document.getElementById("editorial-video-info").textContent = "Current video loaded. Upload new to replace.";
-  } catch(e) {
-    alert("Upload failed: " + e.message);
-  }
-
-  saveBtn.textContent = origText;
-  saveBtn.disabled = false;
-  document.getElementById("editorialVideoFile").value = "";
-}
-
-// 🧹 CLEAR
-function clearEditorialVideoForm() {
-  document.getElementById("editorialVideoFile").value = "";
-  document.getElementById("editorial-video-info").textContent = "";
-}
-
-// 👀 FILE PREVIEW
-document.addEventListener("DOMContentLoaded", () => {
-  const input = document.getElementById("editorialVideoFile");
-  if (input) {
-    input.addEventListener("change", function () {
-      const info = document.getElementById("editorial-video-info");
-      if (this.files[0]) {
-        const f = this.files[0];
-        const err = validateVideoFile(f);
-        if (err) { alert(err); this.value = ""; info.textContent = ""; return; }
-        const mb = (f.size / (1024*1024)).toFixed(1);
-        info.textContent = f.name + " (" + mb + " MB)";
-      } else {
-        info.textContent = "";
-      }
-    });
-  }
-});
-
       uploadPromises.push(uploadTask);
     }
 
@@ -709,6 +604,109 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+});
+
+// ========================================
+// EDITORIAL VIDEO (homepage left of Instagram)
+// ========================================
+
+async function loadEditorialVideo() {
+  const info = document.getElementById("editorial-video-info");
+  if (!info) return;
+  try {
+    const { data, error } = await supabaseClient
+      .from("site_config")
+      .select("value")
+      .eq("key", "editorial_video_url")
+      .single();
+    if (error || !data) { info.textContent = "No editorial video uploaded yet."; return; }
+    info.textContent = "Current video loaded. Upload new to replace.";
+  } catch(e) {
+    info.textContent = "No editorial video uploaded yet.";
+  }
+}
+
+async function saveEditorialVideo() {
+  const fileInput = document.getElementById("editorialVideoFile");
+  const file = fileInput ? fileInput.files[0] : null;
+  if (!file) { alert("Please select a video file"); return; }
+
+  const err = validateVideoFile(file);
+  if (err) { alert(err); return; }
+
+  const saveBtn = document.querySelector('#editorialVideoPanel .btn:not(.ghost)') || document.querySelector('#editorialVideoPanel button');
+  if (!saveBtn) { alert("Save button not found"); return; }
+  const origText = saveBtn.textContent;
+  saveBtn.textContent = "Uploading...";
+  saveBtn.disabled = true;
+
+  try {
+    const ext = (file.name.split('.').pop()||"mp4").toLowerCase().replace(/[^a-z0-9]/g,"") || "mp4";
+    const fileName = `editorial-${Date.now()}-${Math.random().toString(36).substring(2, 8)}.${ext}`;
+
+    const { error: uploadError } = await supabaseClient
+      .storage
+      .from("product-images")
+      .upload(fileName, file, { cacheControl: '3600', upsert: false });
+
+    if (uploadError) {
+      alert("Upload failed: " + (uploadError.message || "Unknown error"));
+      saveBtn.textContent = origText;
+      saveBtn.disabled = false;
+      return;
+    }
+
+    const { data } = supabaseClient
+      .storage
+      .from("product-images")
+      .getPublicUrl(fileName);
+
+    const videoUrl = data.publicUrl;
+
+    const { error: dbError } = await supabaseClient
+      .from("site_config")
+      .upsert({ key: "editorial_video_url", value: videoUrl, updated_at: new Date().toISOString() }, { onConflict: "key" });
+
+    if (dbError) {
+      alert("DB update failed: " + dbError.message);
+      saveBtn.textContent = origText;
+      saveBtn.disabled = false;
+      return;
+    }
+
+    alert("Editorial video saved ✅");
+    const info = document.getElementById("editorial-video-info");
+    if (info) info.textContent = "Current video loaded. Upload new to replace.";
+  } catch(e) {
+    alert("Upload failed: " + e.message);
+  }
+
+  saveBtn.textContent = origText;
+  saveBtn.disabled = false;
+  fileInput.value = "";
+}
+
+function clearEditorialVideoForm() {
+  document.getElementById("editorialVideoFile").value = "";
+  document.getElementById("editorial-video-info").textContent = "";
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const input = document.getElementById("editorialVideoFile");
+  if (input) {
+    input.addEventListener("change", function () {
+      const info = document.getElementById("editorial-video-info");
+      if (this.files[0]) {
+        const f = this.files[0];
+        const err = validateVideoFile(f);
+        if (err) { alert(err); this.value = ""; info.textContent = ""; return; }
+        const mb = (f.size / (1024*1024)).toFixed(1);
+        info.textContent = f.name + " (" + mb + " MB)";
+      } else {
+        info.textContent = "";
+      }
+    });
+  }
 });
 
 // 🚀 INIT
