@@ -691,6 +691,22 @@ function clearEditorialVideoForm() {
   document.getElementById("editorial-video-info").textContent = "";
 }
 
+async function deleteEditorialVideo() {
+  if (!confirm("Delete the editorial video?")) return;
+  try {
+    const { error } = await supabaseClient
+      .from("site_config")
+      .delete()
+      .eq("key", "editorial_video_url");
+    if (error) { alert("Delete failed: " + error.message); return; }
+    alert("Editorial video deleted ✅");
+    document.getElementById("editorial-video-info").textContent = "No editorial video uploaded yet.";
+    document.getElementById("editorialVideoFile").value = "";
+  } catch(e) {
+    alert("Delete failed: " + e.message);
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   const input = document.getElementById("editorialVideoFile");
   if (input) {
