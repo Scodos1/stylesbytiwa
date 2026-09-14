@@ -780,23 +780,19 @@ loadVideos();
 loadFeaturedVideo();
 loadInstagramGrid();
 
-// 🎬 LOAD FEATURED VIDEO (editorial section)
+// 🎬 LOAD FEATURED VIDEO (editorial section — from site_config)
 async function loadFeaturedVideo(){
   const container = document.getElementById('featuredVideo');
   if(!container) return;
-  // always show fallback first
   const fallback = `<img src="images/Vintage%20shirt.jpeg" alt="Editorial" style="width:100%;height:100%;object-fit:cover;opacity:.9"/>`;
   if(!supa){ container.innerHTML = fallback; return; }
   try{
-    const {data, error} = await supa.from('videos').select('*').order('sort_order',{ascending:true}).order('created_at',{ascending:false}).limit(1);
-    if(error){ console.error('Featured video query error:', error); container.innerHTML = fallback; return; }
-    if(!data || data.length===0 || !data[0].video_url){ container.innerHTML = fallback; return; }
-    const v = data[0];
+    const {data, error} = await supa.from('site_config').select('value').eq('key','editorial_video_url').single();
+    if(error || !data || !data.value){ container.innerHTML = fallback; return; }
     container.innerHTML = `
-      <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover" poster="${escapeHtml(v.poster_url || '')}">
-        <source src="${escapeHtml(v.video_url)}" type="video/mp4"/>
+      <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover">
+        <source src="${escapeHtml(data.value)}" type="video/mp4"/>
       </video>
-      <div style="position:absolute;left:20px;bottom:20px;font-size:10px;letter-spacing:.18em;text-transform:uppercase;opacity:.7;color:#fff;z-index:2">${escapeHtml(v.title || 'Latest Drop')}</div>
     `;
     container.style.position = 'relative';
   }catch(e){

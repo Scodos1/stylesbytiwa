@@ -34,10 +34,17 @@ create table if not exists public.videos (
   created_at timestamptz not null default now()
 );
 
+create table if not exists public.site_config (
+  key text primary key,
+  value text not null default '',
+  updated_at timestamptz not null default now()
+);
+
 -- 2) Enable RLS
 alter table public.products enable row level security;
 alter table public.collections enable row level security;
 alter table public.videos enable row level security;
+alter table public.site_config enable row level security;
 
 -- 3) Public read (shop + homepage work without login)
 drop policy if exists "public read products" on public.products;
@@ -48,6 +55,9 @@ create policy "public read collections" on public.collections for select using (
 
 drop policy if exists "public read videos" on public.videos;
 create policy "public read videos" on public.videos for select using (true);
+
+drop policy if exists "public read site_config" on public.site_config;
+create policy "public read site_config" on public.site_config for select using (true);
 
 -- 4) Admin-only write (single allowed email — matches admin.js protectPage)
 -- Replace with your admin email if different:
@@ -64,6 +74,11 @@ create policy "admin write collections" on public.collections
 
 drop policy if exists "admin write videos" on public.videos;
 create policy "admin write videos" on public.videos
+  for all using (auth.jwt() ->> 'email' = 'alagbefareed@gmail.com')
+  with check (auth.jwt() ->> 'email' = 'alagbefareed@gmail.com');
+
+drop policy if exists "admin write site_config" on public.site_config;
+create policy "admin write site_config" on public.site_config
   for all using (auth.jwt() ->> 'email' = 'alagbefareed@gmail.com')
   with check (auth.jwt() ->> 'email' = 'alagbefareed@gmail.com');
 
