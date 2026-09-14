@@ -115,6 +115,10 @@ img{display:block; width:100%; height:100%; object-fit:cover}
 .marquee-track i{font-family:"Instrument Serif"; font-style:italic; opacity:.8}
 .marquee-track .sep{width:4px; height:4px; background:var(--paper); border-radius:50%; opacity:.5}
 @keyframes marq{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@media(max-width:560px){
+  .marquee{height:40px}
+  .marquee-track span{font-size:12px; gap:14px; padding-right:28px}
+}
 /* about */
 .about{display:grid; grid-template-columns:.9fr 1.1fr; border-bottom:1px solid var(--line)}
 .about-left{padding:56px 28px; border-right:1px solid var(--line); position:sticky; top:68px; align-self:start}
