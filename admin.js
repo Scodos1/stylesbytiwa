@@ -613,4 +613,295 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   loadProducts();
   loadCollections();
+  loadVideos();
+});
+
+// ========================================
+// VIDEOS (homepage Latest Arrivals reel)
+// ========================================
+let editingVideoId = null;
+const MAX_VIDEO_SIZE = 25 * 1024 * 1024;
+const ALLOWED_VIDEO_TYPES = ["video/mp4","video/webm","video/quicktime"];
+
+function validateVideoFile(file) {
+  if (!ALLOWED_VIDEO_TYPES.includes(file.type)) {
+    var ext = (file.name.split('.').pop()||"").toLowerCase();
+    if (!["mp4","webm","mov"].includes(ext)) return "Invalid video type: " + file.name;
+  }
+  if (file.size > MAX_VIDEO_SIZE) return file.name + " exceeds 25MB limit";
+  return null;
+}
+
+// 🚀 LOAD VIDEOS
+async function loadVideos() {
+  const { data, error } = await supabaseClient
+    .from("videos")
+    .select("*")
+    .order("sort_order", { ascending: true })
+    .order("created_at", { ascending: false })
+    .limit(50);
+
+  if (error) {
+    console.error(error);
+    const c = document.getElementById("admin-videos");
+    if (c) c.innerHTML = `<p class="admin-empty">Failed to load videos. Please refresh.</p>`;
+    return;
+  }
+
+  displayAdminVideos(data);
+}
+
+// 🎨 DISPLAY VIDEOS
+function displayAdminVideos(videos) {
+  const container = document.getElementById("admin-videos");
+  if (!container) return;
+
+  if (!videos || videos.length === 0) {
+    container.innerHTML = `<p class="admin-empty">No videos yet. Add your first video above.</p>`;
+    return;
+  }
+
+  container.innerHTML = "";
+
+  videos.forEach(v => {
+    container.innerHTML += `
+      <div class="admin-product-card">
+        <img src="${_escapeHtml(v.poster_url || '')}" class="admin-product-img" alt="${_escapeHtml(v.title)}" loading="lazy" style="aspect-ratio:9/16"/>
+        <div class="admin-card-body">
+          <h3>${_escapeHtml(v.title)}</h3>
+          <p class="price">${_escapeHtml(v.subtitle || '')} · Order ${_escapeHtml(String(v.sort_order ?? 0))}</p>
+          <div class="admin-card-actions">
+            <button class="btn-edit" onclick="editVideo('${_escapeHtml(v.id)}')">
+              <i class="fas fa-pen"></i> Edit
+            </button>
+            <button class="btn-delete" onclick="deleteVideo('${_escapeHtml(v.id)}')">
+              <i class="fas fa-trash"></i> Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+}
+
+// ➕ ADD / UPDATE VIDEO
+async function addVideo() {
+  const title = document.getElementById("videoTitle").value.trim();
+  const subtitle = document.getElementById("videoSubtitle").value.trim();
+  const sortOrder = Number(document.getElementById("videoOrder").value) || 0;
+  const videoFile = document.getElementById("videoFile").files[0];
+  const posterFile = document.getElementById("videoPosterFile").files[0];
+
+  if (!title) {
+    alert("Please enter a video title");
+    return;
+  }
+
+  if (videoFile) {
+    const err = validateVideoFile(videoFile);
+    if (err) { alert(err); return; }
+  }
+
+  if (posterFile) {
+    const err = validateImageFile(posterFile);
+    if (err) { alert(err); return; }
+  }
+
+  if (!editingVideoId && !videoFile) {
+    alert("Please upload a video file");
+    return;
+  }
+
+  let videoUrl = null;
+  let posterUrl = null;
+
+  // 📹 VIDEO UPLOAD
+  if (videoFile) {
+    const ext = (videoFile.name.split('.').pop()||"mp4").toLowerCase().replace(/[^a-z0-9]/g,"") || "mp4";
+    const fileName = `video-${Date.now()}-${Math.random().toString(36).substring(2, 8)}.${ext}`;
+
+    const { error: uploadError } = await supabaseClient
+      .storage
+      .from("product-images")
+      .upload(fileName, videoFile);
+
+    if (uploadError) {
+      console.error(uploadError);
+      alert("Video upload failed ❌");
+      return;
+    }
+
+    const { data } = supabaseClient
+      .storage
+      .from("product-images")
+      .getPublicUrl(fileName);
+
+    videoUrl = data.publicUrl;
+  }
+
+  // 🖼 POSTER UPLOAD
+  if (posterFile) {
+    const ext = (posterFile.name.split('.').pop()||"jpg").toLowerCase().replace(/[^a-z0-9]/g,"") || "jpg";
+    const fileName = `poster-${Date.now()}-${Math.random().toString(36).substring(2, 8)}.${ext}`;
+
+    const { error: uploadError } = await supabaseClient
+      .storage
+      .from("product-images")
+      .upload(fileName, posterFile);
+
+    if (!uploadError) {
+      const { data } = supabaseClient
+        .storage
+        .from("product-images")
+        .getPublicUrl(fileName);
+      posterUrl = data.publicUrl;
+    }
+  }
+
+  // ✏️ UPDATE
+  if (editingVideoId) {
+    const updateData = { title, subtitle, sort_order: sortOrder };
+    if (videoUrl) updateData.video_url = videoUrl;
+    if (posterUrl) updateData.poster_url = posterUrl;
+
+    const { error } = await supabaseClient
+      .from("videos")
+      .update(updateData)
+      .eq("id", editingVideoId);
+
+    if (error) {
+      console.error(error);
+      alert("Update failed ❌");
+      return;
+    }
+
+    alert("Video updated ✅");
+    editingVideoId = null;
+
+  } else {
+    // ➕ INSERT NEW
+    const { error } = await supabaseClient
+      .from("videos")
+      .insert([{
+        title,
+        subtitle,
+        video_url: videoUrl,
+        poster_url: posterUrl || "",
+        sort_order: sortOrder
+      }]);
+
+    if (error) {
+      console.error(error);
+      alert("Error adding video ❌");
+      return;
+    }
+
+    alert("Video added ✅");
+  }
+
+  clearVideoForm();
+  loadVideos();
+}
+
+// 🧹 CLEAR FORM
+function clearVideoForm() {
+  document.getElementById("videoTitle").value = "";
+  document.getElementById("videoSubtitle").value = "";
+  document.getElementById("videoOrder").value = "0";
+  document.getElementById("videoFile").value = "";
+  document.getElementById("videoPosterFile").value = "";
+  document.getElementById("video-file-info").textContent = "";
+  document.getElementById("video-poster-preview").innerHTML = "";
+  editingVideoId = null;
+}
+
+// 🗑 DELETE VIDEO
+async function deleteVideo(id) {
+  const confirmDelete = confirm("Delete this video?");
+  if (!confirmDelete) return;
+
+  const { error } = await supabaseClient
+    .from("videos")
+    .delete()
+    .eq("id", id);
+
+  if (error) {
+    console.error(error);
+    alert("Delete failed ❌");
+  } else {
+    alert("Deleted ✅");
+    loadVideos();
+  }
+}
+
+// ✏️ EDIT VIDEO
+async function editVideo(id) {
+  const { data, error } = await supabaseClient
+    .from("videos")
+    .select("*")
+    .eq("id", id)
+    .single();
+
+  if (error) { console.error(error); return; }
+
+  document.getElementById("videoTitle").value = data.title || "";
+  document.getElementById("videoSubtitle").value = data.subtitle || "";
+  document.getElementById("videoOrder").value = data.sort_order ?? 0;
+
+  const preview = document.getElementById("video-poster-preview");
+  preview.innerHTML = "";
+  if (data.poster_url) {
+    const img = document.createElement("img");
+    img.src = _escapeHtml(data.poster_url);
+    img.alt = _escapeHtml(data.title || "");
+    preview.appendChild(img);
+  }
+
+  const fileInfo = document.getElementById("video-file-info");
+  fileInfo.textContent = data.video_url ? "Current video loaded. Upload new to replace." : "";
+
+  editingVideoId = id;
+
+  const panel = document.getElementById("videoFormPanel");
+  if (panel) panel.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+// 👀 VIDEO FILE PREVIEW
+document.addEventListener("DOMContentLoaded", () => {
+
+  const videoInput = document.getElementById("videoFile");
+  if (videoInput) {
+    videoInput.addEventListener("change", function () {
+      const info = document.getElementById("video-file-info");
+      if (this.files[0]) {
+        const f = this.files[0];
+        const err = validateVideoFile(f);
+        if (err) { alert(err); this.value = ""; info.textContent = ""; return; }
+        const mb = (f.size / (1024*1024)).toFixed(1);
+        info.textContent = f.name + " (" + mb + " MB)";
+      } else {
+        info.textContent = "";
+      }
+    });
+  }
+
+  const posterInput = document.getElementById("videoPosterFile");
+  if (posterInput) {
+    posterInput.addEventListener("change", function () {
+      const preview = document.getElementById("video-poster-preview");
+      preview.innerHTML = "";
+      const file = this.files[0];
+      if (!file) return;
+      const err = validateImageFile(file);
+      if (err) { alert(err); this.value = ""; return; }
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const img = document.createElement("img");
+        img.src = e.target.result;
+        preview.appendChild(img);
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
 });

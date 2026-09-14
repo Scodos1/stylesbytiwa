@@ -437,32 +437,7 @@ img{display:block; width:100%; height:100%; object-fit:cover}
     <h3>Latest <em style="font-family:'Instrument Serif'; font-style:italic; font-weight:400">Arrivals</em></h3>
     <p>Watch our newest pieces in motion. Tap to play.</p>
   </div>
-  <div class="video-grid">
-    <div class="video-card" onclick="this.querySelector('video').play(); this.querySelector('.play-overlay').style.opacity='0'">
-      <video muted loop playsinline preload="metadata" poster="images/Two piece set.jpeg">
-        <source src="" type="video/mp4"/>
-      </video>
-      <div class="play-overlay"><div class="play-btn"></div></div>
-      <div class="video-tag">New</div>
-      <div class="video-info"><h4>Two-Piece Vintage Set</h4><span>Spring '26 Collection</span></div>
-    </div>
-    <div class="video-card" onclick="this.querySelector('video').play(); this.querySelector('.play-overlay').style.opacity='0'">
-      <video muted loop playsinline preload="metadata" poster="images/Vintage shirt.jpeg">
-        <source src="" type="video/mp4"/>
-      </video>
-      <div class="play-overlay"><div class="play-btn"></div></div>
-      <div class="video-tag">New</div>
-      <div class="video-info"><h4>Vintage Shirt Look</h4><span>Lagos Atelier</span></div>
-    </div>
-    <div class="video-card" onclick="this.querySelector('video').play(); this.querySelector('.play-overlay').style.opacity='0'">
-      <video muted loop playsinline preload="metadata" poster="images/Vintage_shirt.jpeg">
-        <source src="" type="video/mp4"/>
-      </video>
-      <div class="play-overlay"><div class="play-btn"></div></div>
-      <div class="video-tag">New</div>
-      <div class="video-info"><h4>Greg Shirt Drop</h4><span>Handcrafted in Lagos</span></div>
-    </div>
-  </div>
+  <div class="video-grid" id="videoGrid"><div class="shop-empty" style="grid-column:1/-1; padding:60px; text-align:center; opacity:.6">Loading videos…</div></div>
 </section>
 
 <section class="values">
@@ -755,6 +730,40 @@ window.addEventListener('scroll', ()=>{
 // init
 updateCart();
 loadProducts();
+loadVideos();
+
+// 🎬 LOAD VIDEOS FROM SUPABASE
+async function loadVideos(){
+  const grid = document.getElementById('videoGrid');
+  if(!grid || !supa) { if(grid) grid.innerHTML = ''; return; }
+  try{
+    const {data, error} = await supa.from('videos').select('*').order('sort_order',{ascending:true}).order('created_at',{ascending:false}).limit(10);
+    if(error) throw error;
+    if(!data || data.length===0){
+      grid.innerHTML = '';
+      grid.closest('.video-reel').style.display = 'none';
+      return;
+    }
+    grid.innerHTML = data.map((v, i) => `
+      <div class="video-card" onclick="playVideo(this)">
+        <video muted loop playsinline preload="metadata" poster="${escapeHtml(v.poster_url || '')}">
+          <source src="${escapeHtml(v.video_url)}" type="video/mp4"/>
+        </video>
+        <div class="play-overlay"><div class="play-btn"></div></div>
+        <div class="video-info"><h4>${escapeHtml(v.title)}</h4><span>${escapeHtml(v.subtitle || '')}</span></div>
+      </div>
+    `).join('');
+  }catch(e){
+    console.error('Video load failed', e);
+    grid.innerHTML = '';
+  }
+}
+function playVideo(card){
+  const vid = card.querySelector('video');
+  if(!vid) return;
+  if(vid.paused){ vid.play(); card.querySelector('.play-overlay').style.opacity='0'; }
+  else { vid.pause(); card.querySelector('.play-overlay').style.opacity='1'; }
+}
 </script>
 </body>
 </html>

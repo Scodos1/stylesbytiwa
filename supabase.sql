@@ -24,9 +24,20 @@ create table if not exists public.collections (
   created_at timestamptz not null default now()
 );
 
+create table if not exists public.videos (
+  id uuid primary key default gen_random_uuid(),
+  title text not null,
+  subtitle text not null default '',
+  video_url text not null default '',
+  poster_url text not null default '',
+  sort_order int not null default 0,
+  created_at timestamptz not null default now()
+);
+
 -- 2) Enable RLS
 alter table public.products enable row level security;
 alter table public.collections enable row level security;
+alter table public.videos enable row level security;
 
 -- 3) Public read (shop + homepage work without login)
 drop policy if exists "public read products" on public.products;
@@ -34,6 +45,9 @@ create policy "public read products" on public.products for select using (true);
 
 drop policy if exists "public read collections" on public.collections;
 create policy "public read collections" on public.collections for select using (true);
+
+drop policy if exists "public read videos" on public.videos;
+create policy "public read videos" on public.videos for select using (true);
 
 -- 4) Admin-only write (single allowed email — matches admin.js protectPage)
 -- Replace with your admin email if different:
@@ -45,6 +59,11 @@ create policy "admin write products" on public.products
 
 drop policy if exists "admin write collections" on public.collections;
 create policy "admin write collections" on public.collections
+  for all using (auth.jwt() ->> 'email' = 'alagbefareed@gmail.com')
+  with check (auth.jwt() ->> 'email' = 'alagbefareed@gmail.com');
+
+drop policy if exists "admin write videos" on public.videos;
+create policy "admin write videos" on public.videos
   for all using (auth.jwt() ->> 'email' = 'alagbefareed@gmail.com')
   with check (auth.jwt() ->> 'email' = 'alagbefareed@gmail.com');
 

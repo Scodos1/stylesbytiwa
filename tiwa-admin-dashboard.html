@@ -76,6 +76,20 @@ footer{padding:20px;text-align:center;font-size:11px;opacity:.6}
   </div>
 
   <div class="panel"><h2>Manage Featured Collection</h2><div id="admin-collections" class="grid"></div></div>
+
+  <div class="panel" id="videoFormPanel">
+    <h2>Add / Edit Video</h2><div class="hint">Upload short clips (MP4, ≤25MB) for the homepage "Latest Arrivals" reel. Add a poster image (optional).</div>
+    <div class="form">
+      <div class="field"><label>Video Title</label><input id="videoTitle" placeholder="e.g. Two-Piece Vintage Set"/></div>
+      <div class="field"><label>Subtitle</label><input id="videoSubtitle" placeholder="e.g. Spring '26 Collection"/></div>
+      <div class="field full"><label>Video File (MP4)</label><label class="upload" for="videoFile">Click to upload video</label><input type="file" id="videoFile" accept="video/mp4,video/webm,video/quicktime" style="display:none"/><div id="video-file-info" style="font-size:12px;color:var(--ink-2);margin-top:6px"></div></div>
+      <div class="field full"><label>Poster Image (optional)</label><label class="upload" for="videoPosterFile">Click to upload poster</label><input type="file" id="videoPosterFile" accept="image/jpeg,image/png,image/webp" style="display:none"/><div id="video-poster-preview" class="preview"></div></div>
+      <div class="field full"><label>Display Order</label><input id="videoOrder" type="number" value="0"/></div>
+      <div class="actions"><button class="btn" onclick="addVideo()">Save Video</button><button class="btn ghost" onclick="clearVideoForm()">Clear</button></div>
+    </div>
+  </div>
+
+  <div class="panel"><h2>Manage Videos</h2><div id="admin-videos" class="grid"></div></div>
 </div>
 <footer>© <span id="y"></span> Styles By Tiwa</footer>
 <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
