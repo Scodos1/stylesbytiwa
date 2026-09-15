@@ -4,4 +4,4 @@ Disallow: /login.html
 Disallow: /tiwa-admin-dashboard.html
 Disallow: /admin.js
 
-Sitemap: https://scodos1.github.io/stylesbytiwa/sitemap.xml
+Sitemap: https://stylesbytiwa.vercel.app/sitemap.xml
