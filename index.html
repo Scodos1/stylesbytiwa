@@ -41,7 +41,6 @@
   "description": "Handcrafted fashion brand in Lagos, Nigeria. Vintage shirts, two-piece sets, and Greg shirts.",
   "foundingLocation": "Lagos, Nigeria",
   "sameAs": [
-    "https://www.instagram.com/styles_by_tiwa",
     "https://tiktok.com/@_stylesbytiwa"
   ],
   "contactPoint": {
@@ -242,7 +241,7 @@ img{display:block; width:100%; height:100%; object-fit:cover}
   .video-card:last-child{border-bottom:none}
   .video-card .play-overlay{opacity:1; background:rgba(0,0,0,.25)}
 }
-/* editorial + instagram */
+/* editorial + tiktok */
 .editorial{display:grid; grid-template-columns:1fr 1fr; min-height:72vh; border-bottom:1px solid var(--line); background:var(--ink); color:var(--paper)}
 .editorial-media{position:relative; overflow:hidden;min-height:400px}
 .editorial-media img,.editorial-media video{width:100%;height:100%;object-fit:cover;display:block}
@@ -250,33 +249,30 @@ img{display:block; width:100%; height:100%; object-fit:cover}
 .editorial-content h3{font-family:"Bodoni Moda"; font-size:clamp(32px,4vw,56px); line-height:.95; letter-spacing:-.04em; font-weight:400}
 .editorial-content h3 em{font-family:"Instrument Serif"; font-style:italic}
 .editorial-content p{margin-top:18px; max-width:420px; font-size:14px; line-height:1.7; opacity:.7}
-.ig-header{display:flex;align-items:center;gap:14px;margin-bottom:0}
-.ig-icon{width:44px;height:44px;border-radius:50%;background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);display:grid;place-items:center;color:#fff;flex-shrink:0}
-.ig-header h4{font-size:16px;font-weight:600;letter-spacing:-.01em}
-.ig-handle{font-size:11px;opacity:.5;letter-spacing:.04em;display:block;margin-top:2px}
-.ig-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;flex:1}
-.ig-slot{aspect-ratio:1;border-radius:8px;overflow:hidden;background:rgba(255,255,255,.06);position:relative;cursor:pointer;transition:.3s}
-.ig-slot:hover{opacity:.8}
-.ig-slot img{width:100%;height:100%;object-fit:cover;display:block}
-.ig-placeholder{grid-column:1/-1;text-align:center;padding:40px 20px;opacity:.4;font-size:12px}
-.ig-slot .ig-play{position:absolute;inset:0;display:grid;place-items:center;background:rgba(0,0,0,.3);opacity:0;transition:.25s}
-.ig-slot:hover .ig-play{opacity:1}
-.ig-buttons{display:flex;gap:12px;flex-wrap:wrap}
+.tt-header{display:flex;align-items:center;gap:14px;margin-bottom:0}
+.tt-icon{width:44px;height:44px;border-radius:50%;background:#010101;display:grid;place-items:center;color:#fff;flex-shrink:0;border:1px solid rgba(255,255,255,.15)}
+.tt-header h4{font-size:16px;font-weight:600;letter-spacing:-.01em}
+.tt-handle{font-size:11px;opacity:.5;letter-spacing:.04em;display:block;margin-top:2px}
+.tt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;flex:1}
+.tt-slot{aspect-ratio:1;border-radius:8px;overflow:hidden;background:rgba(255,255,255,.06);position:relative;cursor:pointer;transition:.3s}
+.tt-slot:hover{opacity:.8}
+.tt-slot img{width:100%;height:100%;object-fit:cover;display:block}
+.tt-placeholder{grid-column:1/-1;text-align:center;padding:40px 20px;opacity:.4;font-size:12px}
+.tt-slot .tt-play{position:absolute;inset:0;display:grid;place-items:center;background:rgba(0,0,0,.3);opacity:0;transition:.25s}
+.tt-slot:hover .tt-play{opacity:1}
+.tt-buttons{display:flex;gap:12px;flex-wrap:wrap}
 @media(max-width:900px){
-  .editorial{grid-template-columns:1fr;min-height:auto}
-  .editorial-media{height:50vh;min-height:300px}
-  .editorial-content{padding:36px 20px;gap:16px}
-  .ig-grid{gap:4px}
+  .tt-grid{gap:4px}
 }
 @media(max-width:560px){
   .editorial-media{height:42vh;min-height:240px}
   .editorial-content{padding:24px 16px;gap:14px}
-  .ig-header h4{font-size:14px}
-  .ig-icon{width:36px;height:36px}
-  .ig-grid{gap:4px}
-  .ig-slot{border-radius:6px}
-  .ig-buttons{flex-direction:column}
-  .ig-buttons a{text-align:center}
+  .tt-header h4{font-size:14px}
+  .tt-icon{width:36px;height:36px}
+  .tt-grid{gap:4px}
+  .tt-slot{border-radius:6px}
+  .tt-buttons{flex-direction:column}
+  .tt-buttons a{text-align:center}
 }
 /* contact */
 .contact{display:grid; grid-template-columns:.9fr 1.1fr; border-bottom:1px solid var(--line)}
@@ -514,8 +510,8 @@ img{display:block; width:100%; height:100%; object-fit:cover}
       <div class="stat"><strong>4+</strong><span>Product Lines</span></div>
     </div>
     <div class="reveal" style="margin-top:28px; display:flex; gap:12px; align-items:center; flex-wrap:wrap">
-      <a href="https://www.instagram.com/styles_by_tiwa" target="_blank" class="pill-btn dark"><i data-lucide="instagram" style="width:14px;height:14px"></i> View more on Instagram</a>
-      <span style="font-size:11px; opacity:.5">Follow @styles_by_tiwa</span>
+      <a href="https://tiktok.com/@_stylesbytiwa" target="_blank" class="pill-btn dark"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="margin-right:4px"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05A6.34 6.34 0 0 0 3.15 15.2a6.34 6.34 0 0 0 10.86 4.46V13.2a8.19 8.19 0 0 0 5.58 2.18v-3.45a4.85 4.85 0 0 1-2-.94z"/></svg> View more on TikTok</a>
+      <span style="font-size:11px; opacity:.5">Follow @_stylesbytiwa</span>
     </div>
   </div>
 </section>
@@ -549,18 +545,18 @@ img{display:block; width:100%; height:100%; object-fit:cover}
 <section class="editorial" id="editorial">
   <div class="editorial-media"><img src="images/Vintage%20shirt.jpeg" alt="Editorial - Vintage Shirt"/><div style="position:absolute; inset:0; background:linear-gradient(0deg, rgba(0,0,0,.45), transparent)"></div><div style="position:absolute; left:20px; bottom:20px; font-size:10px; letter-spacing:.18em; text-transform:uppercase; opacity:.7; color:#fff">Editorial — Lagos Atelier / 2026</div></div>
   <div class="editorial-content">
-    <div class="ig-header">
-      <div class="ig-icon"><i data-lucide="instagram" style="width:20px;height:20px"></i></div>
+    <div class="tt-header">
+      <div class="tt-icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05A6.34 6.34 0 0 0 3.15 15.2a6.34 6.34 0 0 0 10.86 4.46V13.2a8.19 8.19 0 0 0 5.58 2.18v-3.45a4.85 4.85 0 0 1-2-.94z"/></svg></div>
       <div>
-        <h4>@styles_by_tiwa</h4>
-        <span class="ig-handle">Follow for new drops & behind the scenes</span>
+        <h4>@_stylesbytiwa</h4>
+        <span class="tt-handle">Follow for new drops & behind the scenes</span>
       </div>
     </div>
-    <div class="ig-grid" id="igGrid">
-      <div class="ig-placeholder">Loading Instagram…</div>
+    <div class="tt-grid" id="ttGrid">
+      <div class="tt-placeholder">Loading TikTok…</div>
     </div>
-    <div class="ig-buttons">
-      <a href="https://instagram.com/styles_by_tiwa" target="_blank" class="btn-primary" style="background:var(--paper);color:var(--ink)"><i data-lucide="instagram" style="width:14px;height:14px"></i> Follow on Instagram</a>
+    <div class="tt-buttons">
+      <a href="https://tiktok.com/@_stylesbytiwa" target="_blank" rel="noopener noreferrer" class="btn-primary" style="background:var(--paper);color:var(--ink)"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="margin-right:4px"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05A6.34 6.34 0 0 0 3.15 15.2a6.34 6.34 0 0 0 10.86 4.46V13.2a8.19 8.19 0 0 0 5.58 2.18v-3.45a4.85 4.85 0 0 1-2-.94z"/></svg> Follow on TikTok</a>
       <a href="shop.html" class="btn-primary" style="background:transparent;color:var(--paper);border:1px solid rgba(255,255,255,.25)">View Lookbook — Shop</a>
     </div>
   </div>
@@ -580,7 +576,7 @@ img{display:block; width:100%; height:100%; object-fit:cover}
       <div class="contact-item"><i><span data-lucide="phone" style="width:16px;height:16px"></span></i><div><b>WhatsApp</b><span><a href="https://wa.me/2349078537344" target="_blank">+234 907 853 7344</a></span></div></div>
       <div class="contact-item"><i><span data-lucide="mail" style="width:16px;height:16px"></span></i><div><b>Email</b><span><a href="mailto:alagbesulait@gmail.com">alagbesulait@gmail.com</a></span></div></div>
       <div class="contact-item"><i><span data-lucide="map-pin" style="width:16px;height:16px"></span></i><div><b>Location</b><span>Lagos, Nigeria</span></div></div>
-      <div class="contact-item"><i><span data-lucide="instagram" style="width:16px;height:16px"></span></i><div><b>Instagram</b><span><a href="https://instagram.com/styles_by_tiwa" target="_blank">@styles_by_tiwa</a></span></div></div>
+      <div class="contact-item"><i><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05A6.34 6.34 0 0 0 3.15 15.2a6.34 6.34 0 0 0 10.86 4.46V13.2a8.19 8.19 0 0 0 5.58 2.18v-3.45a4.85 4.85 0 0 1-2-.94z"/></svg></i><div><b>TikTok</b><span><a href="https://tiktok.com/@_stylesbytiwa" target="_blank">@_stylesbytiwa</a></span></div></div>
     </div>
     <div style="margin-top:18px; border-radius:14px; overflow:hidden; border:1px solid var(--line)" id="mapContainer">
       <div id="mapPlaceholder" style="height:180px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:var(--paper-2);cursor:pointer" onclick="loadMap()" role="button" tabindex="0" aria-label="Load Google Maps">
@@ -612,7 +608,7 @@ img{display:block; width:100%; height:100%; object-fit:cover}
     <p style="margin-top:8px;font-size:11px;opacity:.5;line-height:1.6">Business: Styles By Tiwa (Sole Proprietorship) &bull; Lagos, Nigeria<br/><a href="mailto:alagbesulait@gmail.com" style="color:var(--gold-light)">alagbesulait@gmail.com</a> &bull; <a href="https://wa.me/2349078537344" style="color:var(--gold-light)">+234 907 853 7344</a></p>
   </div>
   <div><h5>Quick Links</h5><div class="footer-links"><a href="#about">About</a><a href="#collection">Collection</a><a href="shop.html">Shop</a><a href="#contact">Contact</a></div></div>
-  <div><h5>Follow Us</h5><div class="footer-links"><a href="https://instagram.com/styles_by_tiwa" target="_blank">Instagram</a><a href="https://tiktok.com/@_stylesbytiwa" target="_blank">TikTok</a><a href="https://wa.me/2349078537344" target="_blank">WhatsApp</a></div></div>
+  <div><h5>Follow Us</h5><div class="footer-links"><a href="https://tiktok.com/@_stylesbytiwa" target="_blank">TikTok</a><a href="https://wa.me/2349078537344" target="_blank">WhatsApp</a></div></div>
   <div class="copy"><span>&copy; <span id="y"></span> Styles By Tiwa. All rights reserved.</span><span style="display:flex; gap:12px; align-items:center"><i data-lucide="heart" style="width:12px;height:12px"></i> Lagos — Worldwide</span></div>
   <div style="grid-column:1/-1; border-top:1px solid rgba(255,255,255,.1); padding-top:14px; margin-top:4px; display:flex; gap:16px; flex-wrap:wrap; font-size:10px; letter-spacing:.08em; text-transform:uppercase; opacity:.45">
     <a href="privacy-policy.html">Privacy Policy</a>
@@ -926,7 +922,7 @@ updateCart();
 loadProducts();
 loadVideos();
 loadFeaturedVideo();
-loadInstagramGrid();
+loadTikTokGrid();
 
 // 🎬 LOAD FEATURED VIDEO (hero right side — from site_config)
 async function loadFeaturedVideo(){
@@ -946,25 +942,24 @@ async function loadFeaturedVideo(){
   }
 }
 
-// 📸 INSTAGRAM GRID (static thumbnails linking to profile)
-function loadInstagramGrid(){
-  const grid = document.getElementById('igGrid');
+// 📸 TIKTOK GRID (static thumbnails linking to TikTok profile)
+function loadTikTokGrid(){
+  const grid = document.getElementById('ttGrid');
   if(!grid) return;
   const posts = [
-    {img:'images/product1.jpeg', link:'https://www.instagram.com/styles_by_tiwa/'},
-    {img:'images/Two piece set.jpeg', link:'https://www.instagram.com/styles_by_tiwa/'},
-    {img:'images/product2.jpeg', link:'https://www.instagram.com/styles_by_tiwa/'},
-    {img:'images/Vintage shirt.jpeg', link:'https://www.instagram.com/styles_by_tiwa/'},
-    {img:'images/product3.jpeg', link:'https://www.instagram.com/styles_by_tiwa/'},
-    {img:'images/Vintage_shirt.jpeg', link:'https://www.instagram.com/styles_by_tiwa/'},
+    {img:'images/product1.jpeg', link:'https://tiktok.com/@_stylesbytiwa'},
+    {img:'images/Two piece set.jpeg', link:'https://tiktok.com/@_stylesbytiwa'},
+    {img:'images/product2.jpeg', link:'https://tiktok.com/@_stylesbytiwa'},
+    {img:'images/Vintage shirt.jpeg', link:'https://tiktok.com/@_stylesbytiwa'},
+    {img:'images/product3.jpeg', link:'https://tiktok.com/@_stylesbytiwa'},
+    {img:'images/Vintage_shirt.jpeg', link:'https://tiktok.com/@_stylesbytiwa'},
   ];
   grid.innerHTML = posts.map(p => `
-    <a href="${p.link}" target="_blank" class="ig-slot" rel="noopener noreferrer">
-      <img src="${p.img}" alt="Styles By Tiwa - Instagram post" loading="lazy"/>
-      <div class="ig-play"><i data-lucide="instagram" style="width:20px;height:20px;color:#fff"></i></div>
+    <a href="${p.link}" target="_blank" class="tt-slot" rel="noopener noreferrer">
+      <img src="${p.img}" alt="Styles By Tiwa - TikTok content" loading="lazy"/>
+      <div class="tt-play"><svg viewBox="0 0 24 24" width="20" height="20" fill="#fff"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05A6.34 6.34 0 0 0 3.15 15.2a6.34 6.34 0 0 0 10.86 4.46V13.2a8.19 8.19 0 0 0 5.58 2.18v-3.45a4.85 4.85 0 0 1-2-.94z"/></svg></div>
     </a>
   `).join('');
-  if(typeof lucide !== 'undefined') lucide.createIcons();
 }
 
 // 🎬 LOAD VIDEOS FROM SUPABASE
