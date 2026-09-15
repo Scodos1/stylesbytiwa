@@ -3,13 +3,24 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta name="description" content="Styles By Tiwa - Luxury Fashion Brand in Lagos, Nigeria. Vintage shirts, two-piece sets, and Greg shirts."/>
-<meta property="og:title" content="Styles by Tiwa. — Handcrafted in Lagos"/>
-<meta property="og:description" content="Vintage shirts, two-piece sets and Greg shirts. Handcrafted in Lagos."/>
+<meta name="description" content="Styles By Tiwa — Handcrafted fashion brand in Lagos, Nigeria. Shop vintage shirts, two-piece sets, and Greg shirts. Made with care, delivered across Nigeria and worldwide."/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://scodos1.github.io/stylesbytiwa/"/>
+<!-- Open Graph -->
+<meta property="og:title" content="Styles By Tiwa — Handcrafted Fashion in Lagos"/>
+<meta property="og:description" content="Shop vintage shirts, two-piece sets and Greg shirts. Handcrafted in Lagos, Nigeria. Free delivery across Nigeria."/>
 <meta property="og:type" content="website"/>
-<meta property="og:image" content="images/Hero_logo.jpeg"/>
+<meta property="og:url" content="https://scodos1.github.io/stylesbytiwa/"/>
+<meta property="og:image" content="https://scodos1.github.io/stylesbytiwa/images/Hero_logo.jpeg"/>
+<meta property="og:site_name" content="Styles By Tiwa"/>
+<meta property="og:locale" content="en_NG"/>
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Styles By Tiwa — Handcrafted Fashion in Lagos"/>
+<meta name="twitter:description" content="Shop vintage shirts, two-piece sets and Greg shirts. Handcrafted in Lagos, Nigeria."/>
+<meta name="twitter:image" content="https://scodos1.github.io/stylesbytiwa/images/Hero_logo.jpeg"/>
 <meta name="theme-color" content="#0B0B0C"/>
-<title>Styles by Tiwa. — Handcrafted in Lagos</title>
+<title>Styles By Tiwa — Handcrafted Vintage Shirts &amp; Two-Piece Sets | Lagos, Nigeria</title>
 <link rel="icon" type="image/jpeg" href="images/Hero_logo.jpeg">
 <link rel="apple-touch-icon" href="images/Hero_logo.jpeg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,6 +29,51 @@
 <script src="https://unpkg.com/lucide@latest"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
 <script src="supabase-config.js"></script>
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Styles By Tiwa",
+  "url": "https://scodos1.github.io/stylesbytiwa/",
+  "logo": "https://scodos1.github.io/stylesbytiwa/images/Hero_logo.jpeg",
+  "description": "Handcrafted fashion brand in Lagos, Nigeria. Vintage shirts, two-piece sets, and Greg shirts.",
+  "foundingLocation": "Lagos, Nigeria",
+  "sameAs": [
+    "https://www.instagram.com/styles_by_tiwa",
+    "https://tiktok.com/@_stylesbytiwa"
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+234-907-853-7344",
+    "contactType": "customer service",
+    "availableLanguage": "English"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Styles By Tiwa",
+  "url": "https://scodos1.github.io/stylesbytiwa/",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://scodos1.github.io/stylesbytiwa/shop.html?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://scodos1.github.io/stylesbytiwa/"},
+    {"@type": "ListItem", "position": 2, "name": "Shop", "item": "https://scodos1.github.io/stylesbytiwa/shop.html"}
+  ]
+}
+</script>
 <style>
 :root{
   --paper:#FDF9F3;
@@ -696,6 +752,8 @@ function renderGrid(){
       if(prod) openLightbox(prod.imgs || [prod.img]);
     });
   });
+  // Product JSON-LD for SEO
+  injectProductSchema(list);
 }
 filtersEl.addEventListener('click', e=>{
   if(e.target.classList.contains('filter')){
@@ -829,6 +887,27 @@ window.addEventListener('scroll', ()=>{
     ticking=false;
   });
 }, {passive:true});
+
+// Product JSON-LD for SEO
+function injectProductSchema(list){
+  document.querySelectorAll('.product-schema').forEach(el=>el.remove());
+  const baseUrl = 'https://scodos1.github.io/stylesbytiwa/';
+  const schema = list.slice(0, 20).map(p=>({
+    "@context":"https://schema.org",
+    "@type":"Product",
+    "name":p.title,
+    "image":p.img?.startsWith('http') ? p.img : baseUrl + p.img,
+    "description":p.title + " — Handcrafted by Styles By Tiwa in Lagos, Nigeria.",
+    "brand":{"@type":"Brand","name":"Styles By Tiwa"},
+    "offers":{"@type":"Offer","priceCurrency":"NGN","price":p.price,"availability":"https://schema.org/InStock","url":baseUrl+"shop.html"},
+    "category":p.cat
+  }));
+  const el = document.createElement('script');
+  el.type = 'application/ld+json';
+  el.className = 'product-schema';
+  el.textContent = JSON.stringify(schema.length === 1 ? schema[0] : schema);
+  document.head.appendChild(el);
+}
 
 // map lazy load behind consent
 function loadMap(){
