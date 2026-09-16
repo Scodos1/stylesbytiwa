@@ -146,7 +146,7 @@ async function load(){
     const {data,error}=await supa.from('products').select('*').order('created_at',{ascending:false}).limit(100);
     if(error) throw error;
     if(data && data.length){ products=data.map(mapRow); } else { products=[...DEMO_SHOP]; }
-  }catch(e){ console.error(e); products=[...DEMO_SHOP]; }
+  }catch(e){ console.error('Product load failed'); products=[...DEMO_SHOP]; }
   render();
 }
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}

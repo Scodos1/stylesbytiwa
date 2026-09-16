@@ -60,12 +60,29 @@ async function login(){
   const password=document.getElementById('password').value;
   const err=document.getElementById('err'); err.textContent='';
   if(!email||!password){err.textContent='Enter email and password';return}
+  if(email.length>254||password.length>256){err.textContent='Invalid credentials';return}
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){err.textContent='Please enter a valid email';return}
+  // Client-side brute-force throttle: max 5 attempts per 5 minutes
+  try{
+    const key='sbt_login_attempts';
+    const now=Date.now();
+    let attempts=[];
+    try{ attempts=JSON.parse(sessionStorage.getItem(key)||'[]'); }catch(_){ attempts=[]; }
+    attempts=attempts.filter(t=>now-t<5*60*1000);
+    if(attempts.length>=5){
+      const oldest=Math.min(...attempts);
+      const wait=Math.ceil((5*60*1000-(now-oldest))/1000);
+      err.textContent='Too many attempts. Try again in '+wait+'s';
+      return;
+    }
+    attempts.push(now);
+    sessionStorage.setItem(key, JSON.stringify(attempts));
+  }catch(_){}
   const btn=document.querySelector('.btn'); btn.textContent='Signing in…'; btn.disabled=true;
   const {error}=await supabaseClient.auth.signInWithPassword({email,password});
   btn.textContent='Login →'; btn.disabled=false;
-  if(error){err.textContent='Login failed: '+(error.message||'check credentials');}
-  else window.location.href='tiwa-admin-dashboard.html';
+  if(error){err.textContent='Login failed. Check credentials and try again.';}
+  else{ try{ sessionStorage.removeItem('sbt_login_attempts'); }catch(_){} window.location.href='tiwa-admin-dashboard.html'; }
 }
 document.getElementById('password').addEventListener('keydown',e=>{if(e.key==='Enter')login()});
 </script>

@@ -714,7 +714,7 @@ async function loadProducts(){
       // also try to load featured collections to update hero? optional
     }
   }catch(e){
-    console.error('Supabase load failed', e);
+    console.error('Supabase load failed');
   }
   renderGrid();
 }
@@ -865,12 +865,30 @@ function showToast(msg){
 
 document.getElementById('contactForm').addEventListener('submit', e=>{
   e.preventDefault();
-  const name=document.getElementById('cname').value.trim();
-  const email=document.getElementById('cemail').value.trim();
-  const msg=document.getElementById('cmsg').value.trim();
+  // Rate limit: 60s cooldown between submissions (spam protection)
+  try{
+    const last = Number(sessionStorage.getItem('sbt_contact_last')||0);
+    const now = Date.now();
+    if(now - last < 60000){
+      const wait = Math.ceil((60000 - (now - last))/1000);
+      return showToast('Please wait '+wait+'s before sending again');
+    }
+  }catch(_){}
+  let name=document.getElementById('cname').value.trim();
+  let email=document.getElementById('cemail').value.trim();
+  let msg=document.getElementById('cmsg').value.trim();
   const consent=document.getElementById('cconsent')?.checked;
   if(!name||!email||!msg) return showToast('Please fill all fields');
   if(!consent) return showToast('Please agree to the Privacy Policy');
+  // Input validation + sanitization (length caps, email format, strip control chars)
+  if(name.length>100) return showToast('Name is too long (max 100 chars)');
+  if(email.length>254) return showToast('Email is too long');
+  if(msg.length>2000) return showToast('Message is too long (max 2000 chars)');
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return showToast('Please enter a valid email');
+  name=name.replace(/[\u0000-\u001F\u007F<>]/g,'').slice(0,100);
+  msg=msg.replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g,'').slice(0,2000);
+  if(!name||!msg) return showToast('Please fill all fields');
+  try{ sessionStorage.setItem('sbt_contact_last', String(Date.now())); }catch(_){}
   const subject=encodeURIComponent('Website inquiry from '+name);
   const body=encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${msg}`);
   window.location.href=`mailto:alagbesulait@gmail.com?subject=${subject}&body=${body}`;
@@ -948,7 +966,7 @@ async function loadFeaturedVideo(){
       </video>
     `;
   }catch(e){
-    console.error('Hero video load failed', e);
+    console.error('Hero video load failed');
   }
 }
 
@@ -995,7 +1013,7 @@ async function loadVideos(){
       </div>
     `).join('');
   }catch(e){
-    console.error('Video load failed', e);
+    console.error('Video load failed');
     grid.innerHTML = '';
   }
 }

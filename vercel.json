@@ -3,6 +3,23 @@
   "trailingSlash": false,
   "headers": [
     {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" },
+        { "key": "Strict-Transport-Security", "value": "max-age=31536000; includeSubDomains" },
+        { "key": "X-DNS-Prefetch-Control", "value": "on" }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: blob:; media-src 'self' https: blob:; frame-src https://www.google.com https://www.google.com/maps; connect-src 'self' https://*.supabase.co wss://*.supabase.co; base-uri 'self'; form-action 'self' mailto:" }
+      ]
+    },
+    {
       "source": "/sitemap.xml",
       "headers": [{ "key": "Content-Type", "value": "application/xml" }]
     },

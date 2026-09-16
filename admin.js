@@ -44,7 +44,7 @@ async function loadProducts() {
     .limit(100);
 
   if (error) {
-    console.error(error);
+    console.error("[admin]", error?.message || "request failed");
     const c = document.getElementById("admin-products");
     if (c) c.innerHTML = `<p class="admin-empty">Failed to load products. Please refresh.</p>`;
     return;
@@ -147,7 +147,7 @@ async function addProduct() {
     try {
       imageUrls = await Promise.all(uploadPromises);
     } catch (err) {
-      console.error(err);
+      console.error("[admin]", err?.message || "upload failed");
       alert("Upload failed ❌");
       return;
     }
@@ -174,7 +174,7 @@ async function addProduct() {
         .single();
 
       if (fetchErr || !existing) {
-        console.error(fetchErr);
+        console.error("[admin]", fetchErr?.message || "fetch failed");
         alert("Could not fetch existing product images");
         return;
       }
@@ -189,7 +189,7 @@ async function addProduct() {
       .eq("id", editingId);
 
     if (error) {
-      console.error(error);
+      console.error("[admin]", error?.message || "request failed");
       alert("Update failed ❌");
       return;
     }
@@ -217,7 +217,7 @@ async function addProduct() {
       ]);
 
     if (error) {
-      console.error(error);
+      console.error("[admin]", error?.message || "request failed");
       alert("Error adding product ❌");
       return;
     }
@@ -251,7 +251,7 @@ async function deleteProduct(id) {
     .eq("id", id);
 
   if (error) {
-    console.error(error);
+    console.error("[admin]", error?.message || "request failed");
     alert("Delete failed ❌");
   } else {
     alert("Deleted ✅");
@@ -269,7 +269,7 @@ async function editProduct(id) {
     .single();
 
   if (error) {
-    console.error(error);
+    console.error("[admin]", error?.message || "request failed");
     return;
   }
 
@@ -353,7 +353,7 @@ async function loadCollections() {
     .limit(50);
 
   if (error) {
-    console.error(error);
+    console.error("[admin]", error?.message || "request failed");
     const c = document.getElementById("admin-collections");
     if (c) c.innerHTML = `<p class="admin-empty">Failed to load collections. Please refresh.</p>`;
     return;
@@ -438,7 +438,7 @@ async function addCollection() {
       .upload(fileName, file);
 
     if (uploadError) {
-      console.error(uploadError);
+      console.error("[admin]", uploadError?.message || "upload failed");
       alert("Image upload failed ❌");
       return;
     }
@@ -471,7 +471,7 @@ async function addCollection() {
       .eq("id", editingCollectionId);
 
     if (error) {
-      console.error(error);
+      console.error("[admin]", error?.message || "request failed");
       alert("Update failed ❌");
       return;
     }
@@ -495,7 +495,7 @@ async function addCollection() {
       }]);
 
     if (error) {
-      console.error(error);
+      console.error("[admin]", error?.message || "request failed");
       alert("Error adding collection card ❌");
       return;
     }
@@ -532,7 +532,7 @@ async function deleteCollection(id) {
     .eq("id", id);
 
   if (error) {
-    console.error(error);
+    console.error("[admin]", error?.message || "request failed");
     alert("Delete failed ❌");
   } else {
     alert("Deleted ✅");
@@ -550,7 +550,7 @@ async function editCollection(id) {
     .single();
 
   if (error) {
-    console.error(error);
+    console.error("[admin]", error?.message || "request failed");
     return;
   }
 
@@ -762,7 +762,7 @@ async function loadVideos() {
     .limit(50);
 
   if (error) {
-    console.error(error);
+    console.error("[admin]", error?.message || "request failed");
     const c = document.getElementById("admin-videos");
     if (c) c.innerHTML = `<p class="admin-empty">Failed to load videos. Please refresh.</p>`;
     return;
@@ -853,7 +853,7 @@ async function addVideo() {
         .upload(fileName, videoFile, { cacheControl: '3600', upsert: false });
 
       if (uploadError) {
-        console.error("Video upload error:", uploadError);
+        console.error("[admin] video upload failed");
         alert("Video upload failed: " + (uploadError.message || "Unknown error. Check bucket size limit in Supabase dashboard (Storage → product-images → Settings → 50MB)."));
         saveBtn.textContent = origText;
         saveBtn.disabled = false;
@@ -867,7 +867,7 @@ async function addVideo() {
 
       videoUrl = data.publicUrl;
     } catch(e) {
-      console.error("Upload exception:", e);
+      console.error("[admin] upload exception");
       alert("Upload failed: " + e.message);
       saveBtn.textContent = origText;
       saveBtn.disabled = false;
@@ -906,7 +906,7 @@ async function addVideo() {
       .eq("id", editingVideoId);
 
     if (error) {
-      console.error(error);
+      console.error("[admin]", error?.message || "request failed");
       alert("Update failed ❌");
       saveBtn.textContent = origText;
       saveBtn.disabled = false;
@@ -929,7 +929,7 @@ async function addVideo() {
       }]);
 
     if (error) {
-      console.error(error);
+      console.error("[admin]", error?.message || "request failed");
       alert("Error adding video ❌");
       saveBtn.textContent = origText;
       saveBtn.disabled = false;
@@ -968,7 +968,7 @@ async function deleteVideo(id) {
     .eq("id", id);
 
   if (error) {
-    console.error(error);
+    console.error("[admin]", error?.message || "request failed");
     alert("Delete failed ❌");
   } else {
     alert("Deleted ✅");
@@ -984,7 +984,7 @@ async function editVideo(id) {
     .eq("id", id)
     .single();
 
-  if (error) { console.error(error); return; }
+  if (error) { console.error("[admin]", error?.message || "request failed"); return; }
 
   document.getElementById("videoTitle").value = data.title || "";
   document.getElementById("videoSubtitle").value = data.subtitle || "";
