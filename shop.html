@@ -169,7 +169,7 @@ function render(){
 function injectProductSchema(list){
   document.querySelectorAll('.product-schema').forEach(el=>el.remove());
   const base='https://stylesbytiwa.vercel.app/';
-  const schema=list.slice(0,20).map(p=>({"@context":"https://schema.org","@type":"Product","name":p.title,"image":p.img?.startsWith('http')?p.img:base+p.img,"description":p.title+" — Handcrafted by Styles By Tiwa in Lagos, Nigeria.","brand":{"@type":"Brand","name":"Styles By Tiwa"},"offers":{"@type":"Offer","priceCurrency":"NGN","price":p.price,"availability":"https://schema.org/InStock","url":base+"shop.html"},"category":p.cat}));
+  const schema=list.slice(0,20).map(p=>({"@context":"https://schema.org","@type":"Product","name":p.title,"image":p.img?.startsWith('http')?p.img:base+p.img,"description":p.title+" — Handcrafted by Styles By Tiwa in Lagos, Nigeria.","brand":{"@type":"Brand","name":"Styles By Tiwa"},"offers":{"@type":"Offer","priceCurrency":"NGN","price":p.price,"availability":"https://schema.org/InStock","itemCondition":"https://schema.org/NewCondition","seller":{"@type":"Organization","name":"Styles By Tiwa"},"url":base+"shop.html"},"category":p.cat}));
   const el=document.createElement('script');el.type='application/ld+json';el.className='product-schema';el.textContent=JSON.stringify(schema.length===1?schema[0]:schema);document.head.appendChild(el);
 }
 document.getElementById('filters').addEventListener('click',e=>{

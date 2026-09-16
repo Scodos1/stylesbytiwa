@@ -906,7 +906,7 @@ function injectProductSchema(list){
     "image":p.img?.startsWith('http') ? p.img : baseUrl + p.img,
     "description":p.title + " — Handcrafted by Styles By Tiwa in Lagos, Nigeria.",
     "brand":{"@type":"Brand","name":"Styles By Tiwa"},
-    "offers":{"@type":"Offer","priceCurrency":"NGN","price":p.price,"availability":"https://schema.org/InStock","url":baseUrl+"shop.html"},
+    "offers":{"@type":"Offer","priceCurrency":"NGN","price":p.price,"availability":"https://schema.org/InStock","itemCondition":"https://schema.org/NewCondition","seller":{"@type":"Organization","name":"Styles By Tiwa"},"url":baseUrl+"shop.html"},
     "category":p.cat
   }));
   const el = document.createElement('script');
